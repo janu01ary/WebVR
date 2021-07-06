@@ -17,12 +17,28 @@
     <script type="module">
         import * as THREE from './libs/three.module.js';
         import { GLTFLoader } from './libs/GLTFLoader.js';
+		import { PointerLockControls } from './libs/PointerLockControls.js';
 
         var scene;
         var camera;
         var renderer;
 
+		var clock;
+		let moveForward = false;
+		let moveBackward = false;
+		let moveLeft = false;
+		let moveRight = false;
+		let canJump = false;
+
+		let prevTime = performance.now();
+		const velocity = new THREE.Vector3();
+		const direction = new THREE.Vector3();
+		const vertex = new THREE.Vector3();
+		const color = new THREE.Color();
+
         function init() {
+			clock = new THREE.Clock();
+	
             scene = new THREE.Scene();
 
             camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -34,10 +50,72 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.shadowMapEnabled = true;
 
-            camera.position.x = -30;
-            camera.position.y = 40;
-            camera.position.z = 30;
-            camera.lookAt(scene.position);
+			// position and point the camera to the center of the scene
+			camera.position.x = 10;
+			camera.position.y = 6;
+			camera.position.z = -9;
+			camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+			//PointerLockControls
+			const pointerLock = new PointerLockControls(camera, document.getElementById("WebGL-output"));
+
+			const onKeyDown = function ( event ) {
+
+					switch ( event.code ) {
+
+						case 'ArrowUp':
+						case 'KeyW':
+							moveForward = true;
+							break;
+
+						case 'ArrowLeft':
+						case 'KeyA':
+							moveLeft = true;
+							break;
+
+						case 'ArrowDown':
+						case 'KeyS':
+							moveBackward = true;
+							break;
+
+						case 'ArrowRight':
+						case 'KeyD':
+							moveRight = true;
+							break;
+					}
+
+				};
+
+				const onKeyUp = function ( event ) {
+
+					switch ( event.code ) {
+
+						case 'ArrowUp':
+						case 'KeyW':
+							moveForward = false;
+							break;
+
+						case 'ArrowLeft':
+						case 'KeyA':
+							moveLeft = false;
+							break;
+
+						case 'ArrowDown':
+						case 'KeyS':
+							moveBackward = false;
+							break;
+
+						case 'ArrowRight':
+						case 'KeyD':
+							moveRight = false;
+							break;
+
+					}
+
+				};
+
+				document.addEventListener( 'keydown', onKeyDown );
+				document.addEventListener( 'keyup', onKeyUp );
 
             // add the output of the renderer to the html element
             document.getElementById("WebGL-output").appendChild(renderer.domElement);
