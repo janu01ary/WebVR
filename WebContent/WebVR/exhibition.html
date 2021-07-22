@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js - pointerlock controls</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
+		<style>
+			#blocker {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0,0,0,0.5);
+			}
+
+			#instructions {
+				width: 100%;
+				height: 100%;
+
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+
+				text-align: center;
+				font-size: 14px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="blocker">
+			<div id="instructions">
+				<p style="font-size:36px">
+					Click to play
+				</p>
+				<p>
+					Move: WASD<br/>
+					Jump: SPACE<br/>
+					Look: MOUSE
+				</p>
+			</div>
+		</div>
+		
+		<script type="module">
+
+			import * as THREE from './build/three.module.js';
+			import { GLTFLoader } from './libs/GLTFLoader.js';
+
+			import { PointerLockControls } from './jsm/controls/PointerLockControls.js';
+
+			let camera, scene, renderer, controls;
+
+			const objects = [];
+
+			let raycaster;
+
+			let moveForward = false;
+			let moveBackward = false;
+			let moveLeft = false;
+			let moveRight = false;
+			let canJump = false;
+
+			let prevTime = performance.now();
+			const velocity = new THREE.Vector3();
+			const direction = new THREE.Vector3();
+			const vertex = new THREE.Vector3();
+			const color = new THREE.Color();
+
+			init();
+			animate();
+
+			function init() {
+
+				//카메라
+				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
+				camera.position.x = 50;
+				camera.position.y = 30;
+				camera.position.z = 50;
+				camera.zoom = 1;
+
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0xffffff );
+				scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
+
+				const light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
+				light.position.set( 0.5, 1, 0.75 );
+				scene.add( light );
+
+				controls = new PointerLockControls( camera, document.body );
+
+				const blocker = document.getElementById( 'blocker' );
+				const instructions = document.getElementById( 'instructions' );
+
+				instructions.addEventListener( 'click', function () {
+
+					controls.lock();
+
+				} );
+
+				controls.addEventListener( 'lock', function () {
+
+					instructions.style.display = 'none';
+					blocker.style.display = 'none';
+
+				} );
+
+				controls.addEventListener( 'unlock', function () {
+
+					blocker.style.display = 'block';
+					instructions.style.display = '';
+
+				} );
+
+				scene.add( controls.getObject() );
+
+				//키(w, a, s, d, space bar, 화살표)를 눌렀을 때의 이벤트
+				const onKeyDown = function ( event ) {
+
+					switch ( event.code ) {
+
+						case 'ArrowUp':
+						case 'KeyW':
+							moveForward = true;
+							break;
+
+						case 'ArrowLeft':
+						case 'KeyA':
+							moveLeft = true;
+							break;
+
+						case 'ArrowDown':
+						case 'KeyS':
+							moveBackward = true;
+							break;
+
+						case 'ArrowRight':
+						case 'KeyD':
+							moveRight = true;
+							break;
+
+						// case 'Space':
+						// 	if ( canJump === true ) velocity.y += 350;
+						// 	canJump = false;
+						// 	break;
+
+					}
+
+				};
+
+				//키에서 뗐을 때의 이벤트
+				const onKeyUp = function ( event ) {
+
+					switch ( event.code ) {
+
+						case 'ArrowUp':
+						case 'KeyW':
+							moveForward = false;
+							break;
+
+						case 'ArrowLeft':
+						case 'KeyA':
+							moveLeft = false;
+							break;
+
+						case 'ArrowDown':
+						case 'KeyS':
+							moveBackward = false;
+							break;
+
+						case 'ArrowRight':
+						case 'KeyD':
+							moveRight = false;
+							break;
+
+					}
+
+				};
+
+				document.addEventListener( 'keydown', onKeyDown );
+				document.addEventListener( 'keyup', onKeyUp );
+
+				raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
+
+
+				// //이미지 큐브
+				// const geometry = new THREE.BoxGeometry(20, 20, 1);
+				// // const cubes = [];  // just an array we can use to rotate the cubes
+				// const loader = new THREE.TextureLoader();
+				// loader.load('img/7.png', (texture) => {
+				// 	const material = new THREE.MeshBasicMaterial({
+				// 	map: texture,
+				// 	});
+				// 	const cube = new THREE.Mesh(geometry, material);
+				// 	cube.position.x = 0;
+				// 	cube.position.y = 15;
+				// 	cube.position.z = -70;
+				// 	scene.add(cube);
+				// 	// cubes.push(cube);  // add to our list of cubes to rotate
+				// });
+
+
+				// // 벽
+				// var cubeGeometry = new THREE.BoxGeometry(150, 200, 10);
+				// var cubeMaterial = new THREE.MeshBasicMaterial({color: 0x222222});
+
+				// var cube1 = new THREE.Mesh(cubeGeometry, cubeMaterial);
+				// cube1.position.x = 0;
+				// cube1.position.y = 100;
+				// cube1.position.z = -75;
+				// scene.add(cube1);
+
+				// var cube2 = new THREE.Mesh(cubeGeometry, cubeMaterial);
+				// cube2.position.x = 0;
+				// cube2.position.y = 100;
+				// cube2.position.z = 75;
+				// scene.add(cube2);
+
+				// var cube3 = new THREE.Mesh(cubeGeometry, cubeMaterial);
+				// cube3.position.x = 75;
+				// cube3.position.y = 100;
+				// cube3.position.z = 0;
+                // cube3.rotation.y = Math.PI / 2;
+				// scene.add(cube3);
+                
+				// var cube4 = new THREE.Mesh(cubeGeometry, cubeMaterial);
+				// cube4.position.x = -75;
+				// cube4.position.y = 100;
+				// cube4.position.z = 0;
+                // cube4.rotation.y = Math.PI / 2;
+				// scene.add(cube4);
+
+                // //천장
+				// var cubeGeometry2 = new THREE.BoxGeometry(200, 200, 10);
+				// var cubeMaterial2 = new THREE.MeshBasicMaterial({color: 0x222222});
+
+				// var cube5 = new THREE.Mesh(cubeGeometry2, cubeMaterial2);
+				// cube5.position.x = 0;
+				// cube5.position.y = 200;
+				// cube5.position.z = 0;
+                // cube5.rotation.x = Math.PI / 2;
+				// scene.add(cube5);
+
+                // //기둥
+				// var cubeGeometry3 = new THREE.BoxGeometry(30, 200, 30);
+				// var cubeMaterial3 = new THREE.MeshBasicMaterial({color: 0x222222});
+
+				// var cube6 = new THREE.Mesh(cubeGeometry3, cubeMaterial3);
+				// cube6.position.x = 0;
+				// cube6.position.y = 100;
+				// cube6.position.z = -40;
+				// scene.add(cube6);
+
+
+
+				// // floor
+				// let floorGeometry = new THREE.PlaneGeometry( 2000, 2000, 100, 100 );
+				// floorGeometry.rotateX( - Math.PI / 2 );
+
+				// const floorMaterial = new THREE.MeshBasicMaterial( {color: 0xaaaaaa} );
+
+				// const floor = new THREE.Mesh( floorGeometry, floorMaterial );
+				// scene.add( floor );
+
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				document.body.appendChild( renderer.domElement );
+
+
+				window.addEventListener( 'resize', onWindowResize );
+
+				function resizeRendererToDisplaySize(renderer) {
+					const canvas = renderer.domElement;
+					const width = canvas.clientWidth;
+					const height = canvas.clientHeight;
+					const needResize = canvas.width !== width || canvas.height !== height;
+					if (needResize) {
+					renderer.setSize(width, height, false);
+					}
+					return needResize;
+				}
+
+				function render(time) {
+					time *= 0.001;
+
+					if (resizeRendererToDisplaySize(renderer)) {
+					const canvas = renderer.domElement;
+					camera.aspect = canvas.clientWidth / canvas.clientHeight;
+					camera.updateProjectionMatrix();
+					}
+
+					// cubes.forEach((cube, ndx) => {
+					// const speed = .2 + ndx * .1;
+					// const rot = time * speed;
+					// cube.rotation.x = rot;
+					// cube.rotation.y = rot;
+					// });
+
+					renderer.render(scene, camera);
+
+					requestAnimationFrame(render);
+				}
+
+				requestAnimationFrame(render);
+
+				const loader2 = new GLTFLoader();
+       		    loader2.load(
+                	// resource URL
+                	'./three_js/exhibition01.gltf',
+
+                	// called when the resource is loaded
+                	function ( gltf ) {
+                    	scene.add( gltf.scene );
+                    	gltf.animations; // Array<THREE.AnimationClip>
+                    	gltf.scene; // THREE.Group
+                    	gltf.scenes; // Array<THREE.Group>
+                    	gltf.cameras; // Array<THREE.Camera>
+                    	gltf.asset; // Object
+                	}
+            	);
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function getCamera() {
+				var aspectRatio = window.innerWidth / window.innerHeight;
+				var camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 100000);
+				camera.position.set(0, 1, -6000);
+				return camera;
+			}
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				const time = performance.now();
+
+				if ( controls.isLocked === true ) {
+
+					raycaster.ray.origin.copy( controls.getObject().position );
+					raycaster.ray.origin.y -= 10;
+
+					const intersections = raycaster.intersectObjects( objects );
+
+					const onObject = intersections.length > 0;
+
+					const delta = ( time - prevTime ) / 1000;
+
+					velocity.x -= velocity.x * 10.0 * delta;
+					velocity.z -= velocity.z * 10.0 * delta;
+
+					velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+
+					direction.z = Number( moveForward ) - Number( moveBackward );
+					direction.x = Number( moveRight ) - Number( moveLeft );
+					direction.normalize(); // this ensures consistent movements in all directions
+
+					if ( moveForward || moveBackward ) velocity.z -= direction.z * 400.0 * delta;
+					if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta;
+
+					if ( onObject === true ) {
+
+						velocity.y = Math.max( 0, velocity.y );
+						canJump = true;
+
+					}
+
+					controls.moveRight( - velocity.x * delta );
+					controls.moveForward( - velocity.z * delta );
+
+					controls.getObject().position.y += ( velocity.y * delta ); // new behavior
+
+					if ( controls.getObject().position.y < 30 ) {
+
+						velocity.y = 0;
+						controls.getObject().position.y = 30;
+
+						canJump = true;
+
+					}
+
+				}
+
+				prevTime = time;
+
+				// renderer.render( scene, camera );
+			}
+
+		</script>
+	</body>
+</html>
