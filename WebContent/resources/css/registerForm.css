@@ -1,0 +1,40 @@
+body {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.box {
+    width: 400px;
+    margin: 200px auto;
+}
+
+table td tr {
+    border: white 1px solid;
+}
+
+tr {
+    height: 60px;
+}
+
+td {
+    width: 200px;
+}
+
+.width-110 {
+    width: 110px;
+    text-align: left;
+}
+
+input {
+    box-shadow: none;
+    border: 1px solid black; 
+    padding: 5px;
+    border-radius: 4px;
+}
+
+input:focus {
+    box-shadow: none;
+    border: 1px solid black; 
+    outline: none;
+}
