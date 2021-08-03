@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <title>my_page</title>
-        <link rel="stylesheet" href="./myPage.css" type="text/css">
+        <link rel="stylesheet" href="../resources/myPage.css" type="text/css">
     </head>
     <body>
         <!-- 사이트 이름이나 로고 나중에 추가 -->
@@ -96,7 +96,7 @@
                     <tr>
                         <td>
                             <div class="watch_card">
-                                <img src="./Example_image/img.png" class="card_image" alt="...">
+                                <img src="../resources/img/img.png" class="card_image" alt="...">
                                 <div class="card_body">
                                     <h2 class="card_title">전시회 이름</h2>
                                     <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
@@ -106,7 +106,7 @@
                         </td>
                         <td>
                             <div class="watch_card">
-                                <img src="./Example_image/img.png" class="card_image" alt="...">
+                                <img src="../resources/img/img.png" class="card_image" alt="...">
                                 <div class="card_body">
                                     <h2 class="card_title">전시회 이름</h2>
                                     <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
@@ -116,7 +116,7 @@
                         </td>
                         <td>
                             <div class="watch_card">
-                                <img src="./Example_image/img.png" class="card_image" alt="...">
+                                <img src="../resources/img/img.png" class="card_image" alt="...">
                                 <div class="card_body">
                                     <h2 class="card_title">전시회 이름</h2>
                                     <p class="card_text">가로로 3개 초과하면 tr 추가해서 아래로 추가하도록 하기! 이거 자세히 버튼 아래에 고정 못 시키나 고민하기..</p>
@@ -128,7 +128,7 @@
                     <tr>
                         <td>
                             <div class="watch_card">
-                                <img src="./Example_image/img.png" class="card_image" alt="...">
+                                <img src="../resources/img/img.png" class="card_image" alt="...">
                                 <div class="card_body">
                                     <h2 class="card_title">전시회 이름</h2>
                                     <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
@@ -144,35 +144,35 @@
                 <table style="width: 90%; table-layout: fixed; border-spacing: 13px;">
                     <tr>
                         <td class="like_td">
-                            <img src="./Example_image/shiba.jpg" class="like_image" alt="...">
+                            <img src="../resources/img/shiba.jpg" class="like_image" alt="...">
                         </td>
                         <td class="like_td">
-                            <img src="./Example_image/cat.jpg" class="like_image" alt="...">
+                            <img src="../resources/img/cat.jpg" class="like_image" alt="...">
                         </td>
                         <td class="like_td">
-                            <img src="./Example_image/leaves.jpg" class="like_image" alt="...">
+                            <img src="../resources/img/leaves.jpg" class="like_image" alt="...">
                         </td>
                         <td class="like_td">
-                            <img src="./Example_image/square2.jpg" class="like_image" alt="...">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="like_td">
-                            <img src="./Example_image/korea.jpg" class="like_image" alt="...">
-                        </td>
-                        <td class="like_td">
-                            <img src="./Example_image/square.jpg" class="like_image" alt="...">
-                        </td>
-                        <td class="like_td">
-                            <img src="./Example_image/img.png" class="like_image" alt="...">
-                        </td>
-                        <td class="like_td">
-                            <img src="./Example_image/img.png" class="like_image" alt="...">
+                            <img src="../resources/img/square2.jpg" class="like_image" alt="...">
                         </td>
                     </tr>
                     <tr>
                         <td class="like_td">
-                            <img src="./Example_image/img.png" class="like_image" alt="...">
+                            <img src="../resources/img/korea.jpg" class="like_image" alt="...">
+                        </td>
+                        <td class="like_td">
+                            <img src="../resources/img/square.jpg" class="like_image" alt="...">
+                        </td>
+                        <td class="like_td">
+                            <img src="../resources/img/img.png" class="like_image" alt="...">
+                        </td>
+                        <td class="like_td">
+                            <img src="../resources/img/img.png" class="like_image" alt="...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="like_td">
+                            <img src="../resources/img/img.png" class="like_image" alt="...">
                         </td>
                     </tr>
                 </table>
@@ -218,7 +218,7 @@
                     <tr>
                         <td>
                             <div class="exhib_card">
-                                <img src="./Example_image/shiba.jpg" class="card_image" alt="...">
+                                <img src="../resources/img/shiba.jpg" class="card_image" alt="...">
                                 <div class="card_body">
                                     <h2 class="card_title">전시회 이름</h2>
                                     <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
@@ -228,7 +228,7 @@
                         </td>
                         <td>
                             <div class="exhib_card">
-                                <img src="./Example_image/cat.jpg" class="card_image" alt="...">
+                                <img src="../resources/img/cat.jpg" class="card_image" alt="...">
                                 <div class="card_body">
                                     <h2 class="card_title">전시회 이름</h2>
                                     <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
@@ -238,7 +238,7 @@
                         </td>
                         <td>
                             <div class="exhib_card">
-                                <img src="./Example_image/img.png" class="card_image" alt="...">
+                                <img src="../resources/img/img.png" class="card_image" alt="...">
                                 <div class="card_body">
                                     <h2 class="card_title">전시회 이름</h2>
                                     <p class="card_text">가로로 3개 초과하면 tr 추가해서 아래로 추가하도록 하기! 이거 자세히 버튼 아래에 고정 못 시키나 고민하기..</p>
@@ -250,7 +250,7 @@
                     <tr>
                         <td>
                             <div class="exhib_card">
-                                <img src="./Example_image/img.png" class="card_image" alt="...">
+                                <img src="../resources/img/img.png" class="card_image" alt="...">
                                 <div class="card_body">
                                     <h2 class="card_title">전시회 이름</h2>
                                     <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
@@ -266,7 +266,7 @@
                 <table style="margin-top:20px;">
                     <tr>
                         <td>
-                            <img src="./Example_image/korea.jpg" class="manage_image" alt="...">
+                            <img src="../resources/img/korea.jpg" class="manage_image" alt="...">
                         </td>
                         <td class="manage_box">
                             <div style="margin-bottom:10px;">
@@ -285,7 +285,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="./Example_image/shiba.jpg" class="manage_image" alt="...">
+                            <img src="../resources/img/shiba.jpg" class="manage_image" alt="...">
                         </td>
                         <td class="manage_box">
                             <div style="margin-bottom:10px;">
