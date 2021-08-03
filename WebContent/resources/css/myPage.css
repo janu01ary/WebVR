@@ -1,0 +1,229 @@
+@charset "UTF-8";
+
+body{
+	background:  black;
+	color:  white;
+	min-width:1000px;
+}
+div#entire{
+	margin: 15px 150px;
+	white-space: nowrap;
+	display: table;
+	border-spacing: 50px;
+}
+div#menuList{
+	display: table-cell;
+	vertical-align: top;
+}
+div.content{
+	display: table-cell;
+	padding-right: 40px;
+	padding-left: 40px;
+	width: 800px;
+	height: 580px;
+	border: 1px solid #FFFFFF;
+	overflow: auto;
+}
+h1#title{
+	white-space: nowrap;
+	margin: 10px 0px;
+	padding-top: 40px;
+	text-align: center;
+
+	position: static;
+	top: 0%;
+	left: 50%;
+}
+/* 좌측 메뉴바 */
+h2#menuTitle{
+	margin-top: 0px;
+	margin-bottom: 30px;
+}
+h3.headMenu{
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+p.menuItem{
+	cursor: pointer;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+p.menuItem:hover{
+	background-color: #555555;
+}
+p.menuItem:active{
+	background-color: #333333;
+}
+h3#warning{
+	color: #FF2222;
+	margin-top: 0px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	cursor: pointer;
+}
+h3#warning:hover{
+	background-color: #551111;
+ }
+/* 마이 프로필 */
+th#profile_title{
+	padding-top: 30px;
+	padding-bottom: 40px;
+	font-size: 50px;
+	text-align:  left;
+}
+th.profile_detail{
+	height: 30px;
+	width: 100px;
+	text-align:  left;
+}
+td.profile_value{
+	width: 180px;
+	text-align: left;
+}
+td#empty{
+	height: 10px;
+}
+/* 프로필 수정 */
+form#edit_form{
+	margin-top: 50px;
+}
+th.editForm_title{
+	width: 180px;
+	height: 50px;
+	text-align: left;
+}
+input.edit_input{
+	width: 200px;
+	height: 25px;
+	color: #FFFFFF;
+	background-color: #333333;
+}
+button#edit_confirm{
+	width: 80px;
+	height: 30px;
+	margin-top: 40px;
+	background-color: white;
+	color: black;
+	border: #000000 solid 1px;
+	border-radius: 6px;
+}
+button#edit_confirm:hover{
+	background-color: #333333;
+	color: white;
+	border: #FFFFFF solid 1px;
+}
+/* 관람 내역 + 전시 목록 (카드) */
+div.watch_card, div.exhib_card{
+	width: 250px;
+	height: 405px;
+	padding-bottom: 10px;
+	text-align: center;
+	border: #FFFFFF solid 1px;
+	border-radius: 6px;
+}
+img.card_image{
+	width: 240px;
+	height: 180px; /* 3: 4 */
+	margin-top: 5px;
+}
+div.card_body{
+	text-align: left;
+	margin-left: 5px;
+}
+p.card_text{
+	width: 240px;
+	overflow: auto;
+	white-space: normal;
+	word-wrap:break-word;
+}
+button.card_button{
+	cursor: pointer;
+	width: 80px;
+	height: 30px;
+	margin-top: 10px;
+	background-color: white;
+	color: black;
+	border: #000000 solid 1px;
+	border-radius: 6px;
+}
+button.card_button:hover{
+	background-color: #333333;
+	color: white;
+	border: #FFFFFF solid 1px;
+}
+div.card_button_box{
+	margin-right: 10px;
+	text-align: right;
+}
+/* 좋아요한 작품 보기 */
+td.like_td{
+	width: 180px;
+	height: 180px;
+	word-break:break-all;
+	text-align: center;
+}
+img.like_image{
+	cursor: pointer;
+	width: 160px;
+	height: 160px;
+}
+img.like_image:hover{
+	width: 170px;
+	height: 170px;
+}
+/* 작성한 댓글 보기 */
+td.reply_box{
+	width: 750px;
+	height: 100px;
+	padding-top: 10px;
+	border-bottom: 1px solid white;
+}
+button.reply_delete, button.manage_delete{
+	cursor: pointer;
+	margin-left: 20px;
+	width: 50px;
+	height: 60px;
+	background-color: #FF0000;
+	color: white;
+	border: #000000 solid 1px;
+	border-radius: 6px;
+}
+button.reply_delete:hover, button.manage_delete:hover{
+	background-color: white;
+	color: #FF0000;
+}
+/* 전시 작품 관리 */
+img.manage_image{
+	width: 100px;
+	height: 100px;
+	margin-right: 20px;
+	padding-top: 5px;
+}
+td.manage_box{
+	width: 750px;
+	height: 100px;
+	border-bottom: 1px solid white;
+}
+button.manage_edit{
+	cursor: pointer;
+	margin-left: 10px;
+	width: 50px;
+	height: 60px;
+	background-color: white;
+	color: black;
+	border: #000000 solid 1px;
+	border-radius: 6px;
+}
+button.manage_edit:hover{
+	background-color: #333333;
+	color: white;
+	border: #FFFFFF solid 1px;
+}
+button.manage_delete{
+	margin-left: 10px;
+}
+p.manage_likes{
+	margin-left: 20px;
+}
