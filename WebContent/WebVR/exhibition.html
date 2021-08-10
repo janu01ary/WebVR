@@ -29,19 +29,6 @@
 		</style>
 	</head>
 	<body>
-		<div id="blocker">
-			<div id="instructions">
-				<p style="font-size:36px">
-					Click to play
-				</p>
-				<p>
-					Move: WASD<br/>
-					Jump: SPACE<br/>
-					Look: MOUSE
-				</p>
-			</div>
-		</div>
-		
 		<script type="module">
 
 			import * as THREE from './libs/three.module.js';
@@ -49,7 +36,7 @@
 
 			import { PointerLockControls } from './jsm/controls/PointerLockControls.js';
 
-			let camera, scene, renderer, controls;
+			var camera, scene, renderer, controls, mouse, SELECTED;
 
 			const objects = [];
 
@@ -66,6 +53,8 @@
 			const direction = new THREE.Vector3();
 			const vertex = new THREE.Vector3();
 			const color = new THREE.Color();
+
+			var imgUrl = "../resources/img/7.png";
 
 			init();
 			animate();
@@ -102,6 +91,7 @@
 
 					instructions.style.display = 'none';
 					blocker.style.display = 'none';
+					console.log("lock");
 
 				} );
 
@@ -144,9 +134,15 @@
 						// 	canJump = false;
 						// 	break;
 
+						case 'KeyF':
+							console.log("keyffff");
+							// onMouseClick();
+							break;
+
 					}
 
 				};
+
 
 				//키에서 뗐을 때의 이벤트
 				const onKeyUp = function ( event ) {
@@ -182,126 +178,46 @@
 
 				raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
 
+				//여기
+				mouse = new THREE.Vector2();
+				mouse.x = mouse.y = -1;
 
-				// //이미지 큐브
-				// const geometry = new THREE.BoxGeometry(20, 20, 1);
-				// // const cubes = [];  // just an array we can use to rotate the cubes
-				// const loader = new THREE.TextureLoader();
-				// loader.load('img/7.png', (texture) => {
-				// 	const material = new THREE.MeshBasicMaterial({
-				// 	map: texture,
-				// 	});
-				// 	const cube = new THREE.Mesh(geometry, material);
-				// 	cube.position.x = 0;
-				// 	cube.position.y = 15;
-				// 	cube.position.z = -70;
-				// 	scene.add(cube);
-				// 	// cubes.push(cube);  // add to our list of cubes to rotate
-				// });
+				let onMouseClick = function(e){
+					// console.log(e)
 
+					// let gap1 = e.clientX - e.offsetX
+					// let gap2 = e.clientY - e.offsetY
+					// mouse.x = ( (e.clientX - gap1)/(window.innerWidth*0.375) )*2 -1;
+					// mouse.y =  -( (e.clientY-gap2)/(window.innerHeight*0.375) )*2 +1;
 
-				// // 벽
-				// var cubeGeometry = new THREE.BoxGeometry(150, 200, 10);
-				// var cubeMaterial = new THREE.MeshBasicMaterial({color: 0x222222});
+					// raycaster.setFromCamera(mouse,camera);
 
-				// var cube1 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-				// cube1.position.x = 0;
-				// cube1.position.y = 100;
-				// cube1.position.z = -75;
-				// scene.add(cube1);
+					event.preventDefault();
+					console.log("event2 : ", event);
+					if ( SELECTED ){
+						console.log("SECECTED : ", SELECTED);
+						// SELECTED.currentHex = 0x00ff00*Math.random();
+						// SELECTED.material.emissive.setHex( SELECTED.currentHex );
+						// window.open("http://www.naver.com");
+						controls.unlock();
+						instructions.innerHTML = `
+							<button onClick="controls.lock()">뒤로</button>
+							<img src="${imgUrl}">
+						`;
+					}
+				}
 
-				// var cube2 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-				// cube2.position.x = 0;
-				// cube2.position.y = 100;
-				// cube2.position.z = 75;
-				// scene.add(cube2);
-
-				// var cube3 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-				// cube3.position.x = 75;
-				// cube3.position.y = 100;
-				// cube3.position.z = 0;
-                // cube3.rotation.y = Math.PI / 2;
-				// scene.add(cube3);
-                
-				// var cube4 = new THREE.Mesh(cubeGeometry, cubeMaterial);
-				// cube4.position.x = -75;
-				// cube4.position.y = 100;
-				// cube4.position.z = 0;
-                // cube4.rotation.y = Math.PI / 2;
-				// scene.add(cube4);
-
-                // //천장
-				// var cubeGeometry2 = new THREE.BoxGeometry(200, 200, 10);
-				// var cubeMaterial2 = new THREE.MeshBasicMaterial({color: 0x222222});
-
-				// var cube5 = new THREE.Mesh(cubeGeometry2, cubeMaterial2);
-				// cube5.position.x = 0;
-				// cube5.position.y = 200;
-				// cube5.position.z = 0;
-                // cube5.rotation.x = Math.PI / 2;
-				// scene.add(cube5);
-
-                // //기둥
-				// var cubeGeometry3 = new THREE.BoxGeometry(30, 200, 30);
-				// var cubeMaterial3 = new THREE.MeshBasicMaterial({color: 0x222222});
-
-				// var cube6 = new THREE.Mesh(cubeGeometry3, cubeMaterial3);
-				// cube6.position.x = 0;
-				// cube6.position.y = 100;
-				// cube6.position.z = -40;
-				// scene.add(cube6);
-
-
-
-				// // floor
-				// let floorGeometry = new THREE.PlaneGeometry( 2000, 2000, 100, 100 );
-				// floorGeometry.rotateX( - Math.PI / 2 );
-
-				// const floorMaterial = new THREE.MeshBasicMaterial( {color: 0xaaaaaa} );
-
-				// const floor = new THREE.Mesh( floorGeometry, floorMaterial );
-				// scene.add( floor );
 
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				document.body.appendChild( renderer.domElement );
-
+   				
+				//여기
+				document.addEventListener( 'click', onMouseClick );
 
 				window.addEventListener( 'resize', onWindowResize );
-
-				function resizeRendererToDisplaySize(renderer) {
-					const canvas = renderer.domElement;
-					const width = canvas.clientWidth;
-					const height = canvas.clientHeight;
-					const needResize = canvas.width !== width || canvas.height !== height;
-					if (needResize) {
-					renderer.setSize(width, height, false);
-					}
-					return needResize;
-				}
-
-				function render(time) {
-					time *= 0.001;
-
-					if (resizeRendererToDisplaySize(renderer)) {
-					const canvas = renderer.domElement;
-					camera.aspect = canvas.clientWidth / canvas.clientHeight;
-					camera.updateProjectionMatrix();
-					}
-
-					// cubes.forEach((cube, ndx) => {
-					// const speed = .2 + ndx * .1;
-					// const rot = time * speed;
-					// cube.rotation.x = rot;
-					// cube.rotation.y = rot;
-					// });
-
-					renderer.render(scene, camera);
-
-					requestAnimationFrame(render);
-				}
 
 				requestAnimationFrame(render);
 
@@ -320,6 +236,22 @@
                     	gltf.asset; // Object
                 	}
             	);
+
+				//이미지 큐브
+				const geometry = new THREE.BoxGeometry(20, 20, 1);
+				// const cubes = [];  // just an array we can use to rotate the cubes
+				const loader = new THREE.TextureLoader();
+				loader.load(imgUrl, (texture) => {
+					const material = new THREE.MeshLambertMaterial({
+					map: texture,
+					});
+					const cube = new THREE.Mesh(geometry, material);
+					cube.position.x = 0;
+					cube.position.y = 30;
+					cube.position.z = -70;
+					scene.add(cube);
+					// cubes.push(cube);  // add to our list of cubes to rotate
+				});
 			}
 
 			function onWindowResize() {
@@ -331,11 +263,22 @@
 
 			}
 
-			function getCamera() {
-				var aspectRatio = window.innerWidth / window.innerHeight;
-				var camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 100000);
-				camera.position.set(0, 1, -6000);
-				return camera;
+			// function getCamera() {
+			// 	var aspectRatio = window.innerWidth / window.innerHeight;
+			// 	var camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 100000);
+			// 	camera.position.set(0, 1, -6000);
+			// 	return camera;
+			// }
+			
+			function resizeRendererToDisplaySize(renderer) {
+				const canvas = renderer.domElement;
+				const width = canvas.clientWidth;
+				const height = canvas.clientHeight;
+				const needResize = canvas.width !== width || canvas.height !== height;
+				if (needResize) {
+				renderer.setSize(width, height, false);
+				}
+				return needResize;
 			}
 
 			function animate() {
@@ -395,6 +338,55 @@
 				// renderer.render( scene, camera );
 			}
 
+			function render(time) {
+				time *= 0.001;
+
+				if (resizeRendererToDisplaySize(renderer)) {
+					const canvas = renderer.domElement;
+					camera.aspect = canvas.clientWidth / canvas.clientHeight;
+					camera.updateProjectionMatrix();
+				}
+
+				//여기
+                raycaster.setFromCamera( mouse, camera );
+
+				let intersects = raycaster.intersectObjects(scene.children);
+				// intersects.forEach(obj=>obj.object.material.color.set(0x00ff00));
+
+				if ( intersects.length > 0 ) {
+					if ( SELECTED != intersects[ 0 ].object ) {
+						// if ( SELECTED ) SELECTED.material.emissive.setHex( SELECTED.currentHex );
+						SELECTED = intersects[ 0 ].object;
+						console.log("SELECTED : ", SELECTED);
+						SELECTED.currentHex = SELECTED.material.emissive.getHex();
+						// SELECTED.material.emissive.setHex( 0xff0000 );
+						blocker.style.cursor = 'pointer';
+					}
+				} else {
+					if ( SELECTED ) {
+						// SELECTED.material.emissive.setHex( SELECTED.currentHex );
+						SELECTED = null;
+						blocker.style.cursor = 'auto';
+					}
+				}
+
+				renderer.render(scene, camera);
+
+				requestAnimationFrame(render);
+			}
 		</script>
+		<div id="blocker">
+			<div id="instructions">
+				<p style="font-size:36px">
+					Click to play
+				</p>
+				<p>
+					Move: WASD<br/>
+					Jump: SPACE<br/>
+					Look: MOUSE
+				</p>
+			</div>
+		</div>
+		
 	</body>
 </html>
