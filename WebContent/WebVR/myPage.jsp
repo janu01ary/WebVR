@@ -1,11 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%
+	//getConnection에 필요한 파라미터 각 mysql의 url, 사용자 아이디, 비밀번호를 받는다.
+	String url = "jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8&serverTimezone=UTC";
+	String id = "root";
+	String pw = "1234";
+	
+	//라이브러리로 받은 mysql connector의 Driver 클래스를 JVM에게 알려준다. 메모리에 올라감
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	
+	//java.sql.DriverManager 를 사용하여 mysql에 대한 정보를 주고 Connection 이 참조
+	Connection con = DriverManager.getConnection(url,id,pw);
+	
+	Statement stmt = con.createStatement();
+	
+	String sql = "select * from user";
+	ResultSet rs = stmt.executeQuery(sql);
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>my_page</title>
-        <link rel="stylesheet" href="../resources/myPage.css" type="text/css">
+        <link rel="stylesheet" href="../resources/css/myPage.css" type="text/css">
     </head>
     <body>
         <!-- 사이트 이름이나 로고 나중에 추가 -->
@@ -37,12 +55,17 @@
             <!-- 마이 프로필 -->
             <div id="my_profile" class="content">
                 <table>
+                <% while(rs.next()){ %>
                     <tr>
-                        <th id="profile_title" colspan="2">최가희</th> <!-- user 이름 -->
+                        <th id="profile_title" colspan="2">
+                        	<%=rs.getString("nickname") %>
+                        </th> <!-- user 이름 -->
                     </tr>
                     <tr>
                         <th class="profile_detail">e-mail | </th>
-                        <td class="profile_value">gogo@gmail.com</td> <!-- user 이메일 -->
+                        <td class="profile_value">
+                        	<%=rs.getString("email") %>
+                        </td> <!-- user 이메일 -->
                     </tr>
                     <tr>
                         <th class="profile_detail">관심 분야 | </th>
@@ -59,6 +82,7 @@
                         <th class="profile_detail">전시 횟수 | </th>
                         <td class="profile_value">2</td> <!-- user가 주최한 전시 횟수-->
                     </tr>
+                <% } %>
                 </table>
             </div>
             <!-- 회원 정보 변경 -->
@@ -77,6 +101,10 @@
                         <tr>
                             <th class="editForm_title">전화번호 | </th>
                             <td><input type="phone" id="edit_phone" class="edit_input" placeholder="010-1234-5678"></td>
+                        </tr>
+                        <tr>
+                        	<th class="editForm_title">관심 분야 | </th>
+                        	<td><input type="text" id="edit_favorites" class="edit_input" placeholder="현대 미술"></td>
                         </tr>
                         <tr>
                             <th class="editForm_title">비밀번호 | </th>
