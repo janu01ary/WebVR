@@ -33,6 +33,10 @@
 <body>
     
     <div class="box">
+    	<!-- 회원가입이 실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
+        <c:if test="${registerFailed}">
+	      <font color="red"><c:out value="${exception.getMessage()}" /></font>
+	    </c:if>
         <form name="form" method="post">
             <table>
                 <tr>
