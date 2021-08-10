@@ -8,8 +8,10 @@ import controller.WebVR.ListExhbController;
 import controller.WebVR.ShareArtworkController;
 import controller.WebVR.ViewArtworkController;
 import controller.WebVR.ViewExhbController;
+import controller.WebVR.user.DeleteUserController;
 import controller.WebVR.user.LoginController;
 import controller.WebVR.user.LogoutController;
+import controller.WebVR.user.MyPageController;
 import controller.WebVR.user.RegisterUserController;
 
 public class RequestMapping {
@@ -35,8 +37,12 @@ public class RequestMapping {
         //artwork
         mappings.put("/WebVR/exhb/artwork", new ViewArtworkController());
         mappings.put("/WebVR/artwork/comment", new CommentArtworkController());
-        mappings.put("//WebVR/artwork/share", new ShareArtworkController());
+        mappings.put("/WebVR/artwork/share", new ShareArtworkController());
 
+        //myPage
+        mappings.put("/WebVR/myPage", new MyPageController());
+        mappings.put("/WebVR/myPage/delete", new DeleteUserController());
+        
 	}
 
 	public Controller findController(String uri) {
