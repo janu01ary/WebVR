@@ -1,0 +1,84 @@
+body {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.artwork {
+    margin: 100px auto;
+    width: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.artwork-img-block {
+    max-width: 50%;
+    float: left;
+}
+
+.artwork-img {
+    max-width: 100%;
+}
+
+.about-artwork {
+    width: 50%;
+    display: inline-block;
+    height: 100%;   
+    float: right;
+    padding: 4%;
+}
+
+.artwork-title {
+    font-size: 20pt;
+}
+
+.artist {
+    margin-bottom: 0px;
+}
+
+.share {
+    margin: 0px auto 100px auto;
+}
+
+.icon {
+    width: 50px;
+    margin: 50px 20px;
+}
+
+input {
+    width: 40%;
+    padding: 4px 6px 6px 6px;
+    margin: 5px;
+}
+
+input:focus {
+    border-color: none;
+    box-shadow: none;
+    outline: 0 none;
+} 
+
+.url {
+    font-size: 16pt;
+}
+
+@media (orientation: portrait) {
+    .artwork {
+        margin: 3% auto;
+        display: block;
+    }
+
+	.artwork-img-block {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .about-artwork {
+        width: 100%;
+        float: left;
+    }
+
+    .artwork-title {
+        margin-left: 3%;
+        margin-top: 5%;
+    }
+}   
