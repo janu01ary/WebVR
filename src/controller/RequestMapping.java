@@ -3,7 +3,9 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import controller.WebVR.CommentArtworkController;
 import controller.WebVR.ListExhbController;
+import controller.WebVR.ShareArtworkController;
 import controller.WebVR.ViewArtworkController;
 import controller.WebVR.ViewExhbController;
 import controller.WebVR.user.LoginController;
@@ -32,7 +34,9 @@ public class RequestMapping {
         
         //artwork
         mappings.put("/WebVR/exhb/artwork", new ViewArtworkController());
-        
+        mappings.put("/WebVR/artwork/comment", new CommentArtworkController());
+        mappings.put("//WebVR/artwork/share", new ShareArtworkController());
+
 	}
 
 	public Controller findController(String uri) {
