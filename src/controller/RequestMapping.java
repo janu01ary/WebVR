@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import controller.WebVR.CommentArtworkController;
+import controller.WebVR.CreateGuestBookController;
+import controller.WebVR.GuestBookController;
 import controller.WebVR.ListExhbController;
 import controller.WebVR.ShareArtworkController;
 import controller.WebVR.ViewArtworkController;
@@ -25,11 +27,11 @@ public class RequestMapping {
         mappings.put("/", new ListExhbController());
 		
 		//login, register
-        mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
-        mappings.put("/user/login", new LoginController());
-        mappings.put("/user/logout", new LogoutController());
-        mappings.put("/user/register/form", new ForwardController("/user/registerForm.jsp"));
-        mappings.put("/user/register", new RegisterUserController());
+        mappings.put("/WebVR/login/form", new ForwardController("/WebVR/loginForm.jsp"));
+        mappings.put("/WebVR/login", new LoginController());
+        mappings.put("/WebVR/logout", new LogoutController());
+        mappings.put("/WebVR/register/form", new ForwardController("/WebVR/registerForm.jsp"));
+        mappings.put("/WebVR/register", new RegisterUserController());
         
         //exhibition
         mappings.put("/WebVR/exhb", new ViewExhbController());
@@ -42,6 +44,15 @@ public class RequestMapping {
         //myPage
         mappings.put("/WebVR/myPage", new MyPageController());
         mappings.put("/WebVR/myPage/delete", new DeleteUserController());
+        
+        //guestbook
+        mappings.put("/WebVR/exhb/guestbook", new GuestBookController());
+        
+        //gridview
+        mappings.put("/WebVR/exhb/List", new GuestBookController());
+        mappings.put("/WebVR/exhb/List/artwork", new ViewArtworkController());
+        
+        
         
 	}
 
