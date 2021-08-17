@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
 		<style>
-			#blocker {
+			#blocker { 
 				position: absolute;
 				width: 100%;
 				height: 100%;
@@ -33,7 +33,6 @@
 
 			import * as THREE from './libs/three.module.js';
 			import { GLTFLoader } from './libs/GLTFLoader.js';
-
 			import { PointerLockControls } from './jsm/controls/PointerLockControls.js';
 
 			var camera, scene, renderer, controls, mouse, SELECTED;
@@ -41,12 +40,12 @@
 			const objects = [];
 
 			let raycaster;
+			let cameraDirection = new THREE.Vector3();
 
 			let moveForward = false;
 			let moveBackward = false;
 			let moveLeft = false;
 			let moveRight = false;
-			let canJump = false;
 
 			let prevTime = performance.now();
 			const velocity = new THREE.Vector3();
@@ -61,8 +60,13 @@
 
 			function init() {
 
+<<<<<<< HEAD
 				//카메라
 				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 3000 );
+=======
+				//카메라 + 씬 + 광원 초기 설정
+				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
+>>>>>>> branch 'master' of https://github.com/janu01ary/WebVR.git
 				camera.position.x = 50;
 				camera.position.y = 30;
 				camera.position.z = 50;
@@ -76,30 +80,26 @@
 				light.position.set( 0.5, 1, 0.75 );
 				scene.add( light );
 
+				//PointerLockControls 초기화 설정
 				controls = new PointerLockControls( camera, document.body );
 
 				const blocker = document.getElementById( 'blocker' );
 				const instructions = document.getElementById( 'instructions' );
 
+				//처음 실행 + Esc로 일시정지 + 브라우저 바깥으로 벗어났을 때 띄우는 안내문 이벤트
 				instructions.addEventListener( 'click', function () {
-
 					controls.lock();
-
 				} );
 
+				//안내문 클릭 시 사라졌다가, 아니면 다시 나타남
 				controls.addEventListener( 'lock', function () {
-
 					instructions.style.display = 'none';
 					blocker.style.display = 'none';
 					console.log("lock");
-
 				} );
-
 				controls.addEventListener( 'unlock', function () {
-
 					blocker.style.display = 'block';
 					instructions.style.display = '';
-
 				} );
 
 				scene.add( controls.getObject() );
@@ -129,11 +129,6 @@
 							moveRight = true;
 							break;
 
-						// case 'Space':
-						// 	if ( canJump === true ) velocity.y += 350;
-						// 	canJump = false;
-						// 	break;
-
 						case 'KeyF':
 							console.log("keyffff");
 							// onMouseClick();
@@ -142,7 +137,6 @@
 					}
 
 				};
-
 
 				//키에서 뗐을 때의 이벤트
 				const onKeyUp = function ( event ) {
@@ -176,51 +170,41 @@
 				document.addEventListener( 'keydown', onKeyDown );
 				document.addEventListener( 'keyup', onKeyUp );
 
-				raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
 
-				//여기
+				//******************************************************
+
+				//레이캐스터 이벤트
+
+				//******************************************************
+
+				raycaster = new THREE.Raycaster();
+
 				mouse = new THREE.Vector2();
 				mouse.x = mouse.y = -1;
 
 				let onMouseClick = function(e){
-					// console.log(e)
-
-					// let gap1 = e.clientX - e.offsetX
-					// let gap2 = e.clientY - e.offsetY
-					// mouse.x = ( (e.clientX - gap1)/(window.innerWidth*0.375) )*2 -1;
-					// mouse.y =  -( (e.clientY-gap2)/(window.innerHeight*0.375) )*2 +1;
-
-					// raycaster.setFromCamera(mouse,camera);
-
-					event.preventDefault();
-					console.log("event2 : ", event);
-					if ( SELECTED ){
-						console.log("SECECTED : ", SELECTED);
-						// SELECTED.currentHex = 0x00ff00*Math.random();
-						// SELECTED.material.emissive.setHex( SELECTED.currentHex );
-						// window.open("http://www.naver.com");
-						controls.unlock();
-						instructions.innerHTML = `
-							<button onClick="controls.lock()">뒤로</button>
-							<img src="${imgUrl}">
-						`;
-					}
+					//그림 선택했을 때 이벤트
+					if (instructions.style.display == 'none') {
+						event.preventDefault();
+						if ( SELECTED ){
+							window.open("http://www.naver.com"); //나중에 작품화면으로 이동하게~
+							controls.unlock();
+						}
+					} 
 				}
 
-
-
+				//renderer 설정이랑 윈도우 창 크기에 맞추기
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				document.body.appendChild( renderer.domElement );
    				
-				//여기
 				document.addEventListener( 'click', onMouseClick );
-
 				window.addEventListener( 'resize', onWindowResize );
 
 				requestAnimationFrame(render);
 
+				//GLTF 로더
 				const loader2 = new GLTFLoader();
        		    loader2.load(
                 	// resource URL
@@ -313,7 +297,6 @@
 					if ( onObject === true ) {
 
 						velocity.y = Math.max( 0, velocity.y );
-						canJump = true;
 
 					}
 
@@ -326,8 +309,6 @@
 
 						velocity.y = 0;
 						controls.getObject().position.y = 30;
-
-						canJump = true;
 
 					}
 
@@ -348,7 +329,10 @@
 				}
 
 				//여기
-                raycaster.setFromCamera( mouse, camera );
+                raycaster.setFromCamera( camera.getWorldDirection( cameraDirection ), camera );
+
+				//레이캐스터 보이는 코드 (확인용) 
+				//scene.add(new THREE.ArrowHelper(raycaster.ray.direction, raycaster.ray.origin, 300, 0xff0000) );
 
 				let intersects = raycaster.intersectObjects(scene.children);
 				// intersects.forEach(obj=>obj.object.material.color.set(0x00ff00));
@@ -382,7 +366,6 @@
 				</p>
 				<p>
 					Move: WASD<br/>
-					Jump: SPACE<br/>
 					Look: MOUSE
 				</p>
 			</div>
