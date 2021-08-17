@@ -183,31 +183,14 @@
 				mouse.x = mouse.y = -1;
 
 				let onMouseClick = function(e){
-					// console.log(e)
-
-					// let gap1 = e.clientX - e.offsetX
-					// let gap2 = e.clientY - e.offsetY
-					// mouse.x = ( (e.clientX - gap1)/(window.innerWidth*0.375) )*2 -1;
-					// mouse.y =  -( (e.clientY-gap2)/(window.innerHeight*0.375) )*2 +1;
-
-					// raycaster.setFromCamera(mouse,camera);
-
-					event.preventDefault();
-					console.log("event2 : ", event);
-					if ( SELECTED ){
-						console.log("SECECTED : ", SELECTED);
-						// SELECTED.currentHex = 0x00ff00*Math.random();
-						// SELECTED.material.emissive.setHex( SELECTED.currentHex );
-						// window.open("http://www.naver.com");
-						controls.unlock();
-						instructions.innerHTML = `
-							<button onClick="controls.lock()">뒤로</button>
-							<img src="${imgUrl}">
-						`;
-					}
+					if (instructions.style.display == 'none') {
+						event.preventDefault();
+						if ( SELECTED ){
+							window.open("http://www.naver.com"); //나중에 작품화면으로 이동하게~
+							controls.unlock();
+						}
+					} 
 				}
-
-
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
