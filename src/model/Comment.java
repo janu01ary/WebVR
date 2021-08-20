@@ -1,51 +1,60 @@
 package model;
 
-public class GuestBookDTO {
-	private int gbID;//pk
+public class Comment {
+	private int cmtID;//pk
 	private String content;
 	private String date;
 	private int userID;//fk
-	private int exhbId;//fk
+	private int artwId;//fk
 	
-	public GuestBookDTO(int gbID, String content, String date, int userID, int exhbId) {
+	public Comment(int cmtID, String content, String date, int userID, int artwId) {
 		super();
-		this.gbID = gbID;
+		this.cmtID = cmtID;
 		this.content = content;
 		this.date = date;
 		this.userID = userID;
-		this.exhbId = exhbId;
+		this.artwId = artwId;
 	}
-	
-	public int getGbID() {
-		return gbID;
+
+	public int getCmtID() {
+		return cmtID;
 	}
-	public void setGbID(int gbID) {
-		this.gbID = gbID;
+
+	public void setCmtID(int cmtID) {
+		this.cmtID = cmtID;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public String getDate() {
 		return date;
 	}
+
 	public void setDate(String date) {
 		this.date = date;
 	}
+
 	public int getUserID() {
 		return userID;
 	}
+
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-	public int getExhbId() {
-		return exhbId;
+
+	public int getArtwId() {
+		return artwId;
 	}
-	public void setExhbId(int exhbId) {
-		this.exhbId = exhbId;
+
+	public void setArtwId(int artwId) {
+		this.artwId = artwId;
 	}
 	
-
+	
 }
