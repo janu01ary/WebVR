@@ -52,8 +52,6 @@ public class RequestMapping {
         mappings.put("/WebVR/exhb/List", new GuestBookController());
         mappings.put("/WebVR/exhb/List/artwork", new ViewArtworkController());
         
-        
-        
 	}
 
 	public Controller findController(String uri) {
