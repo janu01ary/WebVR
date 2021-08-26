@@ -8,17 +8,30 @@ public class User {
 	private String phone;
 	private String favorites;
 	
-	private int exhbWatchCount;
-	private int exhbManageCount;
+	// 전시횟수 관람횟수 관련인데 이건 나중에 시간나면 만져보기.
+//	private int exhbWatchCount;
+//	private int exhbManageCount;
 	
 	public User() {}
-	public User(int id, String em, String pwd) {
+	public User(int id, String em, String pwd, String nickname) {
 		this.userID = id;
 		this.email = em;
 		this.password = pwd;
+		this.nickname = nickname;
 		
-		this.exhbWatchCount = 0;
-		this.exhbManageCount = 0;
+//		this.exhbWatchCount = 0;
+//		this.exhbManageCount = 0;
+	}
+	public User(int id, String em, String pwd, String nickname, String phone, String favorites) {
+		this.userID = id;
+		this.email = em;
+		this.password = pwd;
+		this.nickname = nickname;
+		this.phone = phone;
+		this.favorites = favorites;
+		
+//		this.exhbWatchCount = 0;
+//		this.exhbManageCount = 0;
 	}
 	
 	public int getUserID() {
@@ -57,18 +70,18 @@ public class User {
 	public void setFavorites(String favorites) {
 		this.favorites = favorites;
 	}
-	public int getExhbWatchCount() {
-		return exhbWatchCount;
-	}
-	public void setExhbWatchCount(int exhbWatchCount) {
-		this.exhbWatchCount = exhbWatchCount;
-	}
-	public int getExhbManageCount() {
-		return exhbManageCount;
-	}
-	public void setExhbManageCount(int exhbManageCount) {
-		this.exhbManageCount = exhbManageCount;
-	}
+//	public int getExhbWatchCount() {
+//		return exhbWatchCount;
+//	}
+//	public void setExhbWatchCount(int exhbWatchCount) {
+//		this.exhbWatchCount = exhbWatchCount;
+//	}
+//	public int getExhbManageCount() {
+//		return exhbManageCount;
+//	}
+//	public void setExhbManageCount(int exhbManageCount) {
+//		this.exhbManageCount = exhbManageCount;
+//	}
 	
 	
 	//비밀번호 검사
