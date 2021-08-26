@@ -4,12 +4,22 @@ import java.util.Date;
 
 public class Exhibition {
 	private int id; //전시 id
-	private String userNickname; //닉네임? id? email? 뭘로 하지
+	private int userId; //닉네임? id? email? 뭘로 하지
 	private String title; //전시의 title
 	private String description; //전시 설명
 	private Date start_date; //전시 시작일
 	private Date end_date; //전시 종료일
 	
+	public Exhibition(int id, int userId, String title, String description, Date start_date, Date end_date) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.title = title;
+		this.description = description;
+		this.start_date = start_date;
+		this.end_date = end_date;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -18,12 +28,12 @@ public class Exhibition {
 		this.id = id;
 	}
 
-	public String getUserNickname() {
-		return userNickname;
+	public int getUserId() {
+		return userId;
 	}
 	
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	
 	public String getTitle() {
@@ -60,7 +70,7 @@ public class Exhibition {
 	
 	@Override
 	public String toString() {
-		return "Exhibition [exhibitionId=" + id + ", userNickname=" + userNickname + ", title=" + title
+		return "Exhibition [exhibitionId=" + id + ", userNickname=" + userId + ", title=" + title
 				+ ", description=" + description + ", start_date=" + start_date + ", end_date=" + end_date + "]";
 	}
 }
