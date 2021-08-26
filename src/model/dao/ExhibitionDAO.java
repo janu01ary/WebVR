@@ -86,7 +86,7 @@ public class ExhibitionDAO {
 //					new java.util.Date(rs.getDate("date").getTime()),
 //					rs.getInt("views_count"),
 //					rs.getInt("likes_count"));
-				artworkList.add(artwork);
+				artworkList.add(artwork); 
 			}		
 			return artworkList;					
 			
