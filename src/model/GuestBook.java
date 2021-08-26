@@ -7,7 +7,7 @@ public class GuestBook {
 	private int userID;//fk
 	private int exhbId;//fk
 	
-	public GuestBook(int gbID, String content, String date, int userID, int exhbId) {
+	public GuestBook(int gbID, int userID, int exhbId, String content, String date) {
 		super();
 		this.gbID = gbID;
 		this.content = content;

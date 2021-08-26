@@ -1,13 +1,15 @@
 package model;
 
+import java.util.Date;
+
 public class Comment {
 	private int cmtID;//pk
 	private String content;
-	private String date;
+	private Date date;
 	private int userID;//fk
 	private int artwId;//fk
 	
-	public Comment(int cmtID, String content, String date, int userID, int artwId) {
+	public Comment(int cmtID, String content, Date date, int userID, int artwId) {
 		super();
 		this.cmtID = cmtID;
 		this.content = content;
@@ -32,11 +34,11 @@ public class Comment {
 		this.content = content;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
