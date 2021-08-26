@@ -104,7 +104,7 @@ public class ArtworkDAO {
 				artwork = new Artwork(		// Artwork 객체를 생성하여 커뮤니티 정보를 저장
 						rs.getInt("artworkId"),
 						rs.getInt("exhibitionId"),
-						rs.getInt("title"),
+						rs.getString("title"),
 						rs.getInt("artworkAddress"),
 						rs.getString("description"),
 						rs.getString("artistName"),
@@ -137,7 +137,7 @@ public class ArtworkDAO {
 				Artwork artwork = new Artwork(		
 						rs.getInt("artworkId"),
 						rs.getInt("exhibitionId"),
-						rs.getInt("title"),
+						rs.getString("title"),
 						rs.getInt("artworkAddress"),
 						rs.getString("description"),
 						rs.getString("artistName"),
