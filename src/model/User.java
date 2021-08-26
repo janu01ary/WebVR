@@ -8,7 +8,7 @@ public class User {
 	private String phone;
 	private String favorites;
 	
-	// 전시횟수 관람횟수 관련인데 이건 나중에 시간나면 만져보기
+	// 전시횟수 관람횟수 관련인데 이건 나중에 시간나면 만져보기.
 //	private int exhbWatchCount;
 //	private int exhbManageCount;
 	
