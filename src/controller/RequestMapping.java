@@ -5,6 +5,7 @@ import java.util.Map;
 
 import controller.WebVR.CommentArtworkController;
 import controller.WebVR.CreateGuestBookController;
+import controller.WebVR.GridViewController;
 import controller.WebVR.GuestBookController;
 import controller.WebVR.ListExhbController;
 import controller.WebVR.ShareArtworkController;
@@ -49,7 +50,7 @@ public class RequestMapping {
         mappings.put("/WebVR/exhb/guestbook", new GuestBookController());
         
         //gridview
-        mappings.put("/WebVR/exhb/List", new GuestBookController());
+        mappings.put("/WebVR/exhb/List", new GridViewController());
         mappings.put("/WebVR/exhb/List/artwork", new ViewArtworkController());
         
 	}
