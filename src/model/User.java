@@ -5,8 +5,8 @@ public class User {
 	private String email;
 	private String password;
 	private String nickname;
-	private String phone;
-	private String favorites;
+//	private String phone;
+//	private String favorites;
 	
 	// 전시횟수 관람횟수 관련인데 이건 나중에 시간나면 만져보기.
 //	private int exhbWatchCount;
@@ -22,7 +22,7 @@ public class User {
 //		this.exhbWatchCount = 0;
 //		this.exhbManageCount = 0;
 	}
-	public User(int id, String em, String pwd, String nickname, String phone, String favorites) {
+/*	public User(int id, String em, String pwd, String nickname, String phone, String favorites) {
 		this.userID = id;
 		this.email = em;
 		this.password = pwd;
@@ -33,7 +33,7 @@ public class User {
 //		this.exhbWatchCount = 0;
 //		this.exhbManageCount = 0;
 	}
-	
+*/	
 	public int getUserID() {
 		return userID;
 	}
@@ -58,7 +58,7 @@ public class User {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public String getPhone() {
+/*	public String getPhone() {
 		return phone;
 	}
 	public void setPhone(String phone) {
@@ -82,7 +82,7 @@ public class User {
 //	public void setExhbManageCount(int exhbManageCount) {
 //		this.exhbManageCount = exhbManageCount;
 //	}
-	
+*/	
 	
 	//비밀번호 검사
 	public boolean matchPassword(String pwd) {
