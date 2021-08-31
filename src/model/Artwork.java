@@ -7,7 +7,7 @@ public class Artwork {
 	private int artworkId; // pk(기본키)
 	private int exhibitionId; // exhibition의 PK, FK
 	private String title; // 작품 제목
-	private int artworkAddress; // 작품 사진 주소 경로
+	private String artworkAddress; // 작품 사진 주소 경로
 	private String description; // 작품 설명
 	private String artistName; // 작품 작가 이름
 	private Date date; // 작품을 제작한 날짜
@@ -16,7 +16,7 @@ public class Artwork {
 	
 	public Artwork() {}
 
-	public Artwork(int artworkId, int exhibitionId, String title,  int artworkAddress, String description, String artistName, Date date,
+	public Artwork(int artworkId, int exhibitionId, String title,  String artworkAddress, String description, String artistName, Date date,
 			int viewCount, int likesCount) {
 		super();
 		this.artworkId = artworkId;
@@ -54,11 +54,11 @@ public class Artwork {
 		this.title = title;
 	}
 	
-	public int getArtworkAddress() {
+	public String getArtworkAddress() {
 		return artworkAddress;
 	}
 
-	public void setArtworkAddress(int artworkAddress) {
+	public void setArtworkAddress(String artworkAddress) {
 		this.artworkAddress = artworkAddress;
 	}
 
