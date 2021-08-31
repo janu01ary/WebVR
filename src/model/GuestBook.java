@@ -1,6 +1,6 @@
 package model;
 
-public class GuestBook {
+public class GuestBook { 
 	private int gbID;//pk
 	private String content;
 	private String date;
