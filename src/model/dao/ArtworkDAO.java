@@ -93,24 +93,24 @@ public class ArtworkDAO {
 
 	// 주어진 id에 해당하는 artwork를 데이터베이스에서 찾아 도메인 클래스에 저장하여 반환
 	public Artwork findArtwork(int id) throws SQLException {
-		String sql = "SELECT artworkId, exhibitionId, title, artworkAddress, description, artistName, date, viewCount, likesCount "
+		String sql = "SELECT id, exhibition_id, title, artwork_address, description, artist_name, date, views_count, likes_count "
     			+ "FROM artwork "
-    			+ "WHERE artworkId=? ";         
+    			+ "WHERE id=? ";         
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {id});	// JDBCUtil에 query문과 매개 변수 설정
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
 			Artwork artwork = null;
 			if (rs.next()) {						//  정보 발견
 				artwork = new Artwork(		// Artwork 객체를 생성하여 커뮤니티 정보를 저장
-						rs.getInt("artworkId"),
-						rs.getInt("exhibitionId"),
+						rs.getInt("id"),
+						rs.getInt("exhibition_id"),
 						rs.getString("title"),
-						rs.getInt("artworkAddress"),
+						rs.getString("artwork_address"),
 						rs.getString("description"),
-						rs.getString("artistName"),
+						rs.getString("artist_name"),
 						rs.getDate("date"),
-						rs.getInt("viewCount"),
-						rs.getInt("likesCount"));
+						rs.getInt("views_count"),
+						rs.getInt("likes_count"));
 			}
 			return artwork;
 		} catch (Exception ex) {
@@ -124,9 +124,9 @@ public class ArtworkDAO {
 	
 	// 전체 Artwork를 List에 저장 및 반환
 	public List<Artwork> findArtworkList() throws SQLException {
-		String sql = "SELECT artworkId, exhibitionId, title, artworkAddress, description, artistName, date, viewCount, likesCount "
+		String sql = "SELECT id, exhibition_id, title, artwork_address, description, artist_name, date, views_count, likes_count "
 				+ "FROM artwork "
-				+ "ORDER BY artworkId DESC "; 
+				+ "ORDER BY id ASC "; 
 		
 		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
 					
@@ -135,15 +135,15 @@ public class ArtworkDAO {
 			List<Artwork> artworkList = new ArrayList<Artwork>();	
 			while (rs.next()) {
 				Artwork artwork = new Artwork(		
-						rs.getInt("artworkId"),
-						rs.getInt("exhibitionId"),
+						rs.getInt("id"),
+						rs.getInt("exhibition_id"),
 						rs.getString("title"),
-						rs.getInt("artworkAddress"),
+						rs.getString("artwork_address"),
 						rs.getString("description"),
-						rs.getString("artistName"),
+						rs.getString("artist_name"),
 						rs.getDate("date"),
-						rs.getInt("viewCount"),
-						rs.getInt("likesCount"));
+						rs.getInt("views_count"),
+						rs.getInt("likes_count"));
 				artworkList.add(artwork);
 			}		
 			return artworkList;					
