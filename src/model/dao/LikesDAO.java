@@ -83,7 +83,7 @@ public class LikesDAO {
 		} finally {
 			jdbcUtil.close();		// resource ¹ÝÈ¯
 		}
-		return null;
+		return null; 
 		
 	}
 	
