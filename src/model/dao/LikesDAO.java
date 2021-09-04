@@ -140,5 +140,4 @@ public class LikesDAO {
 		}
 		return null;
 	}
-
 }
