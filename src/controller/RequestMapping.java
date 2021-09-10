@@ -16,7 +16,8 @@ import controller.WebVR.ViewGuestBookController;
 import controller.WebVR.user.DeleteUserController;
 import controller.WebVR.user.LoginController;
 import controller.WebVR.user.LogoutController;
-import controller.WebVR.user.MyPageController;
+import controller.WebVR.user.ViewMyPageController;
+import controller.WebVR.user.UpdateMyPageController;
 import controller.WebVR.user.RegisterUserController;
 
 public class RequestMapping {
@@ -49,7 +50,8 @@ public class RequestMapping {
         mappings.put("/WebVR/artwork/comment/delete", new DeleteCommentController());
 
         //myPage
-        mappings.put("/WebVR/myPage", new MyPageController());
+        mappings.put("/WebVR/myPage", new ViewMyPageController());
+        mappings.put("/WebVR/myPage/update", new UpdateMyPageController());
         mappings.put("/WebVR/myPage/delete", new DeleteUserController());
         
         //guestbook
