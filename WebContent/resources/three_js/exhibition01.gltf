@@ -897,30 +897,57 @@
     {
       "pbrMetallicRoughness": {
         "baseColorFactor": [
-          0.7843137254901961,
-          0.7843137254901961,
-          0.7843137254901961,
-          1
+          1,
+          1,
+          1,
+          0.7
         ],
-        "metallicFactor": 0.5,
-        "roughnessFactor": 0.5
+        "metallicFactor": 0,
+        "roughnessFactor": 0.9,
+        "baseColorTexture": {
+          "index": 0
+        }
       },
-      "emissiveFactor": [
-        0.4392156862745098,
-        0.4392156862745098,
-        0.4392156862745098
-      ]
+      "alphaMode": "BLEND",
+      "extensions": {
+        "KHR_materials_unlit": {}
+      }
     },
     {
       "pbrMetallicRoughness": {
-        "metallicFactor": 0.5,
-        "roughnessFactor": 0.5
+        "metallicFactor": 0,
+        "roughnessFactor": 0.9,
+        "baseColorTexture": {
+          "index": 1
+        }
       },
-      "emissiveFactor": [
-        0.0784313725490196,
-        0.0784313725490196,
-        0.0784313725490196
-      ]
+      "extensions": {
+        "KHR_materials_unlit": {}
+      }
+    },
+    {
+      "pbrMetallicRoughness": {
+        "metallicFactor": 0,
+        "roughnessFactor": 0.9,
+        "baseColorTexture": {
+          "index": 2
+        }
+      },
+      "extensions": {
+        "KHR_materials_unlit": {}
+      }
+    },
+    {
+      "pbrMetallicRoughness": {
+        "metallicFactor": 0,
+        "roughnessFactor": 0.9,
+        "baseColorTexture": {
+          "index": 3
+        }
+      },
+      "extensions": {
+        "KHR_materials_unlit": {}
+      }
     },
     {
       "pbrMetallicRoughness": {
@@ -936,46 +963,26 @@
     {
       "pbrMetallicRoughness": {
         "metallicFactor": 0,
-        "roughnessFactor": 1
+        "roughnessFactor": 0.9,
+        "baseColorTexture": {
+          "index": 4
+        }
       },
-      "emissiveFactor": [
-        0.0784313725490196,
-        0.0784313725490196,
-        0.0784313725490196
-      ]
+      "extensions": {
+        "KHR_materials_unlit": {}
+      }
     },
     {
       "pbrMetallicRoughness": {
         "metallicFactor": 0,
-        "roughnessFactor": 1
+        "roughnessFactor": 0.9,
+        "baseColorTexture": {
+          "index": 5
+        }
       },
-      "emissiveFactor": [
-        0.0392156862745098,
-        0.0392156862745098,
-        0.0392156862745098
-      ]
-    },
-    {
-      "pbrMetallicRoughness": {
-        "metallicFactor": 0,
-        "roughnessFactor": 1
-      },
-      "emissiveFactor": [
-        0.1568627450980392,
-        0.1568627450980392,
-        0.1568627450980392
-      ]
-    },
-    {
-      "pbrMetallicRoughness": {
-        "metallicFactor": 0,
-        "roughnessFactor": 1
-      },
-      "emissiveFactor": [
-        0.1568627450980392,
-        0.1568627450980392,
-        0.1568627450980392
-      ]
+      "extensions": {
+        "KHR_materials_unlit": {}
+      }
     },
     {
       "pbrMetallicRoughness": {
@@ -987,6 +994,96 @@
         0.5294117647058824,
         0.5294117647058824
       ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 1,
+      "source": 1
+    },
+    {
+      "sampler": 2,
+      "source": 2
+    },
+    {
+      "sampler": 3,
+      "source": 3
+    },
+    {
+      "sampler": 4,
+      "source": 4
+    },
+    {
+      "sampler": 5,
+      "source": 5
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/jpg",     
+      "uri": "../sample.jpg"
+    },
+    {
+      "mimeType": "image/jpg",     
+      "uri": "../sample.jpg"
+    },
+    {
+      "mimeType": "image/jpg",     
+      "uri": "../sample.jpg"
+    },
+    {
+      "mimeType": "image/jpg",     
+      "uri": "../sample.jpg"
+    },
+    {
+      "mimeType": "image/jpg",     
+      "uri": "../sample.jpg"
+    },
+    {
+      "mimeType": "image/jpg",     
+      "uri": "../sample.jpg"
     }
   ],
   "meshes": [
@@ -1102,5 +1199,8 @@
         }
       ]
     }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_unlit"
   ]
 }
