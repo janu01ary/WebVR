@@ -7,11 +7,11 @@ import controller.WebVR.CommentArtworkController;
 import controller.WebVR.CreateGuestBookController;
 import controller.WebVR.GridViewController;
 import controller.WebVR.GuestBookController;
-import controller.WebVR.LikeArtworkController;
 import controller.WebVR.ListExhbController;
 import controller.WebVR.ShareArtworkController;
 import controller.WebVR.ViewArtworkController;
 import controller.WebVR.ViewExhbController;
+import controller.WebVR.ViewGuestBookController;
 import controller.WebVR.user.DeleteUserController;
 import controller.WebVR.user.LoginController;
 import controller.WebVR.user.LogoutController;
@@ -42,14 +42,13 @@ public class RequestMapping {
         mappings.put("/WebVR/exhb/artwork", new ViewArtworkController());
         mappings.put("/WebVR/artwork/comment", new CommentArtworkController());
         mappings.put("/WebVR/artwork/share", new ShareArtworkController());
-        mappings.put("/WebVR/artwork/like", new LikeArtworkController());
 
         //myPage
         mappings.put("/WebVR/myPage", new MyPageController());
         mappings.put("/WebVR/myPage/delete", new DeleteUserController());
         
         //guestbook
-        mappings.put("/WebVR/exhb/guestbook", new GuestBookController());
+        mappings.put("/WebVR/exhb/guestbook", new ViewGuestBookController());
         
         //gridview
         mappings.put("/WebVR/exhb/List", new GridViewController());
