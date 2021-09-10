@@ -3,14 +3,15 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import controller.WebVR.CommentArtworkController;
+import controller.WebVR.CreateCommentController;
 import controller.WebVR.CreateGuestBookController;
+import controller.WebVR.DeleteCommentController;
 import controller.WebVR.GridViewController;
-import controller.WebVR.GuestBookController;
-import controller.WebVR.ListExhbController;
+import controller.WebVR.ListExhibitionController;
 import controller.WebVR.ShareArtworkController;
 import controller.WebVR.ViewArtworkController;
-import controller.WebVR.ViewExhbController;
+import controller.WebVR.ViewCommentController;
+import controller.WebVR.ViewExhibitionController;
 import controller.WebVR.ViewGuestBookController;
 import controller.WebVR.user.DeleteUserController;
 import controller.WebVR.user.LoginController;
@@ -26,7 +27,7 @@ public class RequestMapping {
 		// 각 uri에 대응되는 controller 객체를 생성 및 저장
 
 		//home
-        mappings.put("/", new ListExhbController());
+        mappings.put("/", new ListExhibitionController());
 		
 		//login, register
         mappings.put("/WebVR/login/form", new ForwardController("/WebVR/loginForm.jsp"));
@@ -36,12 +37,16 @@ public class RequestMapping {
         mappings.put("/WebVR/register", new RegisterUserController());
         
         //exhibition
-        mappings.put("/WebVR/exhb", new ViewExhbController());
+        mappings.put("/WebVR/exhb", new ViewExhibitionController());
         
         //artwork
         mappings.put("/WebVR/exhb/artwork", new ViewArtworkController());
-        mappings.put("/WebVR/artwork/comment", new CommentArtworkController());
         mappings.put("/WebVR/artwork/share", new ShareArtworkController());
+        
+        //comment
+        mappings.put("/WebVR/artwork/comment", new ViewCommentController());
+        mappings.put("/WebVR/artwork/comment/create", new CreateCommentController());
+        mappings.put("/WebVR/artwork/comment/delete", new DeleteCommentController());
 
         //myPage
         mappings.put("/WebVR/myPage", new MyPageController());
