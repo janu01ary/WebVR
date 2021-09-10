@@ -8,13 +8,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
+import model.Artwork;
+import model.dao.ArtworkDAO;
 
 public class ShareArtworkController implements Controller {
+	
+	private ArtworkDAO artworkDAO = new ArtworkDAO();
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		// 컨트롤러가 어떤 jsp 파일로 리턴되어야 하는지만 작성하면 됨
+		int artworkId = Integer.parseInt(request.getParameter("artworkId"));
+		Artwork artwork = artworkDAO.findArtwork(artworkId);
+		request.setAttribute("artwork", artwork);		
+		
 		return "/WebVR/artworkShare.jsp";
 	}
 

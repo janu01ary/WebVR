@@ -1,21 +1,57 @@
-package controller.WebVR.user;
+/*
+ *  해당 회원 정보 DB에서 삭제
+ * 
+ */
 
-import java.util.ArrayList;
-import java.util.List;
+package controller.WebVR.user;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
+import controller.WebVR.user.UserSessionUtils;
+import model.User;
+import model.dao.UserDAO;
 
 public class DeleteUserController implements Controller {
 
+	private UserDAO userDAO = new UserDAO();
+	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		// 로그인 여부 확인
+    	if (!UserSessionUtils.hasLogined(request.getSession())) {
+            return "redirect:/WebVR/login/form";		// login form 요청으로 redirect
+        }
+    	
+		HttpSession session = request.getSession();	
+		String userId = UserSessionUtils.getLoginUserId(session);
+	
+		if ((UserSessionUtils.isLoginUser("admin", session) && 	// 로그인한 사용자가 관리자이고 	
+			 !userId.equals("admin"))							// 삭제 대상이 일반 사용자인 경우, 
+			   || 												// 또는 
+			(!UserSessionUtils.isLoginUser("admin", session) &&  // 로그인한 사용자가 관리자가 아니고 
+			UserSessionUtils.isLoginUser(userId, session))) { // 로그인한 사용자가 삭제 대상인 경우 (자기 자신을 삭제)
+
+			userDAO.remove(userId);				// 사용자 정보 삭제
+			
+			if (UserSessionUtils.isLoginUser("admin", session))	// 로그인한 사용자가 관리자 	
+				return "redirect:/WebVR/home";		// 사용자 리스트로 이동
+			else 									// 로그인한 사용자는 이미 삭제됨
+				return "redirect:/WebVR/logout";		// logout 처리
+		}
 		
-		// 컨트롤러가 어떤 jsp 파일로 리턴되어야 하는지만 작성하면 됨
-		return "/WebVR/home.jsp";
+		/* 삭제가 불가능한 경우 */
+		User user = userDAO.findUser(userId);	// 사용자 정보 검색
+		request.setAttribute("user", user);						
+		request.setAttribute("deleteFailed", true);
+		String msg = (UserSessionUtils.isLoginUser("admin", session)) 
+				   ? "시스템 관리자 정보는 삭제할 수 없습니다."		
+				   : "타인의 정보는 삭제할 수 없습니다.";													
+		request.setAttribute("exception", new IllegalStateException(msg));            
+		return "/WebVR/myPage.jsp";
 	}
 
 }

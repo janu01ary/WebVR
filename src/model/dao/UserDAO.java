@@ -36,10 +36,9 @@ public class UserDAO {
 	// USER 테이블의 사용자 정보 수정
 	public int update(User user) throws SQLException {
 		String sql = "UPDATE USERINFO "
-					+ "SET email=?, password=?, nickname=?, phone=?, favorites=? "
+					+ "SET email=?, password=?, nickname=?,"
 					+ "WHERE userID=?";
-		Object[] param = new Object[] {user.getEmail(), user.getPassword(), user.getNickname(),
-				(user.getPhone() != null) ? user.getPhone() : null, (user.getFavorites() != null) ? user.getFavorites() : null};				
+		Object[] param = new Object[] {user.getEmail(), user.getPassword(), user.getNickname()};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
 			
 		try {				
@@ -57,7 +56,7 @@ public class UserDAO {
 	}
 
 	//해당 ID를 가진 사용자를 USER 테이블에서 삭제
-	public int remove(int userID) throws SQLException {
+	public int remove(String userID) throws SQLException {
 		String sql = "DELETE FROM USERINFO WHERE userID=?";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userID});	// JDBCUtil에 delete문과 매개 변수 설정
 
@@ -76,8 +75,8 @@ public class UserDAO {
 	}
 
 	// 해당 ID의 사용자 정보를 DB에서 찾아 User 도메인 클래스에 저장 후 반환
-	public User findUser(int userID) throws SQLException {
-        String sql = "SELECT email, password, nickname, phone, favorites"
+	public User findUser(String userID) throws SQLException {
+        String sql = "SELECT email, password, nickname"
         			+ "WHERE userID=? ";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userID});	// JDBCUtil에 query문과 매개 변수 설정
 
@@ -85,12 +84,10 @@ public class UserDAO {
 			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
 			if (rs.next()) {						// 학생 정보 발견
 				User user = new User(		// User 객체를 생성하여 학생 정보를 저장
-					userID,
+					Integer.parseInt(userID),
 					rs.getString("email"),
 					rs.getString("password"),
-					rs.getString("nickname"),
-					rs.getString("phone"),
-					rs.getString("favorites"));
+					rs.getString("nickname"));
 				return user;
 			}
 		} catch (Exception ex) {
@@ -102,7 +99,7 @@ public class UserDAO {
 	}
 	
 	// 해당 ID의 사용자가 존재하는지 검사
-	public boolean existingUser(int userID) throws SQLException {
+	public boolean existingUser(String userID) throws SQLException {
 		String sql = "SELECT count(*) FROM USERINFO WHERE userID=?";      
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userID});	// JDBCUtil에 query문과 매개 변수 설정
 

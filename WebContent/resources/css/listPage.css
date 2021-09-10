@@ -3,6 +3,10 @@
 	width: 70%;
 }
 
+body {
+	background-color: black;
+}
+
 table{
 	width: 70%;
 	margin-left:15%;

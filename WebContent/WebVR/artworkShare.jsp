@@ -12,13 +12,14 @@
 <body>
     
     <div class="artwork">
-        <div class="artwork-img-block">
-            <img class="artwork-img" src="">
+        <div class="artwork-img-block">   
+            <c:set var="s3_bucket_link" value="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" />
+			<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.artworkAddress}"/>"  class="artwork-img">
         </div>
         <div class="about-artwork">
-            <span class="artwork-title">작품 제목</span>
+            <span class="artwork-title"><c:out value="${artwork.title}"/></span>
             <!-- <br> -->
-            <span class="artist">작가 이름</span>
+            <span class="artist"><c:out value="${artwork.artistName}"/></span>
         </div>
     </div>
 

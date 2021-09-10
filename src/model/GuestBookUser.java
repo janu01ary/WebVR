@@ -2,52 +2,60 @@ package model;
 
 import java.util.Date;
 
-public class GuestBook { 
+public class GuestBookUser {
 	private int gbID;//pk
 	private String content;
 	private Date date;
-	private int userID;//fk
+	private String nickname;//fk
 	private int exhbId;//fk
 	
-	public GuestBook(int gbID, int userID, int exhbId, String content, Date date) {
+	public GuestBookUser(int gbID, String nickname, int exhbId, String content, Date date) {
 		super();
 		this.gbID = gbID;
 		this.content = content;
 		this.date = date;
-		this.userID = userID;
+		this.nickname = nickname;
 		this.exhbId = exhbId;
 	}
-	
+
 	public int getGbID() {
 		return gbID;
 	}
+
 	public void setGbID(int gbID) {
 		this.gbID = gbID;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public Date getDate() {
 		return date;
 	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public int getUserID() {
-		return userID;
+
+	public String getNickname() {
+		return nickname;
 	}
-	public void setUserID(int userID) {
-		this.userID = userID;
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
+
 	public int getExhbId() {
 		return exhbId;
 	}
+
 	public void setExhbId(int exhbId) {
 		this.exhbId = exhbId;
 	}
-	
 
 }

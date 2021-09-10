@@ -53,10 +53,10 @@ public class RequestMapping {
         mappings.put("/WebVR/myPage/delete", new DeleteUserController());
         
         //guestbook
-        mappings.put("/WebVR/exhb/guestbook", new GuestBookController());
+        mappings.put("/WebVR/exhb/guestbook", new ViewGuestBookController());
         
         //gridview
-        mappings.put("/WebVR/exhb/List", new GuestBookController());
+        mappings.put("/WebVR/exhb/List", new GridViewController());
         mappings.put("/WebVR/exhb/List/artwork", new ViewArtworkController());
         
 	}
