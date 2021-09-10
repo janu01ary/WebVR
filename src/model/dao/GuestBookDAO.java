@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.GBU;
+import model.GuestBookUser;
 import model.GuestBook;
 import model.User;
 
@@ -110,7 +110,7 @@ public class GuestBookDAO {
 		return null;
 	}
 	
-	public List<GBU> GBUList(int exhbId) throws SQLException {//전시 별 방명록 작성한 유저 , 방명록 리스트
+	public List<GuestBookUser> getGuestBookList(int exhbId) throws SQLException {//전시 별 방명록 작성한 유저 , 방명록 리스트
         String sql = "SELECT g.id, u.nickname, g.exhibition_id, g.content, g.date " 
         		   + "FROM guest_book g left outer join user u"
         		   + "on g.user_id = u.id"
@@ -120,9 +120,9 @@ public class GuestBookDAO {
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
-			List<GBU> GBUList = new ArrayList<GBU>();	//리스트 생성
+			List<GuestBookUser> GBUList = new ArrayList<GuestBookUser>();	//리스트 생성
 			while (rs.next()) {
-				GBU GB = new GBU(			//객체를 생성하여 현재 행의 정보를 저장
+				GuestBookUser GB = new GuestBookUser(			//객체를 생성하여 현재 행의 정보를 저장
 					rs.getInt("g.id"),
 					rs.getString("u.nickname"),
 					rs.getInt("g.exhibition_id"),

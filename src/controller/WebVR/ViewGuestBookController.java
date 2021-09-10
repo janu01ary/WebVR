@@ -1,7 +1,7 @@
 package controller.WebVR;
 
 import controller.Controller;
-import model.GBU;
+import model.GuestBookUser;
 import model.GuestBook;
 import model.User;
 import model.dao.ExhibitionDAO;
@@ -23,9 +23,9 @@ public class ViewGuestBookController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		HttpSession session = request.getSession();
-		int exhbID = Integer.parseInt(request.getParameter("ExhbId"));// 파라미터로 전시 아이디 가져오기
+		int exhbID = Integer.parseInt(request.getParameter("ExhbId"));// 파라미터로 전시 아이디 가져오기,전시공간에서 ㅊ가
 
-		List<GBU> GBUList = gbDAO.GBUList(exhbID);//전시 아이디로 방명록 리스트
+		List<GuestBookUser> GBUList = gbDAO.getGuestBookList(exhbID);//전시 아이디로 방명록 리스트
 		
 		request.setAttribute("GBUList", GBUList);		// GBList보내기
 

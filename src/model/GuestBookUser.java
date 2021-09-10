@@ -2,14 +2,14 @@ package model;
 
 import java.util.Date;
 
-public class GBU {
+public class GuestBookUser {
 	private int gbID;//pk
 	private String content;
 	private Date date;
 	private String nickname;//fk
 	private int exhbId;//fk
 	
-	public GBU(int gbID, String nickname, int exhbId, String content, Date date) {
+	public GuestBookUser(int gbID, String nickname, int exhbId, String content, Date date) {
 		super();
 		this.gbID = gbID;
 		this.content = content;
