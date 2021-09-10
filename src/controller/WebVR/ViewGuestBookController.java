@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 public class ViewGuestBookController implements Controller {
 
-	private GuestBookDAO gbDAO = new GuestBookDAO();
+	private GuestBookDAO gbDAO = new GuestBookDAO(); 
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

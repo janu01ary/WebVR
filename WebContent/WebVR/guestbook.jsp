@@ -20,7 +20,7 @@
 <title>방명록</title>
 
 <style type="text/css">
-.card { $
+.card { $ 
 	card-height: 100%;
 	background-color: black;
 }
