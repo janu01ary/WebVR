@@ -1,54 +1,89 @@
- <!-- 배경화면 검정, 글자색 흰색으로 수정 필요 -->
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <title>artwork</title>
-<link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/workPage.css">
+<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
+<link rel="stylesheet" href="<c:url value='/resources/css/workPage.css' />">
+<style type="text/css">
+	#workPage{
+	  width: 60%; 
+	  text-align: left;
+	}
+	
+	body {
+		background-color: black;
+	}
+	th {
+		color: white;
+	}
+	td {
+		color: white;
+		padding: 10px;
+	}
+</style>
 </head>
 <body>
 	<div id="workPage" class="center-block">
-		<!-- 이미지 첨부 확인을 위해 임의로 사진 넣음. 추후 데이터베이스에서 가져올 예정 -->
-		<br>
-		<img src="momo.jpg" alt="workImage" class="img-responsive">
+		<br><br>
+		<c:set var="s3_bucket_link" value="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" />
+		<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.artworkAddress}"/>"  class="img-responsive">
 		
 	    <table width="100%" style="text-align:left;">
 			<tr>
-			    <td>
-			    	<img src="../resources/icon/comment.png" alt="commentIcon" width="50px">
-			    </td>
-				<td>
-					<img src="../resources/icon/likes.png" alt="likeIcon" width="50px">
-				</td>
-				<td>
-					99+
-				</td>
+			    <th>
+			    	<a href="<c:url value='/WebVR/artwork/comment'> <c:param name='artworkId' value='${artwork.artworkId}'/></c:url>">
+	        		<img src="<c:url value='/resources/icon/comment.png' />" alt="commentIcon" width="50px" /> </a> 
+			    </th>
+				<th>
+					<a href="<c:url value='/WebVR/artwork/like'> <c:param name='artworkId' value='${artwork.artworkId}'/></c:url>">
+	        		<img src="<c:url value='/resources/icon/likes.png' />" alt="commentIcon" width="50px" /> </a>
+				</th>
+				<th> 
+					<c:choose>
+						<c:when test="${artwork.likesCount < 100}">
+							<c:out value="${artwork.likesCount}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="99+"/>
+						</c:otherwise>
+					</c:choose>
+				</th>
 				
-				<td width="70%">
-				</td>
+				<th width="70%">
+				</th>
 				
-				<td>
-					<img src="../resources/icon/share.png" alt="shareIcon" width="50px">
-				</td>
-				<td>
-					<img src="../resources/icon/view.png" alt="viewIcon" width="50px">
-				</td>
-				<td>
-					99+
-				</td>
+				<th>
+					<a href="<c:url value='/WebVR/artwork/share'> <c:param name='artworkId' value='${artwork.artworkId}'/></c:url>">
+	        		<img src="<c:url value='/resources/icon/share.png' />" alt="commentIcon" width="50px" /> </a>
+				</th>
+				<th>
+					<img src="<c:url value='/resources/icon/view.png' />" alt="viewIcon" width="50px" />
+				</th>
+				<th>
+					<c:choose>
+						<c:when test="${artwork.viewCount < 100}">
+							<c:out value="${artwork.viewCount}"/>
+						</c:when>
+						<c:otherwise>
+							<c:out value="99+"/>
+						</c:otherwise>
+					</c:choose>
+				</th>
 			</tr>
 	
 			<tr>
-				<td colspan="7" style="padding:15px;">
-					<h3 style="display:inline">작품 제목</h3> 
-					<h4 style="display:inline">작가 이름</h4>
+				<td colspan="7" >
+					<h3 style="display:inline"><c:out value="${artwork.title}"/></h3> 
+					<h4 style="display:inline"><c:out value="${artwork.artistName}"/></h4>
+					<h5 style="display:inline"><c:out value="${artwork.date}"/></h5>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="7" style="padding:20px;"><h5>작품 설명 들어갈 부분 작품 설명 들어갈 부분 작품 설명 들어갈 부분 작품 설명 들어갈 부분</h5></td>
+				<td colspan="7" ><h4><c:out value="${artwork.description}"/></h4></td>
 			</tr>
 	    </table>
 	</div>
