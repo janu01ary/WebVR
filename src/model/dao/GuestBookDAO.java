@@ -130,7 +130,7 @@ public class GuestBookDAO {
 					rs.getInt("g.exhibition_id"),
 					rs.getString("g.content"),
 					rs.getDate("g.date"));
-				GBUList.add(GB);				// List俊 按眉 历厘
+				GBUList.add(GB);				 // List俊 按眉 历厘
 			}		
 			return GBUList;					
 			
