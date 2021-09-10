@@ -1,23 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="controller.*" %>
+<%@ page import="model.*" %>
 <%
-	//getConnection에 필요한 파라미터 각 mysql의 url, 사용자 아이디, 비밀번호를 받는다.
-	String url = "jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8&serverTimezone=UTC";
-	String id = "root";
-	String pw = "1234";
-	
-	//라이브러리로 받은 mysql connector의 Driver 클래스를 JVM에게 알려준다. 메모리에 올라감
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	
-	//java.sql.DriverManager 를 사용하여 mysql에 대한 정보를 주고 Connection 이 참조
-	Connection con = DriverManager.getConnection(url,id,pw);
-	
-	Statement stmt = con.createStatement();
-	
-	String sql = "select * from user";
-	ResultSet rs = stmt.executeQuery(sql);
+	User user = (User)request.getAttribute("user");
+	List<Likes> likesList = (List<Likes>)request.getAttribute("likesList");
+	List<Visit> visitList = (List<Visit>)request.getAttribute("visitList");
 %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,38 +43,21 @@
                 <br>
                 <h3 id="warning" onClick="openMenu(event, 'leave_acc')">회원 탈퇴</h3>
             </div>
-            <!-- 오른쪽 content에 띄울 mypage 내용들 -->
+            <!-- 오른쪽 content에 띄울 myPage 내용들 -->
             <!-- 마이 프로필 -->
             <div id="my_profile" class="content">
                 <table>
-                <% while(rs.next()){ %>
                     <tr>
                         <th id="profile_title" colspan="2">
-                        	<%=rs.getString("nickname") %>
+                        	<%=user.getUserID() %>
                         </th> <!-- user 이름 -->
                     </tr>
                     <tr>
                         <th class="profile_detail">e-mail | </th>
                         <td class="profile_value">
-                        	<%=rs.getString("email") %>
+                        	<%=user.getEmail() %>
                         </td> <!-- user 이메일 -->
                     </tr>
-                    <tr>
-                        <th class="profile_detail">관심 분야 | </th>
-                        <td class="profile_value">현대 미술</td>
-                    </tr>
-                    <tr>
-                        <td id="empty" colspan="2"></td> <!-- empty -->
-                    </tr>
-                    <tr>
-                        <th class="profile_detail">관람 횟수 | </th>
-                        <td class="profile_value">5</td> <!-- user의 관람 횟수 -->
-                    </tr>
-                    <tr>
-                        <th class="profile_detail">전시 횟수 | </th>
-                        <td class="profile_value">2</td> <!-- user가 주최한 전시 횟수-->
-                    </tr>
-                <% } %>
                 </table>
             </div>
             <!-- 회원 정보 변경 -->
@@ -91,20 +66,16 @@
                     <table>
                         <tr>
                             <th class="editForm_title">이름 | </th>
-                            <td><input type="text" id="edit_name" class="edit_input" placeholder="최가희"></td>
+                            <td>
+                            	<input type="text" id="edit_name" class="edit_input" placeholder="<%=user.getNickname() %>">
+                            </td>
                             <!-- placeholder에는 해당하는 user 정보 넣어주기 -->
                         </tr>
                         <tr>
                             <th class="editForm_title">e-mail | </th>
-                            <td><input type="email" id="edit_email" class="edit_input" placeholder="gogo@gmail.com"></td>
-                        </tr>
-                        <tr>
-                            <th class="editForm_title">전화번호 | </th>
-                            <td><input type="phone" id="edit_phone" class="edit_input" placeholder="010-1234-5678"></td>
-                        </tr>
-                        <tr>
-                        	<th class="editForm_title">관심 분야 | </th>
-                        	<td><input type="text" id="edit_favorites" class="edit_input" placeholder="현대 미술"></td>
+                            <td>
+                            	<input type="email" id="edit_email" class="edit_input" placeholder="<%=user.getEmail() %>">
+                            </td>
                         </tr>
                         <tr>
                             <th class="editForm_title">비밀번호 | </th>
@@ -121,91 +92,51 @@
             <!-- 관람 내역 -->
             <div id="watch_history" class="content">
                 <table style="margin-top: 40px; border-spacing:10px">
+                <%
+                	Iterator<Visit> visitIter = visitList.iterator();
+                	for(int i = 0; visitIter.hasNext(); i++){
+                		Visit visit = (Visit)visitIter.next();
+                		if(i % 3 == 0){
+                %>
                     <tr>
+                    <% } %>
                         <td>
                             <div class="watch_card">
                                 <img src="../resources/img/img.png" class="card_image" alt="...">
                                 <div class="card_body">
-                                    <h2 class="card_title">전시회 이름</h2>
+                                    <h2 class="card_title"><%=visit.getExhibitionId() %></h2>
                                     <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
                                 </div>
                                 <div class="card_button_box"><button class="card_button">자세히</button></div>
                             </div>
                         </td>
-                        <td>
-                            <div class="watch_card">
-                                <img src="../resources/img/img.png" class="card_image" alt="...">
-                                <div class="card_body">
-                                    <h2 class="card_title">전시회 이름</h2>
-                                    <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
-                                </div>
-                                <div class="card_button_box"><button class="card_button">자세히</button></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="watch_card">
-                                <img src="../resources/img/img.png" class="card_image" alt="...">
-                                <div class="card_body">
-                                    <h2 class="card_title">전시회 이름</h2>
-                                    <p class="card_text">가로로 3개 초과하면 tr 추가해서 아래로 추가하도록 하기! 이거 자세히 버튼 아래에 고정 못 시키나 고민하기..</p>
-                                </div>
-                                <div class="card_button_box"><button class="card_button">자세히</button></div>
-                            </div>
-                        </td>
+                    <% if(i % 3 == 2){ %>
                     </tr>
-                    <tr>
-                        <td>
-                            <div class="watch_card">
-                                <img src="../resources/img/img.png" class="card_image" alt="...">
-                                <div class="card_body">
-                                    <h2 class="card_title">전시회 이름</h2>
-                                    <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
-                                </div>
-                                <div class="card_button_box"><button class="card_button">자세히</button></div>
-                            </div>
-                        </td>
-                    </tr>
+                    <% }} %>
                 </table>
             </div>
             <!-- 좋아한 작품 보기 -->
             <div id="favorite_art" class="content">
                 <table style="width: 90%; table-layout: fixed; border-spacing: 13px;">
+                <%
+                	Iterator<Likes> likesIter = likesList.iterator();
+                	for(int i = 0; likesIter.hasNext(); i++){
+                		Likes likes = (Likes)likesIter.next();
+                		if(i % 4 == 0){
+                %>
                     <tr>
+                    <% } %>
                         <td class="like_td">
+                        	<p> <%= likes.getLikeId() %>
                             <img src="../resources/img/shiba.jpg" class="like_image" alt="...">
                         </td>
-                        <td class="like_td">
-                            <img src="../resources/img/cat.jpg" class="like_image" alt="...">
-                        </td>
-                        <td class="like_td">
-                            <img src="../resources/img/leaves.jpg" class="like_image" alt="...">
-                        </td>
-                        <td class="like_td">
-                            <img src="../resources/img/square2.jpg" class="like_image" alt="...">
-                        </td>
+                    <% if(i % 4 == 3){ %>
                     </tr>
-                    <tr>
-                        <td class="like_td">
-                            <img src="../resources/img/korea.jpg" class="like_image" alt="...">
-                        </td>
-                        <td class="like_td">
-                            <img src="../resources/img/square.jpg" class="like_image" alt="...">
-                        </td>
-                        <td class="like_td">
-                            <img src="../resources/img/img.png" class="like_image" alt="...">
-                        </td>
-                        <td class="like_td">
-                            <img src="../resources/img/img.png" class="like_image" alt="...">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="like_td">
-                            <img src="../resources/img/img.png" class="like_image" alt="...">
-                        </td>
-                    </tr>
+                <% }} %>
                 </table>
             </div>
             <!-- 작성한 댓글 보기 -->
+            <!-- 나중에 Comment 추가해서 마저 하기!!!!!!!!!!!!!!!!!!!!!! -->
             <div id="my_reply" class="content">
                 <table style="margin-top:20px;">
                     <tr>
