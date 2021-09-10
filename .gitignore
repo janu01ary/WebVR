@@ -130,10 +130,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-<<<<<<< HEAD
-# End of https://www.toptal.com/developers/gitignore/api/windows,eclipse,java
->>>>>>> 5fb62fd (추가: 전시 및 작품 관련 controller, view 추가)
-=======
-# End of https://www.toptal.com/developers/gitignore/api/windows,eclipse,java
->>>>>>> 5fb62fd (추가: 전시 및 작품 관련 controller, view 추가)
