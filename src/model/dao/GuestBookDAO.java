@@ -112,11 +112,13 @@ public class GuestBookDAO {
 	
 	public List<GuestBookUser> getGuestBookList(int exhbId) throws SQLException {//전시 별 방명록 작성한 유저 , 방명록 리스트
         String sql = "SELECT g.id, u.nickname, g.exhibition_id, g.content, g.date " 
-        		   + "FROM guest_book g left outer join user u"
-        		   + "on g.user_id = u.id"
-        		   + "WHERE exhibition_id=?"
-        		   + "ORDER BY date";
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
+        		   + "FROM guest_book g left outer join user u "
+        		   + "on g.user_id = u.id "
+        		   + "WHERE exhibition_id=? "
+        		   + "ORDER BY date ";
+        
+        Object[] param = new Object[] {exhbId};
+		jdbcUtil.setSqlAndParameters(sql, param);		// JDBCUtil에 query문 설정
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			

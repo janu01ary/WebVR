@@ -35,7 +35,7 @@
 .list-group-item {
 	margin-bottom: 20px;
 	margin-right: 10px;
-	border-radius: 15px;
+	/*border-radius: 15px;*/
 	border-color: lightgrey;
 }
 </style>
@@ -54,11 +54,10 @@
 						<a class="list-group-item list-group-item-dark"
 							aria-current="true">
 							<div class="d-flex w-100 justify-content-between">
-								<h5 class="mb-1">${GBU.nickname}</h5>
-								<small>${GBU.date}</small>
+								<h5 class="mb-1">${gb.nickname}</h5>
+								<small>${gb.date}</small>
 							</div>
-							<p class="mb-1">${GBU.content}</p> <small>And
-								some small print.</small>
+							<p class="mb-1">${gb.content}</p>
 						</a>
 					</c:forEach>
 				</div>
