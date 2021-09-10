@@ -12,7 +12,6 @@
 <body>
     <div class="top">
         <!-- 로그인 되어 있지 않으면-->
-        <c:if 
         <button type="button" class="btn btn-outline-light">LOGIN/JOIN</button>
          
         <!-- 로그인 되어 있으면 -->
@@ -25,18 +24,10 @@
         <div class="list">  
             <a href="<c:url value='/WebVR/exhb' />" class="exhibition-link">
                 <div class="exhibition"> 
-                    <img src="<c:url value='/resources/icon/mypage_circle.png' />" class="exhibition-img">
+                    <img src="" class="exhibition-img">
                     전시 이름1
                 </div>
             </a>
-            <c:forEach var="exhb" items="${exhibitionList}" varStatus="status">
-            	<a href="<c:url value='/WebVR/exhb' />" class="exhibition-link">
-	            	<div class="exhibition"> 
-	                    <img src="<c:url value='/resources/icon/mypage_circle.png' />" class="exhibition-img">
-	                    ${exhb.title}
-	                </div>
-            	</a>
-            </c:forEach>
             <a href="" class="exhibition-link">
                 <div class="exhibition">
                     <img src="" class="exhibition-img">

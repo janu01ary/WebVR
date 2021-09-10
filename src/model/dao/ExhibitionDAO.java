@@ -3,7 +3,6 @@ package model.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import model.Artwork;
@@ -40,7 +39,7 @@ public class ExhibitionDAO {
 	}
 	
 	//exhibition id를 통해 exhibition 조회
-	public Exhibition findExhibitionById(int exhibitionId) throws SQLException {
+	public Exhibition findExhibition(int exhibitionId) throws SQLException {
         String sql = "select user_id, title, description, start_date, end_date "
         			+ "from exhibition "
         			+ "where id=?";              
@@ -78,16 +77,15 @@ public class ExhibitionDAO {
 			ResultSet rs = jdbcUtil.executeQuery();	
 			List<Artwork> artworkList = new ArrayList<Artwork>();	
 			while (rs.next()) {
-				Artwork artwork = new Artwork(
-					rs.getInt("id"),
-					exhibitionId,
-					rs.getString("title"), 
-					rs.getString("artworkAddress"), 
-					rs.getString("description"),
-					rs.getString("artistName"),
-					new java.util.Date(rs.getDate("date").getTime()),
-					rs.getInt("views_count"),
-					rs.getInt("likes_count"));
+//				Artwork artwork = new Artwork(
+//					rs.getInt("id"),
+//					exhibitionId,
+//					rs.getInt("title"), //getString으로 바꿔야
+//					rs.getString("description"),
+//					rs.getString("artistName"),
+//					new java.util.Date(rs.getDate("date").getTime()),
+//					rs.getInt("views_count"),
+//					rs.getInt("likes_count"));
 				artworkList.add(artwork); 
 			}		
 			return artworkList;					

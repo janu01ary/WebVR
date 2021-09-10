@@ -14,7 +14,7 @@ private JDBCUtil jdbcUtil = null;
 		jdbcUtil = new JDBCUtil();	// JDBCUtil 객체 생성
 	}
 
-	// comment 생성
+	//comment 생성
 	public int create(Comment comment) throws SQLException {
 		String sql = "insert into comment (content, date, user_id, artwork_id) values (?, ?, ?, ?)"; //null로 두면 알아서 증가하는지? 아니면 id 컬럼을 제외하고 넣어야 하는 건지?	
 		Object[] param = new Object[] {
@@ -36,32 +36,12 @@ private JDBCUtil jdbcUtil = null;
 		return 0;			
 	}
 	
-	// comment 삭제
-	public int delete(int commentId) throws SQLException {
-		String sql = "delete from comment where id=?";		
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {commentId});	// JDBCUtil에 delete문과 매개 변수 설정
-
-		try {				
-			int result = jdbcUtil.executeUpdate();	// delete 문 실행
-			return result;
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		}
-		finally {
-			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 반환
-		}		
-		return 0;
-	}
-	
-	// artwork id를 통해 해당 작품에 속한 최근 30개의 comment의 list 조회
+	//artwork id를 통해 해당 작품에 속한 comment의 list 조회
 	public List<Comment> findCommentListByArtworkId(int artworkId) {
 		String sql = "select id, content, date, user_id " 
       		   + "from comment "
       		   + "where artwork_id=? "
-      		   + "order by id desc" // 시간 순서대로 id가 만들어지니까 그냥 id로 내림차순 정렬
-      		   + "limit 30"; // 최근 30개
+      		   + "order by id"; //시간 순서대로 id가 만들어지니까 그냥 id로 정렬
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {artworkId});	
 					
 		try {
