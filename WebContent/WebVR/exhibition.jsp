@@ -1,39 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>three.js - pointerlock controls</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
-		<style>
-			#blocker { 
-				position: absolute;
-				width: 100%;
-				height: 100%;
-				background-color: rgba(0,0,0,0.5);
-			}
+<head>
+<title>Untact Gallery</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
+<style>
+#blocker {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
 
-			#instructions {
-				width: 100%;
-				height: 100%;
+#instructions {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 14px;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+	<script type="module">
 
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-
-				text-align: center;
-				font-size: 14px;
-				cursor: pointer;
-			}
-		</style>
-	</head>
-	<body>
-		<script type="module">
-
-			import * as THREE from './libs/three.module.js';
-			import { GLTFLoader } from './libs/GLTFLoader.js';
-			import { PointerLockControls } from './jsm/controls/PointerLockControls.js';
+			import * as THREE from '<c:url value='/resources/libs/three.module.js' />';
+			import { GLTFLoader } from '<c:url value='/resources/libs/GLTFLoader.js' />';
+			import { PointerLockControls } from '<c:url value='/resources/jsm/controls/PointerLockControls.js' />';
 
 			var camera, scene, renderer, controls, mouse, SELECTED;
 
@@ -59,7 +61,7 @@
 			animate();
 
 			function init() {
-				//카메라 + 씬 + 광원 초기 설정
+				//Ã¬Â¹Â´Ã«Â©ÂÃ«ÂÂ¼ + Ã¬ÂÂ¬ + ÃªÂ´ÂÃ¬ÂÂ Ã¬Â´ÂÃªÂ¸Â° Ã¬ÂÂ¤Ã¬Â Â
 				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
 				camera.position.x = 50;
 				camera.position.y = 30;
@@ -74,18 +76,18 @@
 				light.position.set( 0.5, 1, 0.75 );
 				scene.add( light );
 
-				//PointerLockControls 초기화 설정
+				//PointerLockControls Ã¬Â´ÂÃªÂ¸Â°Ã­ÂÂ Ã¬ÂÂ¤Ã¬Â Â
 				controls = new PointerLockControls( camera, document.body );
 
 				const blocker = document.getElementById( 'blocker' );
 				const instructions = document.getElementById( 'instructions' );
 
-				//처음 실행 + Esc로 일시정지 + 브라우저 바깥으로 벗어났을 때 띄우는 안내문 이벤트
+				//Ã¬Â²ÂÃ¬ÂÂ Ã¬ÂÂ¤Ã­ÂÂ + EscÃ«Â¡Â Ã¬ÂÂ¼Ã¬ÂÂÃ¬Â ÂÃ¬Â§Â + Ã«Â¸ÂÃ«ÂÂ¼Ã¬ÂÂ°Ã¬Â Â Ã«Â°ÂÃªÂ¹Â¥Ã¬ÂÂ¼Ã«Â¡Â Ã«Â²ÂÃ¬ÂÂ´Ã«ÂÂ¬Ã¬ÂÂ Ã«ÂÂ Ã«ÂÂÃ¬ÂÂ°Ã«ÂÂ Ã¬ÂÂÃ«ÂÂ´Ã«Â¬Â¸ Ã¬ÂÂ´Ã«Â²Â¤Ã­ÂÂ¸
 				instructions.addEventListener( 'click', function () {
 					controls.lock();
 				} );
 
-				//안내문 클릭 시 사라졌다가, 아니면 다시 나타남
+				//Ã¬ÂÂÃ«ÂÂ´Ã«Â¬Â¸ Ã­ÂÂ´Ã«Â¦Â­ Ã¬ÂÂ Ã¬ÂÂ¬Ã«ÂÂ¼Ã¬Â¡ÂÃ«ÂÂ¤ÃªÂ°Â, Ã¬ÂÂÃ«ÂÂÃ«Â©Â´ Ã«ÂÂ¤Ã¬ÂÂ Ã«ÂÂÃ­ÂÂÃ«ÂÂ¨
 				controls.addEventListener( 'lock', function () {
 					instructions.style.display = 'none';
 					blocker.style.display = 'none';
@@ -98,7 +100,7 @@
 
 				scene.add( controls.getObject() );
 
-				//키(w, a, s, d, space bar, 화살표)를 눌렀을 때의 이벤트
+				//Ã­ÂÂ¤(w, a, s, d, space bar, Ã­ÂÂÃ¬ÂÂ´Ã­ÂÂ)Ã«Â¥Â¼ Ã«ÂÂÃ«Â ÂÃ¬ÂÂ Ã«ÂÂÃ¬ÂÂ Ã¬ÂÂ´Ã«Â²Â¤Ã­ÂÂ¸
 				const onKeyDown = function ( event ) {
 
 					switch ( event.code ) {
@@ -132,7 +134,7 @@
 
 				};
 
-				//키에서 뗐을 때의 이벤트
+				//Ã­ÂÂ¤Ã¬ÂÂÃ¬ÂÂ Ã«ÂÂÃ¬ÂÂ Ã«ÂÂÃ¬ÂÂ Ã¬ÂÂ´Ã«Â²Â¤Ã­ÂÂ¸
 				const onKeyUp = function ( event ) {
 
 					switch ( event.code ) {
@@ -167,7 +169,7 @@
 
 				//******************************************************
 
-				//레이캐스터 이벤트
+				//Ã«Â ÂÃ¬ÂÂ´Ã¬ÂºÂÃ¬ÂÂ¤Ã­ÂÂ° Ã¬ÂÂ´Ã«Â²Â¤Ã­ÂÂ¸
 
 				//******************************************************
 
@@ -177,17 +179,17 @@
 				mouse.x = mouse.y = -1;
 
 				let onMouseClick = function(e){
-					//그림 선택했을 때 이벤트
+					//ÃªÂ·Â¸Ã«Â¦Â¼ Ã¬ÂÂ Ã­ÂÂÃ­ÂÂÃ¬ÂÂ Ã«ÂÂ Ã¬ÂÂ´Ã«Â²Â¤Ã­ÂÂ¸
 					if (instructions.style.display == 'none') {
 						event.preventDefault();
 						if ( SELECTED ){
-							window.open("http://www.naver.com"); //나중에 작품화면으로 이동하게~
+							window.open("http://www.naver.com"); //Ã«ÂÂÃ¬Â¤ÂÃ¬ÂÂ Ã¬ÂÂÃ­ÂÂÃ­ÂÂÃ«Â©Â´Ã¬ÂÂ¼Ã«Â¡Â Ã¬ÂÂ´Ã«ÂÂÃ­ÂÂÃªÂ²Â~
 							controls.unlock();
 						}
 					} 
 				}
 
-				//renderer 설정이랑 윈도우 창 크기에 맞추기
+				//renderer Ã¬ÂÂ¤Ã¬Â ÂÃ¬ÂÂ´Ã«ÂÂ Ã¬ÂÂÃ«ÂÂÃ¬ÂÂ° Ã¬Â°Â½ Ã­ÂÂ¬ÃªÂ¸Â°Ã¬ÂÂ Ã«Â§ÂÃ¬Â¶ÂÃªÂ¸Â°
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
@@ -198,11 +200,11 @@
 
 				requestAnimationFrame(render);
 
-				//GLTF 로더
+				//GLTF Ã«Â¡ÂÃ«ÂÂ
 				const loader2 = new GLTFLoader();
        		    loader2.load(
                 	// resource URL
-                	'./three_js/exhibition01.gltf',
+                	'<c:url value='/resources/three_js/exhibition01.gltf' />',
 
                 	// called when the resource is loaded
                 	function ( gltf ) {
@@ -215,7 +217,7 @@
                 	}
             	);
 
-				//이미지 큐브
+				//Ã¬ÂÂ´Ã«Â¯Â¸Ã¬Â§Â Ã­ÂÂÃ«Â¸Â
 				const geometry = new THREE.BoxGeometry(20, 20, 1);
 				// const cubes = [];  // just an array we can use to rotate the cubes
 				const loader = new THREE.TextureLoader();
@@ -322,10 +324,10 @@
 					camera.updateProjectionMatrix();
 				}
 
-				//여기
+				//Ã¬ÂÂ¬ÃªÂ¸Â°
                 raycaster.setFromCamera( camera.getWorldDirection( cameraDirection ), camera );
 
-				//레이캐스터 보이는 코드 (확인용) 
+				//Ã«Â ÂÃ¬ÂÂ´Ã¬ÂºÂÃ¬ÂÂ¤Ã­ÂÂ° Ã«Â³Â´Ã¬ÂÂ´Ã«ÂÂ Ã¬Â½ÂÃ«ÂÂ (Ã­ÂÂÃ¬ÂÂ¸Ã¬ÂÂ©) 
 				//scene.add(new THREE.ArrowHelper(raycaster.ray.direction, raycaster.ray.origin, 300, 0xff0000) );
 
 				let intersects = raycaster.intersectObjects(scene.children);
@@ -353,17 +355,14 @@
 				requestAnimationFrame(render);
 			}
 		</script>
-		<div id="blocker">
-			<div id="instructions">
-				<p style="font-size:36px">
-					Click to play
-				</p>
-				<p>
-					Move: WASD<br/>
-					Look: MOUSE
-				</p>
-			</div>
+	<div id="blocker">
+		<div id="instructions">
+			<p style="font-size: 36px">Click to play</p>
+			<p>
+				Move: WASD<br /> Look: MOUSE
+			</p>
 		</div>
-		
-	</body>
+	</div>
+
+</body>
 </html>

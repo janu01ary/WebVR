@@ -1,6 +1,14 @@
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background-color: black;
     color: white;
+    font-family: 'NEXON Lv1 Gothic OTF';
 }
 
 .top {
@@ -9,9 +17,39 @@ body {
     vertical-align: middle;
 }
 
+.description {
+	height: 100%; /*수정필요*/
+	padding: 10% 20%;
+	background-image: url( "/resources/img/main_pic01.jpg" );
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.description-img {
+	position: absolute;
+	height: 500px;
+}
+
+p {
+	margin-bottom: 20px;
+	font-size: 28pt;
+}
+
+.title {
+	font-size: 48pt;
+}
+
+.emphasis {
+	font-size: 72pt;
+}
+
 .icon {
     width: 50px;
     height: 50px;
+}
+
+.list-block {
+	padding-top: 30px;
 }
 
 .list-title {
@@ -22,11 +60,13 @@ body {
 
 .exhibition {
     text-align: center;
-    margin: 50px 20%;
-    padding: 50px;
+    margin: 50px 0%;
+    padding: 50px 0px;
     transition-duration: 1.5s;
     transition-timing-function: ease;
     border-radius: 10px;
+    width: 30%;
+    display: inline-block;
 }
 
 .exhibition-link:link, .exhibition-link:visited, .exhibition-link:hover, .exhibition-link:active {
@@ -40,7 +80,8 @@ body {
 }
 
 .exhibition-img {
-    height: 100px;
+	max-width: 80%;
+    /*max-height: 400px;*/
 }
 
 .btn {
@@ -49,4 +90,5 @@ body {
 
 .list-block {
     margin-bottom: 100px;
+    text-align: center;
 }
