@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.GBU;
 import model.GuestBook;
+import model.User;
 
 
 public class GuestBookDAO {
@@ -17,8 +19,8 @@ public class GuestBookDAO {
 	}
 	
 	public int create(GuestBook gtb) throws SQLException {//새로운 방명록 작성
-		String sql = "INSERT INTO guest_book VALUES (?, ?, ?, ?, ?)";		
-		Object[] param = new Object[] {gtb.getGbID(), gtb.getContent(), 
+		String sql = "INSERT INTO guest_book VALUES (?, ?, ?, ?)";		
+		Object[] param = new Object[] {gtb.getContent(), 
 						gtb.getDate(), gtb.getUserID(), gtb.getExhbId()
 						//(user.getCommId()!=0) ? user.getCommId() : null 
 						};				
@@ -60,7 +62,7 @@ public class GuestBookDAO {
 		return 0;
 	}
 	
-	public int remove(String gbID) throws SQLException {//방명록 삭제
+	public int remove(int gbID) throws SQLException {//방명록 삭제
 		String sql = "DELETE FROM guest_book WHERE id=?";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {gbID});	// JDBCUtil에 delete문과 매개 변수 설정
 
@@ -79,7 +81,7 @@ public class GuestBookDAO {
 	}
 	
 	
-	public List<GuestBook> GBList() throws SQLException {//전시 별 방명록 리스트 반환
+	public List<GuestBook> GBList(int exhbId) throws SQLException {//전시 별 방명록 리스트 반환
         String sql = "SELECT id, user_id, exhibition_id, content, date " 
         		   + "FROM guest_book"
         		   + "WHERE exhibition_id=?"
@@ -88,17 +90,47 @@ public class GuestBookDAO {
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
-			List<GuestBook> GBList = new ArrayList<GuestBook>();	// User들의 리스트 생성
+			List<GuestBook> GBList = new ArrayList<GuestBook>();	//리스트 생성
 			while (rs.next()) {
-				GuestBook GB = new GuestBook(			// User 객체를 생성하여 현재 행의 정보를 저장
+				GuestBook GB = new GuestBook(			//객체를 생성하여 현재 행의 정보를 저장
 					rs.getInt("id"),
 					rs.getInt("user_id"),
 					rs.getInt("exhibition_id"),
 					rs.getString("content"),
-					rs.getString("date"));
-				GBList.add(GB);				// List에 User 객체 저장
+					rs.getDate("date"));
+				GBList.add(GB);				// List에 객체 저장
 			}		
 			return GBList;					
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return null;
+	}
+	
+	public List<GBU> GBUList(int exhbId) throws SQLException {//전시 별 방명록 작성한 유저 , 방명록 리스트
+        String sql = "SELECT g.id, u.nickname, g.exhibition_id, g.content, g.date " 
+        		   + "FROM guest_book g left outer join user u"
+        		   + "on g.user_id = u.id"
+        		   + "WHERE exhibition_id=?"
+        		   + "ORDER BY date";
+		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
+			List<GBU> GBUList = new ArrayList<GBU>();	//리스트 생성
+			while (rs.next()) {
+				GBU GB = new GBU(			//객체를 생성하여 현재 행의 정보를 저장
+					rs.getInt("g.id"),
+					rs.getString("u.nickname"),
+					rs.getInt("g.exhibition_id"),
+					rs.getString("g.content"),
+					rs.getDate("g.date"));
+				GBUList.add(GB);				// List에 객체 저장
+			}		
+			return GBUList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -124,7 +156,7 @@ public class GuestBookDAO {
 					rs.getInt("user_id"),
 					rs.getInt("exhibition_id"),
 					rs.getString("content"),
-					rs.getString("date"));
+					rs.getDate("date"));
 				myGBList.add(GB);				// List에 User 객체 저장
 			}		
 			return myGBList;					
