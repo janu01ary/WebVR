@@ -18,13 +18,14 @@ public class ExhibitionDAO {
 
 	//exhibition 생성
 	public int create(Exhibition exhibition) throws SQLException {
-		String sql = "insert into exhibition (user_id, title, start_date, end_date, description) values (?, ?, ?, ?, ?)"; //시퀀스 해야됨	
+		String sql = "insert into exhibition (user_id, title, start_date, end_date, description, image_ddress) values (?, ?, ?, ?, ?, ?)"; 	
 		Object[] param = new Object[] {
 				exhibition.getUserId(), 
 				exhibition.getTitle(), 
 				new java.sql.Date(exhibition.getStart_date().getTime()), 
 				new java.sql.Date(exhibition.getEnd_date().getTime()), 
-				exhibition.getDescription()};				
+				exhibition.getDescription(),
+				exhibition.getImageAddress()};				
 		jdbcUtil.setSqlAndParameters(sql, param);
 		try {				
 			int result = jdbcUtil.executeUpdate();
@@ -41,7 +42,7 @@ public class ExhibitionDAO {
 	
 	//exhibition id를 통해 exhibition 조회
 	public Exhibition findExhibitionById(int exhibitionId) throws SQLException {
-        String sql = "select user_id, title, description, start_date, end_date "
+        String sql = "select user_id, title, description, image_address, start_date, end_date "
         			+ "from exhibition "
         			+ "where id=?";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {exhibitionId});
@@ -54,6 +55,7 @@ public class ExhibitionDAO {
 					rs.getInt("user_id"),
 					rs.getString("title"),
 					rs.getString("description"),
+					rs.getString("image_address"),
 					new java.util.Date(rs.getDate("start_date").getTime()),
 					new java.util.Date(rs.getDate("end_date").getTime()));
 				return exhibition;
@@ -100,10 +102,12 @@ public class ExhibitionDAO {
 		return null;
 	}
 	
-	//exhibition list 조회
+	//현재 진행 중인 exhibition list 조회
 	public List<Exhibition> findExhibitionList() {
-		String sql = "select id, user_id, title, description, start_date, end_date " 
+
+		String sql = "select id, user_id, title, description, image_address, start_date, end_date " 
       		   + "from exhibition "
+      		   + "where date(now()) >= date(start_date) AND date(now()) <= date(end_date) "
       		   + "order by id"; //시간 순서대로 id가 만들어지니까 그냥 id로 정렬
 		jdbcUtil.setSqlAndParameters(sql, null);
 					
@@ -116,6 +120,7 @@ public class ExhibitionDAO {
 					rs.getInt("user_id"),
 					rs.getString("title"),
 					rs.getString("description"),
+					rs.getString("image_address"),
 					new java.util.Date(rs.getDate("start_date").getTime()),
 					new java.util.Date(rs.getDate("end_date").getTime()));
 				exhibitionList.add(exhibition);	

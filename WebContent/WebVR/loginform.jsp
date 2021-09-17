@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,25 +53,29 @@ Usage as a mixin
 <div class ="bgdiv">
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container text-white">
-			<h1 class="display-4">webVR</h1>
+			<h1 class="display-4">Untact Gallery</h1>
 			
 		</div>
 	</div>
 	<div class="container-md text-white">
-		<form>
+		<form method="post" action="<c:url value='/WebVR/login' />">
 			<div class="form-group">
-				<label for="exampleInputId">ID</label> <input type="text"
-					class="form-control" id="exampleInputId">
+				<label for="exampleInputId">Email</label>
+				<input type="text" class="form-control" id="exampleInputId" name="email">
 			</div>
 			<div class="form-group">
-				<label for="exampleInputPassword">Password</label> <input
-					type="password" class="form-control" id="exampleInputPassword">
+				<label for="exampleInputPassword">Password</label>
+				<input type="password" class="form-control" id="exampleInputPassword" name="password">
 			</div>
 			<div class="clearfix">
 					<u><a href="#" >sign in</a></u>
 				<button type="submit" class="btn btn-outline-light btn-lg float-right">login</button>
 			</div>
 		</form>
+		
+		<c:if test="${loginFailed}">
+			${exception}
+		</c:if>
 	</div>
 	</div>
 	<!-- Optional JavaScript; choose one of the two! -->

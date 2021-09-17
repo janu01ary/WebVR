@@ -28,13 +28,13 @@ public class RequestMapping {
 		// 각 uri에 대응되는 controller 객체를 생성 및 저장
 
 		//home
-        mappings.put("/", new ListExhibitionController());
+        mappings.put("/WebVR/home", new ListExhibitionController());
 		
 		//login, register
-        mappings.put("/WebVR/login/form", new ForwardController("/WebVR/loginForm.jsp"));
+        mappings.put("/WebVR/login/form", new ForwardController("/WebVR/loginform.jsp"));
         mappings.put("/WebVR/login", new LoginController());
         mappings.put("/WebVR/logout", new LogoutController());
-        mappings.put("/WebVR/register/form", new ForwardController("/WebVR/registerForm.jsp"));
+        mappings.put("/WebVR/register/form", new ForwardController("/WebVR/registerform.jsp"));
         mappings.put("/WebVR/register", new RegisterUserController());
         
         //exhibition

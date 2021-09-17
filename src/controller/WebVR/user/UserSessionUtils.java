@@ -20,7 +20,7 @@ public class UserSessionUtils {
     }
 
     /* 현재 로그인한 사용자의 ID가 userId인지 검사 */
-    public static boolean isLoginUser(String userId, HttpSession session) {
+    public static boolean isLoginUser(int userId, HttpSession session) {
         String loginUser = getLoginUserId(session);
         if (loginUser == null) {
             return false;

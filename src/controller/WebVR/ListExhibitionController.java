@@ -18,6 +18,8 @@ public class ListExhibitionController implements Controller {
 
 		List<Exhibition> exhibitionList = exhibitionDAO.findExhibitionList();
 		
+		System.out.println("exhibitionList" + exhibitionList);
+
 		request.setAttribute("exhibitionList", exhibitionList);
 		return "/WebVR/home.jsp";
 	}

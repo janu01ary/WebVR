@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,16 +50,21 @@
         }
         .icon {
         	font-size: 1.5em;
+            color: lightgrey;
+        }
+        .icon:hover {
+        	text-decoration: none;
+            color: grey;
         }
     </style>
 </head>
 <body>
 <div class="card-group">
     <div class="card">
-        <img src="sample.jpg" class="card-img-top" alt="sample">
+        <img src="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/<c:out value="${artwork.artworkAddress}"/>" class="card-img-top" alt="sample">
         <div class="card-body text-white">
-            <h5 class="card-title">title</h5>
-            <p class="card-text">caption in here</p>
+            <h5 class="card-title">${artwork.title}</h5>
+            <p class="card-text">${artwork.description}</p>
         </div>
     </div>
     <!--댓글창-->
@@ -71,13 +77,15 @@
 	            <c:forEach var="comment" items="${commentList}" varStatus="status">
 	            	<div class="list-group-item" aria-current="true">
 	                    <div class="d-flex w-100 justify-content-between">
-	                        <h5 class="mb-1">${userList[status].nickname}</h5>
+	                        <h5 class="mb-1">${userList[status.index].nickname}</h5>
 	                        <small class="mb-2">
-	                        	${comment.date}
-	                        	<c:if test="${userList[status].id eq userId}"> <!-- 댓글 작성자와 현재 로그인된 사용자가 같으면 -->
+	                        	<fmt:formatDate value="${comment.date}" pattern="yyyy-MM-dd" var="date"/>
+	                        	${date}
+	                        	<c:if test="${userList[status.index].userID eq userID}"> <!-- 댓글 작성자와 현재 로그인된 사용자가 같으면 -->
 	                        		<a class="material-icons icon ml-1"
 	                        		   href="<c:url value='/WebVR/artwork/comment/delete'>
-	                        		   			<c:param name='commentId' value='${comment.id}' />
+	                        		   			<c:param name='commentId' value='${comment.cmtID}' />
+            									<c:param name='artworkId' value='${artwork.artworkId}'/>
 	                        		   		 </c:url>">delete</a>
 	                        	</c:if>
 	                        </small>
@@ -117,11 +125,11 @@
             </div>
         </div>
         <div class="card-footer text-white">
-            <form action="<c:url value='/WebVR/arkwork/comment/create'>
-            				<c:param name='artworkId' value='${artworkId}'/>
+            <form action="<c:url value='/WebVR/artwork/comment/create'>
+            				<c:param name='artworkId' value='${artwork.artworkId}'/>
             			  </c:url>" method="post">
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="InputComment">
+                    <input type="text" class="form-control" id="InputComment" name="content">
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 	<button type="submit" class="btn btn-outline-light me-md-2">Send</button>

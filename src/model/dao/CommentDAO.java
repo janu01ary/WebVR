@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Comment;
+import model.User;
 
 public class CommentDAO {
 private JDBCUtil jdbcUtil = null;
@@ -13,6 +14,57 @@ private JDBCUtil jdbcUtil = null;
 	public CommentDAO() {			
 		jdbcUtil = new JDBCUtil();	// JDBCUtil 객체 생성
 	}
+	
+	// 해당 ID의 사용자 정보를 DB에서 찾아 User 도메인 클래스에 저장 후 반환
+			public User findUserByEmail(String email) throws SQLException {
+		        String sql = "select id, email, password, nickname "
+		        			+ "from user "
+		        			+ "where email=?";              
+				jdbcUtil.setSqlAndParameters(sql, new Object[] {email});	// JDBCUtil에 query문과 매개 변수 설정
+
+				try {
+					ResultSet rs = jdbcUtil.executeQuery();		// query 실행
+					if (rs.next()) {						// 학생 정보 발견
+						User user = new User(		// User 객체를 생성하여 학생 정보를 저장
+							rs.getInt("id"),
+							email,
+							rs.getString("password"),
+							rs.getString("nickname"));
+						System.out.println(user);
+						return user;
+					}
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				} finally {
+					jdbcUtil.close();		// resource 반환
+				}
+				return null;
+			}
+			
+			// 해당 ID의 사용자 정보를 DB에서 찾아 User 도메인 클래스에 저장 후 반환
+			public User findUser(int userID) throws SQLException {
+		        String sql = "SELECT email, password, nickname "
+		        			+ "FROM user "
+		        			+ "WHERE id=?";              
+				jdbcUtil.setSqlAndParameters(sql, new Object[] {userID});	// JDBCUtil에 query문과 매개 변수 설정
+
+				try {
+					ResultSet rs = jdbcUtil.executeQuery();		// query 실행
+					if (rs.next()) {						// 학생 정보 발견
+						User user = new User(		// User 객체를 생성하여 학생 정보를 저장
+							userID,
+							rs.getString("email"),
+							rs.getString("password"),
+							rs.getString("nickname"));
+						return user;
+					}
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				} finally {
+					jdbcUtil.close();		// resource 반환
+				}
+				return null;
+			}		
 
 	// comment 생성
 	public int create(Comment comment) throws SQLException {
@@ -60,7 +112,7 @@ private JDBCUtil jdbcUtil = null;
 		String sql = "select id, content, date, user_id " 
       		   + "from comment "
       		   + "where artwork_id=? "
-      		   + "order by id desc" // 시간 순서대로 id가 만들어지니까 그냥 id로 내림차순 정렬
+      		   + "order by id desc " // 시간 순서대로 id가 만들어지니까 그냥 id로 내림차순 정렬
       		   + "limit 30"; // 최근 30개
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {artworkId});	
 					

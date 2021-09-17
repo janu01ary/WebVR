@@ -7,15 +7,17 @@ public class Exhibition {
 	private int userId; //닉네임? id? email? 뭘로 하지
 	private String title; //전시의 title
 	private String description; //전시 설명
+	private String imageAddress; //전시 대표 이미지의 주소
 	private Date start_date; //전시 시작일
 	private Date end_date; //전시 종료일
 	
-	public Exhibition(int id, int userId, String title, String description, Date start_date, Date end_date) {
+	public Exhibition(int id, int userId, String title, String description, String imageAddress, Date start_date, Date end_date) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.title = title;
 		this.description = description;
+		this.imageAddress = imageAddress;
 		this.start_date = start_date;
 		this.end_date = end_date;
 	}
@@ -52,6 +54,14 @@ public class Exhibition {
 		this.description = description;
 	}
 	
+	public String getImageAddress() {
+		return imageAddress;
+	}
+
+	public void setImageAddress(String imageAddress) {
+		this.imageAddress = imageAddress;
+	}
+
 	public Date getStart_date() {
 		return start_date;
 	}
@@ -71,6 +81,7 @@ public class Exhibition {
 	@Override
 	public String toString() {
 		return "Exhibition [exhibitionId=" + id + ", userNickname=" + userId + ", title=" + title
-				+ ", description=" + description + ", start_date=" + start_date + ", end_date=" + end_date + "]";
+				+ ", description=" + description + ", imageAddress=" + imageAddress 
+				+ ", start_date=" + start_date + ", end_date=" + end_date + "]";
 	}
 }
