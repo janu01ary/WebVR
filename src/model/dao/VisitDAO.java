@@ -64,9 +64,11 @@ public class VisitDAO {
 	
 	// 주어진 userId에 해당하는 visit List를 데이터베이스에서 찾아 도메인 클래스에 저장하여 반환
 	public List<Visit> findVisitListByUserId(int userId) throws SQLException {
-		String sql = "SELECT id, user_id, exhibition_id "
-    			+ "FROM visit "
-    			+ "WHERE user_id=? ";  
+		String sql = "SELECT v.id, v.user_id, exhibition_id, e.title, e.description "
+    			+ "FROM visit v "
+				+ "INNER JOIN exhibition e "
+    			+ "ON v.exhibition_id = e.id "
+    			+ "WHERE v.user_id=? ";  
 		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 query문과 매개 변수 설정
 		try {
@@ -74,9 +76,11 @@ public class VisitDAO {
 			List<Visit> visitList = new ArrayList<Visit>();	
 			while (rs.next()) {				
 				Visit visit = new Visit(		// like 객체를 생성하여 커뮤니티 정보를 저장
-						rs.getInt("id"),
-						rs.getInt("user_id"),
-						rs.getInt("exhibition_id"));
+						rs.getInt("v.id"),
+						rs.getInt("v.user_id"),
+						rs.getInt("exhibition_id"),
+						rs.getString("e.title"),
+						rs.getString("e.description"));
 				visitList.add(visit);
 			}		
 			return visitList;					

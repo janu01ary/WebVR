@@ -8,6 +8,9 @@
 	User user = (User)request.getAttribute("user");
 	List<Likes> likesList = (List<Likes>)request.getAttribute("likesList");
 	List<Visit> visitList = (List<Visit>)request.getAttribute("visitList");
+	List<Comment> commentList = (List<Comment>)request.getAttribute("commentList");
+	List<Exhibition> exhibitionList = (List<Exhibition>)request.getAttribute("exhibitionList");
+	HashMap<Integer, List<Artwork>> artworkMap = (HashMap<Integer, List<Artwork>>)request.getAttribute("artworkMap");
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -19,7 +22,7 @@
     </head>
     <body>
         <!-- 사이트 이름이나 로고 나중에 추가 -->
-        <h1 id="title">사이트 이름</h1>
+        <h1 id="title">Untact Gallery</h1>
         <div id="entire">
             <!-- 마이페이지 메뉴 리스트 -->
             <!-- 나중에 클릭 시 해당 메뉴는 색칠하는 것도 좋을 듯~ -->
@@ -49,7 +52,7 @@
                 <table>
                     <tr>
                         <th id="profile_title" colspan="2">
-                        	<%=user.getUserID() %>
+                        	<%=user.getNickname() %>
                         </th> <!-- user 이름 -->
                     </tr>
                     <tr>
@@ -62,31 +65,27 @@
             </div>
             <!-- 회원 정보 변경 -->
             <div id="edit_profile" class="content">
-                <form id="edit_form">
+                <form action="/WebVR/WebVR/myPage/update" id="edit_form" role="form" method="POST">
                     <table>
                         <tr>
                             <th class="editForm_title">이름 | </th>
                             <td>
-                            	<input type="text" id="edit_name" class="edit_input" placeholder="<%=user.getNickname() %>">
+                            	<input type="text" id="edit_name" name="edit_name" class="edit_input" placeholder="<%=user.getNickname() %>">
                             </td>
                             <!-- placeholder에는 해당하는 user 정보 넣어주기 -->
                         </tr>
                         <tr>
                             <th class="editForm_title">e-mail | </th>
                             <td>
-                            	<input type="email" id="edit_email" class="edit_input" placeholder="<%=user.getEmail() %>">
+                            	<input type="email" id="edit_email" name="edit_email" class="edit_input" placeholder="<%=user.getEmail() %>">
                             </td>
                         </tr>
                         <tr>
                             <th class="editForm_title">비밀번호 | </th>
-                            <td><input type="password" id="edit_pwd" class="edit_input"></td>
-                        </tr>
-                        <tr>
-                            <th class="editForm_title">비밀번호 재확인 | </th>
-                            <td><input type="password" id="edit_pwdCheck" class="edit_input"></td>
+                            <td><input type="password" id="edit_pwd" name="edit_pwd" class="edit_input"></td>
                         </tr>
                     </table>
-                    <button id="edit_confirm">수정</button>
+                    <button type="submit" id="edit_confirm">수정</button>
                 </form>
             </div>
             <!-- 관람 내역 -->
@@ -104,8 +103,8 @@
                             <div class="watch_card">
                                 <img src="../resources/img/img.png" class="card_image" alt="...">
                                 <div class="card_body">
-                                    <h2 class="card_title"><%=visit.getExhibitionId() %></h2>
-                                    <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
+                                    <h2 class="card_title"><%=visit.getExhibitionTitle() %></h2>
+                                    <p class="card_text"><%=visit.getExhibitionDesc() %></p>
                                 </div>
                                 <div class="card_button_box"><button class="card_button">자세히</button></div>
                             </div>
@@ -136,93 +135,62 @@
                 </table>
             </div>
             <!-- 작성한 댓글 보기 -->
-            <!-- 나중에 Comment 추가해서 마저 하기!!!!!!!!!!!!!!!!!!!!!! -->
             <div id="my_reply" class="content">
                 <table style="margin-top:20px;">
+                <%
+                	Iterator<Comment> commentIter = commentList.iterator();
+                	for(int i = 0; commentIter.hasNext(); i++){
+                		Comment comment = (Comment)commentIter.next();
+                %>
                     <tr>
                         <td class="reply_box">
-                            <h3 class="reply_exhib" style="display: inline">전시회 이름</h3>
-                            <p class="reply_artwork" style="display: inline">작품 이름</p>
-                            <p class="reply_content">붓터치가 예술이에요^-^</p>
+                            <h3 class="reply_exhib" style="display: inline"><%= comment.getArtworkTitle() %></h3>
+                            <p class="reply_content"><%= comment.getContent() %></p>
                         </td>
                         <td>
                             <button class="reply_delete">삭제</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="reply_box">
-                            <h3 class="reply_exhib" style="display: inline">전시회 이름</h3>
-                            <p class="reply_artwork" style="display: inline">작품 이름</p>
-                            <p class="reply_content">새로 추가될수록 tr을 추가합시당</p>
-                        </td>
-                        <td>
-                            <button class="reply_delete">삭제</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="reply_box">
-                            <h3 class="reply_exhib" style="display: inline">전시회 이름</h3>
-                            <p class="reply_artwork" style="display: inline">작품 이름</p>
-                            <p class="reply_content">새로 추가될수록 tr을 추가합시당</p>
-                        </td>
-                        <td>
-                            <button class="reply_delete">삭제</button>
-                        </td>
-                    </tr>
+                <% } %>
                 </table>
             </div>
             <!-- 전시 목록 보기 -->
             <div id="exhib_list" class="content">
                 <table style="margin-top: 40px; border-spacing:10px">
+                <%
+                	Iterator<Exhibition> exhibitionIter = exhibitionList.iterator();
+                	for(int i = 0; exhibitionIter.hasNext(); i++){
+                		Exhibition exhibition = (Exhibition)exhibitionIter.next();
+                		if(i % 3 == 0){
+                %>
                     <tr>
+                    <% } %>
                         <td>
                             <div class="exhib_card">
                                 <img src="../resources/img/shiba.jpg" class="card_image" alt="...">
                                 <div class="card_body">
-                                    <h2 class="card_title">전시회 이름</h2>
-                                    <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
+                                    <h2 class="card_title"><%=exhibition.getTitle() %></h2>
+                                    <p class="card_text"><%=exhibition.getDescription() %></p>
                                 </div>
                                 <div class="card_button_box"><button class="card_button">자세히</button></div>
                             </div>
                         </td>
-                        <td>
-                            <div class="exhib_card">
-                                <img src="../resources/img/cat.jpg" class="card_image" alt="...">
-                                <div class="card_body">
-                                    <h2 class="card_title">전시회 이름</h2>
-                                    <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
-                                </div>
-                                <div class="card_button_box"><button class="card_button">자세히</button></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="exhib_card">
-                                <img src="../resources/img/img.png" class="card_image" alt="...">
-                                <div class="card_body">
-                                    <h2 class="card_title">전시회 이름</h2>
-                                    <p class="card_text">가로로 3개 초과하면 tr 추가해서 아래로 추가하도록 하기! 이거 자세히 버튼 아래에 고정 못 시키나 고민하기..</p>
-                                </div>
-                                <div class="card_button_box"><button class="card_button">자세히</button></div>
-                            </div>
-                        </td>
+                    <% if(i % 3 == 2){ %>
                     </tr>
-                    <tr>
-                        <td>
-                            <div class="exhib_card">
-                                <img src="../resources/img/img.png" class="card_image" alt="...">
-                                <div class="card_body">
-                                    <h2 class="card_title">전시회 이름</h2>
-                                    <p class="card_text">전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음! 전시회에 대한 설명! 3~4줄 이내로 끝나도록 해야할 것같음!</p>
-                                </div>
-                                <div class="card_button_box"><button class="card_button">자세히</button></div>
-                            </div>
-                        </td>
-                    </tr>
+                    <% }} %>
                 </table>
             </div>
             <!-- 전시 작품 관리 -->
             <div id="exhib_manage" class="content">
                 <table style="margin-top:20px;">
+                <%
+          	      	Iterator<Integer> keys = artworkMap.keySet().iterator();
+         			while( keys.hasNext() ){
+                    	int key = keys.next();
+                    	Iterator<Artwork> artworkIter = artworkMap.get(key).iterator();
+                    	for(int i = 0; artworkIter.hasNext(); i++){
+                    		Artwork artwork = (Artwork)artworkIter.next();
+                %>
                     <tr>
                         <td>
                             <img src="../resources/img/korea.jpg" class="manage_image" alt="...">
@@ -230,44 +198,36 @@
                         <td class="manage_box">
                             <div style="margin-bottom:10px;">
                                 <h3 class="manage_exhib" style="display: inline">전시회 이름</h3>
-                                <p class="manage_artwork" style="display: inline">작품 이름</p>
+                                <p class="manage_artwork" style="display: inline"><%=artwork.getTitle() %></p>
                             </div>
                             <div>
-                                <p class="manage_views" style="display: inline">218</p>
-                                <p class="manage_likes" style="display: inline">20</p>
+                                <p class="manage_views" style="display: inline"><%=artwork.getViewCount() %></p>
+                                <p class="manage_likes" style="display: inline"><%=artwork.getLikesCount() %></p>
                             </div>
                         </td>
                         <td>
-                            <button class="manage_edit">수정</button>
                             <button class="manage_delete">삭제</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <img src="../resources/img/shiba.jpg" class="manage_image" alt="...">
-                        </td>
-                        <td class="manage_box">
-                            <div style="margin-bottom:10px;">
-                                <h3 class="manage_exhib" style="display: inline">전시회 이름</h3>
-                                <p class="manage_artwork" style="display: inline">여기도 tr을 점점 추가해나가는 걸로</p>
-                            </div>
-                            <div>
-                                <p class="manage_views" style="display: inline">조회수 아이콘 나중에 넣기</p>
-                                <p class="manage_likes" style="display: inline">좋아요 아이콘 나중에 넣기</p>
-                            </div>
-                        </td>
-                        <td>
-                            <button class="manage_edit">수정</button>
-                            <button class="manage_delete">삭제</button>
-                        </td>
-                    </tr>
+                 <% }} %>
                 </table>
             </div>
             <!-- 회원 탈퇴 -->
             <div id="leave_acc" class="content">
-                <p>
-                    회원 탈퇴 클릭
-                </p>
+            <form action="/WebVR/WebVR/myPage/delete" role="form" method="POST">
+            	<table>
+                    <tr>
+                        <th id="profile_title" colspan="2">
+                        	탈퇴하시겠습니까?
+                        </th>
+                    </tr>
+                    <tr>
+                       	<th class="editForm_title">비밀번호 | </th>
+                      	<td><input type="password" id="edit_pwd" name="edit_pwd" class="edit_input"></td>
+                 	</tr>
+            	</table>
+               	<button type="submit" id="delete_confirm">탈퇴</button>
+           	</form>
             </div>
         </div>
         <script>

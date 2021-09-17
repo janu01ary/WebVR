@@ -102,6 +102,36 @@ public class ExhibitionDAO {
 		return null;
 	}
 	
+	// user id를 통해 해당 유저가 주최한 exhibition list 조회
+			public List<Exhibition> findExhibitionListByUserId(int userId) {
+				String sql = "select id, user_id, title, start_date, end_date, description " 
+		      		   + "from exhibition "
+		      		   + "where user_id=? ";
+				jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	
+							
+				try {
+					ResultSet rs = jdbcUtil.executeQuery();	
+					List<Exhibition> exhibitionList = new ArrayList<Exhibition>();	
+					while (rs.next()) {
+						Exhibition exhibition = new Exhibition(
+									rs.getInt("id"),
+									rs.getInt("user_id"),
+									rs.getString("title"),
+									rs.getString("description"),
+									new java.util.Date(rs.getDate("start_date").getTime()),
+									new java.util.Date(rs.getDate("end_date").getTime()));
+								exhibitionList.add(exhibition);
+					}		
+					return exhibitionList;					
+					
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				} finally {
+					jdbcUtil.close();	
+				}
+				return null;
+			}
+	
 	//현재 진행 중인 exhibition list 조회
 	public List<Exhibition> findExhibitionList() {
 

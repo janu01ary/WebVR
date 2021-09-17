@@ -137,5 +137,39 @@ private JDBCUtil jdbcUtil = null;
 		}
 		return null;
 	}
+	
+	// 사용자 id에 해당하는 comment List 가져옴
+		public List<Comment> findCommentListByUserId(int userId) throws SQLException {//특정 사용자 방명록 리스트 반환
+	        String sql = "SELECT c.id, user_id, artwork_id, a.title, content, c.date " 
+	        		   + "FROM comment c "
+	        		   + "INNER JOIN artwork a "
+	        		   + "ON a.id = c.artwork_id "
+	        		   + "WHERE user_id=? "
+	        		   + "ORDER BY c.id DESC ";
+	        
+			jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});		// JDBCUtil에 query문 설정
+						
+			try {
+				ResultSet rs = jdbcUtil.executeQuery();		
+				List<Comment> commentList = new ArrayList<Comment>();	// User들의 리스트 생성
+				while (rs.next()) {
+					Comment comment = new Comment(			// User 객체를 생성하여 현재 행의 정보를 저장
+						rs.getInt("c.id"),
+						rs.getString("content"),
+						new java.util.Date(rs.getDate("c.date").getTime()),
+						userId,
+						rs.getInt("artwork_id"),
+						rs.getString("a.title"));
+					commentList.add(comment);				// List에 User 객체 저장
+				}		
+				return commentList;					
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			} finally {
+				jdbcUtil.close();		// resource 반환
+			}
+			return null;
+		}
 
 }

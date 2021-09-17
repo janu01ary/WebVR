@@ -22,7 +22,7 @@ public class UpdateMyPageController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		// 로그인 여부 확인
+		/*// 로그인 여부 확인
     	if (!UserSessionUtils.hasLogined(request.getSession())) {
             return "redirect:/WebVR/login/form";		// login form 요청으로 redirect
         }
@@ -47,13 +47,13 @@ public class UpdateMyPageController implements Controller {
 //			request.setAttribute("exception", 
 //				new IllegalStateException("타인의 정보는 수정할 수 없습니다."));            
 //			return "/myPage/myPage.jsp";	// 사용자 보기 화면으로 이동 (forwarding)
-		}
-			
+		}*/
+					
 		User updateUser = new User(
-				Integer.parseInt(userId),
-				user.getEmail(),
-				user.getPassword(),
-				user.getNickname());
+				1,
+				request.getParameter("edit_email"),
+				request.getParameter("edit_pwd"),
+				request.getParameter("edit_name"));
 		try {
 			userDAO.update(updateUser);
 		} catch(Exception e) { 
@@ -61,7 +61,7 @@ public class UpdateMyPageController implements Controller {
 		} 
 
 		request.setAttribute("user", updateUser);
-		return "redirect:/WebVR/myPage.jsp";
+		return "redirect:/WebVR/myPage";
 	}
 
 }

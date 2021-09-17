@@ -9,6 +9,8 @@ public class Comment {
 	private int userID;//fk
 	private int artwId;//fk
 	
+	private String artworkTitle; // INNER JOIN ½Ã »ç¿ë
+	
 	public Comment(int cmtID, String content, Date date, int userID, int artwId) {
 		super();
 		this.cmtID = cmtID;
@@ -16,6 +18,16 @@ public class Comment {
 		this.date = date;
 		this.userID = userID;
 		this.artwId = artwId;
+	}
+	
+	public Comment(int cmtID, String content, Date date, int userID, int artwId, String artworkTitle) {
+		super();
+		this.cmtID = cmtID;
+		this.content = content;
+		this.date = date;
+		this.userID = userID;
+		this.artwId = artwId;
+		this.artworkTitle = artworkTitle;
 	}
 
 	public int getCmtID() {
@@ -56,6 +68,14 @@ public class Comment {
 
 	public void setArtwId(int artwId) {
 		this.artwId = artwId;
+	}
+	
+	public String getArtworkTitle() {
+		return artworkTitle;
+	}
+	
+	public void setArtworkTitle(String artworkTitle) {
+		this.artworkTitle = artworkTitle;
 	}
 	
 	
