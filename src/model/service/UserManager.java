@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.Community;
 import model.User;
+import model.dao.CommentDAO;
 import model.dao.CommunityDAO;
 import model.dao.UserDAO;
 
@@ -68,9 +69,12 @@ public class UserManager {
 		return userDAO.findUserList(currentPage, countPerPage);
 	}
 
-	public boolean login(String userId, String password)
+	public boolean login(String email, String password)
 		throws SQLException, UserNotFoundException, PasswordMismatchException {
-		User user = findUser(userId);
+//		User user = findUser(email);
+		
+		CommentDAO commentDAO = new CommentDAO();
+		User user = commentDAO.findUserByEmail(email);
 
 		if (!user.matchPassword(password)) {
 			throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");

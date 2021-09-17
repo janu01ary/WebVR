@@ -55,7 +55,8 @@
 			const vertex = new THREE.Vector3();
 			const color = new THREE.Color();
 
-			var imgUrl = "../resources/img/7.png";
+			let imgUrl = "../resources/img/7.png";
+			let artworkId = 7;
 
 			init();
 			animate();
@@ -183,7 +184,11 @@
 					if (instructions.style.display == 'none') {
 						event.preventDefault();
 						if ( SELECTED ){
-							window.open("http://www.naver.com"); //Ã«ÂÂÃ¬Â¤ÂÃ¬ÂÂ Ã¬ÂÂÃ­ÂÂÃ­ÂÂÃ«Â©Â´Ã¬ÂÂ¼Ã«Â¡Â Ã¬ÂÂ´Ã«ÂÂÃ­ÂÂÃªÂ²Â~
+console.log("SELECTED : ", SELECTED);
+console.log("event: ", e);
+							window.open("<c:url value='/WebVR/exhb/artwork'>
+	                        		   			<c:param name='artworkId' value='7' />
+	                        		   		 </c:url> "); //Ã«ÂÂÃ¬Â¤ÂÃ¬ÂÂ Ã¬ÂÂÃ­ÂÂÃ­ÂÂÃ«Â©Â´Ã¬ÂÂ¼Ã«Â¡Â Ã¬ÂÂ´Ã«ÂÂÃ­ÂÂÃªÂ²Â~
 							controls.unlock();
 						}
 					} 
@@ -337,7 +342,7 @@
 					if ( SELECTED != intersects[ 0 ].object ) {
 						// if ( SELECTED ) SELECTED.material.emissive.setHex( SELECTED.currentHex );
 						SELECTED = intersects[ 0 ].object;
-						console.log("SELECTED : ", SELECTED);
+						//console.log("SELECTED : ", SELECTED);
 						SELECTED.currentHex = SELECTED.material.emissive.getHex();
 						// SELECTED.material.emissive.setHex( 0xff0000 );
 						blocker.style.cursor = 'pointer';

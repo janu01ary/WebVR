@@ -17,11 +17,15 @@ public class CreateCommentController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 로그인 여부
+		if (!UserSessionUtils.hasLogined(request.getSession())) { // 로그인 안되어있는 있는 경우
+			return "redirect:/WebVR/login/form";	
+		}
 
 		String artworkId = request.getParameter("artworkId");
 		
 		HttpSession session = request.getSession();
-		int userId = UserSessionUtils.getLoginUserId(session); //UserSessionUtils 파일 건든 사람 있는지 물어보고 수정해야~
+		int userId = Integer.parseInt(UserSessionUtils.getLoginUserId(session));
 		
 		Comment comment = new Comment(
 				0, 
@@ -29,10 +33,9 @@ public class CreateCommentController implements Controller {
 				new Date(), 
 				userId, 
 				Integer.parseInt(artworkId));
+		System.out.println(commentDAO.create(comment));
 		
-		commentDAO.create(comment);
-		
-		return "redirect:/WebVR/exhb/artwork?artworkId=" + artworkId;
+		return "redirect:/WebVR/artwork/comment?artworkId=" + artworkId;
 	}
 
 }
