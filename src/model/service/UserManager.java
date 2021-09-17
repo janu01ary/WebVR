@@ -73,8 +73,8 @@ public class UserManager {
 		throws SQLException, UserNotFoundException, PasswordMismatchException {
 //		User user = findUser(email);
 		
-		CommentDAO commentDAO = new CommentDAO();
-		User user = commentDAO.findUserByEmail(email);
+		UserDAO userDAO = new UserDAO();
+		User user = userDAO.findUserByEmail(email);
 
 		if (!user.matchPassword(password)) {
 			throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
