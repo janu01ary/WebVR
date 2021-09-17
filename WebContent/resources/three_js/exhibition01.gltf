@@ -1020,6 +1020,10 @@
     {
       "sampler": 5,
       "source": 5
+    },
+    {
+      "sampler": 6,
+      "source": 6
     }
   ],
   "samplers": [
@@ -1082,6 +1086,10 @@
       "uri": "../sample.jpg"
     },
     {
+      "mimeType": "image/jpg",     
+      "uri": "../sample.jpg"
+    },
+     {
       "mimeType": "image/jpg",     
       "uri": "../sample.jpg"
     }
