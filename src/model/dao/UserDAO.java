@@ -16,7 +16,7 @@ public class UserDAO {
 		
 	// USER 테이블에 새로운 User 생성
 	public int create(User user) throws SQLException {
-		String sql = "INSERT INTO USERINFO VALUES (?, ?, ?)";		
+		String sql = "INSERT INTO user VALUES (?, ?, ?)";		
 		Object[] param = new Object[] {user.getEmail(), user.getPassword(), user.getNickname()};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 						
@@ -35,10 +35,10 @@ public class UserDAO {
 
 	// USER 테이블의 사용자 정보 수정
 	public int update(User user) throws SQLException {
-		String sql = "UPDATE USERINFO "
-					+ "SET email=?, password=?, nickname=?,"
-					+ "WHERE userID=?";
-		Object[] param = new Object[] {user.getEmail(), user.getPassword(), user.getNickname()};				
+		String sql = "UPDATE user "
+					+ "SET email=?, password=?, nickname=? "
+					+ "WHERE id=?";
+		Object[] param = new Object[] {user.getEmail(), user.getPassword(), user.getNickname(), user.getUserID()};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
 			
 		try {				
@@ -57,7 +57,7 @@ public class UserDAO {
 
 	//해당 ID를 가진 사용자를 USER 테이블에서 삭제
 	public int remove(String userID) throws SQLException {
-		String sql = "DELETE FROM USERINFO WHERE userID=?";		
+		String sql = "DELETE FROM user WHERE id=?";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userID});	// JDBCUtil에 delete문과 매개 변수 설정
 
 		try {				
@@ -76,8 +76,9 @@ public class UserDAO {
 
 	// 해당 ID의 사용자 정보를 DB에서 찾아 User 도메인 클래스에 저장 후 반환
 	public User findUser(String userID) throws SQLException {
-        String sql = "SELECT email, password, nickname"
-        			+ "WHERE userID=? ";              
+        String sql = "SELECT email, password, nickname "
+        			+ "FROM user "
+        			+ "WHERE id=? ";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userID});	// JDBCUtil에 query문과 매개 변수 설정
 
 		try {
@@ -100,7 +101,7 @@ public class UserDAO {
 	
 	// 해당 ID의 사용자가 존재하는지 검사
 	public boolean existingUser(String userID) throws SQLException {
-		String sql = "SELECT count(*) FROM USERINFO WHERE userID=?";      
+		String sql = "SELECT count(*) FROM user WHERE id=?";      
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userID});	// JDBCUtil에 query문과 매개 변수 설정
 
 		try {

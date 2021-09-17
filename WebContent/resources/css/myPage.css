@@ -227,3 +227,18 @@ button.manage_delete{
 p.manage_likes{
 	margin-left: 20px;
 }
+/* 회원 탈퇴 */
+button#delete_confirm{
+	cursor: pointer;
+	margin-left: 20px;
+	width: 80px;
+	height: 30px;
+	background-color: #FF0000;
+	color: white;
+	border: #000000 solid 1px;
+	border-radius: 6px;
+}
+button#delete_confirm:hover{
+	background-color: white;
+	color: #FF0000;
+}
