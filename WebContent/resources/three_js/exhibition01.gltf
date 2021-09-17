@@ -918,7 +918,7 @@
         "metallicFactor": 0,
         "roughnessFactor": 0.9,
         "baseColorTexture": {
-          "index": 1
+          "index": 0
         }
       },
       "extensions": {
@@ -930,7 +930,7 @@
         "metallicFactor": 0,
         "roughnessFactor": 0.9,
         "baseColorTexture": {
-          "index": 2
+          "index": 0
         }
       },
       "extensions": {
@@ -942,7 +942,7 @@
         "metallicFactor": 0,
         "roughnessFactor": 0.9,
         "baseColorTexture": {
-          "index": 3
+          "index": 0
         }
       },
       "extensions": {
@@ -951,21 +951,10 @@
     },
     {
       "pbrMetallicRoughness": {
-        "metallicFactor": 0,
-        "roughnessFactor": 1
-      },
-      "emissiveFactor": [
-        0.0392156862745098,
-        0.0392156862745098,
-        0.0392156862745098
-      ]
-    },
-    {
-      "pbrMetallicRoughness": {
-        "metallicFactor": 0,
+       "metallicFactor": 0,
         "roughnessFactor": 0.9,
         "baseColorTexture": {
-          "index": 4
+          "index": 0
         }
       },
       "extensions": {
@@ -977,10 +966,22 @@
         "metallicFactor": 0,
         "roughnessFactor": 0.9,
         "baseColorTexture": {
-          "index": 5
+          "index": 0
         }
       },
       "extensions": {
+        "KHR_materials_unlit": {}
+      }
+    },
+    {
+      "pbrMetallicRoughness": {
+        "metallicFactor": 0,
+        "roughnessFactor": 0.9,
+        "baseColorTexture": {
+          "index": 0
+        }
+      },
+       "extensions": {
         "KHR_materials_unlit": {}
       }
     },
@@ -1024,6 +1025,14 @@
     {
       "sampler": 6,
       "source": 6
+    },
+    {
+      "sampler": 7,
+      "source": 7
+    },
+     {
+      "sampler": 8,
+      "source": 8
     }
   ],
   "samplers": [
@@ -1063,33 +1072,9 @@
       "wrapS": 33071,
       "wrapT": 33071
     }
-  ],
+  ], 
   "images": [
     {
-      "mimeType": "image/jpg",     
-      "uri": "../sample.jpg"
-    },
-    {
-      "mimeType": "image/jpg",     
-      "uri": "../sample.jpg"
-    },
-    {
-      "mimeType": "image/jpg",     
-      "uri": "../sample.jpg"
-    },
-    {
-      "mimeType": "image/jpg",     
-      "uri": "../sample.jpg"
-    },
-    {
-      "mimeType": "image/jpg",     
-      "uri": "../sample.jpg"
-    },
-    {
-      "mimeType": "image/jpg",     
-      "uri": "../sample.jpg"
-    },
-     {
       "mimeType": "image/jpg",     
       "uri": "../sample.jpg"
     }
