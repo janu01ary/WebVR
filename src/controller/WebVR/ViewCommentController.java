@@ -32,8 +32,7 @@ public class ViewCommentController implements Controller {
 		List<User> userList = new ArrayList<User>();
 		if (commentList != null) {
 			for (int i = 0; i < commentList.size(); i++) {
-//				userList.add(userDAO.findUser(String.valueOf(commentList.get(i).getUserID())));
-				userList.add(commentDAO.findUser(commentList.get(i).getUserID()));
+				userList.add(userDAO.findUser(commentList.get(i).getUserID()));
 			}
 		}
 

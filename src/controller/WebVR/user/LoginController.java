@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import model.User;
-import model.dao.CommentDAO;
+import model.dao.UserDAO;
 import model.service.UserManager;
 
 public class LoginController implements Controller {
@@ -20,8 +20,9 @@ public class LoginController implements Controller {
 			UserManager manager = UserManager.getInstance();
 			manager.login(email, password);
 	
-			CommentDAO commentDAO = new CommentDAO();
-			User user = commentDAO.findUserByEmail(email);
+			UserDAO userDAO = new UserDAO();
+			User user = userDAO.findUserByEmail(email);
+			
 			// 세션에 사용자 이이디 저장
 			HttpSession session = request.getSession();
             session.setAttribute(UserSessionUtils.USER_SESSION_KEY, String.valueOf(user.getUserID()));
