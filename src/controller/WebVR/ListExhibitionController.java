@@ -11,7 +11,7 @@ import model.dao.ExhibitionDAO;
 
 public class ListExhibitionController implements Controller {
 	
-	private ExhibitionDAO exhibitionDAO = new ExhibitionDAO();;
+	private ExhibitionDAO exhibitionDAO = new ExhibitionDAO();
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
