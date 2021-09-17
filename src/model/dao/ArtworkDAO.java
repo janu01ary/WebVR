@@ -156,6 +156,41 @@ public class ArtworkDAO {
 		return null;
 	}
 	
+	// 전체 Artwork를 List에 저장 및 반환
+	public List<Artwork> findArtworkListByExhibitionId(int exhibitionId) throws SQLException {
+		String sql = "SELECT id, exhibition_id, title, artwork_address, description, artist_name, date, views_count, likes_count "
+				+ "FROM artwork "
+				+ "WHERE exhibition_id=? "
+				+ "ORDER BY id ASC "; 
+		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {exhibitionId});		// JDBCUtil에 query문 설정
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
+			List<Artwork> artworkList = new ArrayList<Artwork>();	
+			while (rs.next()) {
+				Artwork artwork = new Artwork(		
+						rs.getInt("id"),
+						rs.getInt("exhibition_id"),
+						rs.getString("title"),
+						rs.getString("artwork_address"),
+						rs.getString("description"),
+						rs.getString("artist_name"),
+						rs.getDate("date"),
+						rs.getInt("views_count"),
+						rs.getInt("likes_count"));
+				artworkList.add(artwork);
+			}		
+			return artworkList;					
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return null;
+	}
+	
 	// Artwork의 view(조회수) 증가
 	public int updateView(Artwork artwork) throws SQLException {
 		String sql = "UPDATE artwork "
