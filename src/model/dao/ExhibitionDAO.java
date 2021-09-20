@@ -18,7 +18,7 @@ public class ExhibitionDAO {
 
 	//exhibition 생성
 	public int create(Exhibition exhibition) throws SQLException {
-		String sql = "insert into exhibition (user_id, title, start_date, end_date, description, image_ddress) values (?, ?, ?, ?, ?, ?)"; 	
+		String sql = "insert into exhibition (user_id, title, start_date, end_date, description, image_address) values (?, ?, ?, ?, ?, ?)"; 	
 		Object[] param = new Object[] {
 				exhibition.getUserId(), 
 				exhibition.getTitle(), 
@@ -70,7 +70,7 @@ public class ExhibitionDAO {
 	
 	//exhibition id를 통해 전시에 속한 artwork list 조회
 	public List<Artwork> findArtworkListById(int exhibitionId) {
-		String sql = "select id, title, description, artist_name, date, views_count, likes_count " 
+		String sql = "select id, title, artwork_address, description, artist_name, date, views_count, likes_count " 
       		   + "from artwork "
       		   + "where exhibition_id=? "
       		   + "order by id"; //시간 순서대로 id가 만들어지니까 그냥 id로 정렬
@@ -84,9 +84,9 @@ public class ExhibitionDAO {
 					rs.getInt("id"),
 					exhibitionId,
 					rs.getString("title"), 
-					rs.getString("artworkAddress"), 
+					rs.getString("artwork_address"), 
 					rs.getString("description"),
-					rs.getString("artistName"),
+					rs.getString("artist_name"),
 					new java.util.Date(rs.getDate("date").getTime()),
 					rs.getInt("views_count"),
 					rs.getInt("likes_count"));
@@ -104,7 +104,7 @@ public class ExhibitionDAO {
 	
 	// user id를 통해 해당 유저가 주최한 exhibition list 조회
 	public List<Exhibition> findExhibitionListByUserId(int userId) {
-		String sql = "select id, user_id, title, start_date, end_date, description " 
+		String sql = "select id, user_id, title, start_date, end_date, description, image_address " 
 			+ "from exhibition "
 			+ "where user_id=? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	
@@ -118,6 +118,7 @@ public class ExhibitionDAO {
 					rs.getInt("user_id"),
 					rs.getString("title"),
 					rs.getString("description"),
+					rs.getString("image_address"),
 					new java.util.Date(rs.getDate("start_date").getTime()),
 					new java.util.Date(rs.getDate("end_date").getTime()));
 				exhibitionList.add(exhibition);

@@ -37,7 +37,7 @@
         <div class="list">  
             <c:forEach var="exhb" items="${exhibitionList}" varStatus="status">
 	            <a href="<c:url value='/WebVR/exhb'>
-	            			<c:param name='exhibitionId' value='${exhibition.id}' />
+	            			<c:param name='exhibitionId' value='${exhb.id}' />
 	            		</c:url>" class="exhibition-link">
 	                <div class="exhibition"> 
 	                    <img src="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/<c:url value='${exhb.imageAddress}' />" class="exhibition-img"><br> <!-- 이미지 링크 수정 필요 -->
@@ -45,33 +45,6 @@
 	                </div>
 	            </a>
             </c:forEach>
-            
-        	<!-- 
-            <a href="<c:url value='/WebVR/exhb' />" class="exhibition-link">
-                <div class="exhibition"> 
-                    <img src="<c:url value='/resources/img/poster.jpg' />" class="exhibition-img"><br>
-                    <h4 class="mt-4 mx-4">전시 이름1전시 이름1전시 이름1전시 이름1전시 이름1</h4>
-                </div>
-            </a>
-            <a href="<c:url value='/WebVR/exhb' />" class="exhibition-link">
-                <div class="exhibition"> 
-                    <img src="<c:url value='/resources/img/poster.jpg' />" class="exhibition-img"><br>
-                    <h4 class="mt-4 mx-4">전시 이름2</h4>
-                </div>
-            </a>
-            <a href="<c:url value='/WebVR/exhb' />" class="exhibition-link">
-                <div class="exhibition"> 
-                    <img src="<c:url value='/resources/img/poster.jpg' />" class="exhibition-img"><br>
-                    <h4 class="mt-4 mx-4">전시 이름3</h4>
-                </div>
-            </a>
-            <a href="<c:url value='/WebVR/exhb' />" class="exhibition-link">
-                <div class="exhibition"> 
-                    <img src="<c:url value='/resources/img/poster.jpg' />" class="exhibition-img"><br>
-                    <h4 class="mt-4 mx-4">전시 이름4</h4>
-                </div>
-            </a>
-             -->
         </div>
     </div>
     
