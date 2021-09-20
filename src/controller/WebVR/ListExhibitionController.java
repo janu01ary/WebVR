@@ -17,10 +17,8 @@ public class ListExhibitionController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		List<Exhibition> exhibitionList = exhibitionDAO.findExhibitionList();
-		
-		System.out.println("exhibitionList" + exhibitionList);
-
 		request.setAttribute("exhibitionList", exhibitionList);
+		
 		return "/WebVR/home.jsp";
 	}
 

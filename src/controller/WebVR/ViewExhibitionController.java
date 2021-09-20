@@ -16,10 +16,11 @@ public class ViewExhibitionController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-//		int exhibitionId = Integer.parseInt(request.getParameter("exhibitionId"));
-//		List<Artwork> artworkList = exhibitionDAO.findArtworkListById(exhibitionId);
-//		
-//		request.setAttribute("artworkList", artworkList);
+		int exhibitionId = Integer.parseInt(request.getParameter("exhibitionId"));
+		List<Artwork> artworkList = exhibitionDAO.findArtworkListById(exhibitionId);
+
+		request.setAttribute("exhibitionId", exhibitionId);
+		request.setAttribute("artworkList", artworkList);
 		
 		return "/WebVR/exhibition.jsp";
 	}

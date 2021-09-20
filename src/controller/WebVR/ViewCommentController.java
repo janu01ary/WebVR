@@ -36,7 +36,6 @@ public class ViewCommentController implements Controller {
 			}
 		}
 
-		request.setAttribute("userID", 5);
 		request.setAttribute("artwork", artwork);
 		request.setAttribute("commentList", commentList);
 		request.setAttribute("userList", userList);

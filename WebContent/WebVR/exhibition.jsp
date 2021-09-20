@@ -10,6 +10,17 @@
 	content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
 <style>
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+		
+body {
+   	font-family: 'NEXON Lv1 Gothic OTF';
+}
+
 #blocker {
 	position: absolute;
 	width: 100%;
@@ -57,6 +68,7 @@
 
 			let imgUrl = "../resources/img/7.png";
 			let artworkId = 7;
+			const s3_url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/${exhibitionId}/";
 
 			init();
 			animate();
@@ -222,21 +234,146 @@ console.log("event: ", e);
                 	}
             	);
 
-				//Ã¬ÂÂ´Ã«Â¯Â¸Ã¬Â§Â Ã­ÂÂÃ«Â¸Â
-				const geometry = new THREE.BoxGeometry(20, 20, 1);
-				// const cubes = [];  // just an array we can use to rotate the cubes
-				const loader = new THREE.TextureLoader();
-				loader.load(imgUrl, (texture) => {
+
+				//Ã¬ÂÂ´Ã«Â¯Â¸Ã¬Â§Â Ã­ÂÂÃ«Â¸Â
+				const img_loader = new THREE.TextureLoader();
+
+				const geometry0 = new THREE.BoxGeometry(40, 25, 1);
+				img_loader.load(s3_url + "${artworkList[0].artworkAddress}", (texture) => {
 					const material = new THREE.MeshLambertMaterial({
 					map: texture,
 					});
-					const cube = new THREE.Mesh(geometry, material);
-					cube.position.x = 0;
-					cube.position.y = 30;
-					cube.position.z = -70;
+					const cube = new THREE.Mesh(geometry0, material);
+					cube.position.x = 57; //가로로 이동
+					cube.position.y = 30; //세로로 이동(높이 조정)
+					cube.position.z = 28; //고정
 					scene.add(cube);
-					// cubes.push(cube);  // add to our list of cubes to rotate
 				});
+				const geometry1 = new THREE.BoxGeometry(30, 20, 1);
+				img_loader.load(s3_url + "${artworkList[1].artworkAddress}", (texture) => {
+					const material = new THREE.MeshLambertMaterial({
+					map: texture,
+					});
+					const cube = new THREE.Mesh(geometry1, material);
+					cube.position.x = -55; //가로로 이동
+					cube.position.y = 30; //세로로 이동(높이 조정)
+					cube.position.z = 97; //고정
+					scene.add(cube);
+				});
+				const geometry2 = new THREE.BoxGeometry(32, 23, 1);
+				img_loader.load(s3_url + "${artworkList[2].artworkAddress}", (texture) => {
+					const material = new THREE.MeshLambertMaterial({
+					map: texture,
+					});
+					const cube = new THREE.Mesh(geometry2, material);
+					cube.position.x = 0; //가로로 이동
+					cube.position.y = 30; //세로로 이동(높이 조정)
+					cube.position.z = 97; //고정
+					scene.add(cube);
+				});
+				const geometry3 = new THREE.BoxGeometry(58, 39, 1);
+				img_loader.load(s3_url + "${artworkList[3].artworkAddress}", (texture) => {
+					const material = new THREE.MeshLambertMaterial({
+					map: texture,
+					});
+					const cube = new THREE.Mesh(geometry3, material);
+					cube.position.x = -97; //고정
+					cube.position.y = 35; //세로로 이동(높이 조정)
+					cube.position.z = 40; //가로로 이동
+                    cube.rotation.y = Math.PI / 2;
+					scene.add(cube);
+				});
+				const geometry4 = new THREE.BoxGeometry(34, 27, 1);
+				img_loader.load(s3_url + "${artworkList[4].artworkAddress}", (texture) => {
+					const material = new THREE.MeshLambertMaterial({
+					map: texture,
+					});
+					const cube = new THREE.Mesh(geometry4, material);
+					cube.position.x = -59; //가로로 이동
+					cube.position.y = 30; //세로로 이동(높이 조정)
+					cube.position.z = -22; //고정
+					scene.add(cube);
+				});
+				const geometry5 = new THREE.BoxGeometry(36, 24, 1);
+				img_loader.load(s3_url + "${artworkList[5].artworkAddress}", (texture) => {
+					const material = new THREE.MeshLambertMaterial({
+					map: texture,
+					});
+					const cube = new THREE.Mesh(geometry5, material);
+					cube.position.x = 57; //가로로 이동
+					cube.position.y = 30; //세로로 이동(높이 조정)
+					cube.position.z = 22; //고정
+					scene.add(cube);
+				});
+				const geometry6 = new THREE.BoxGeometry(60, 50, 1);
+				img_loader.load(s3_url + "${artworkList[6].artworkAddress}", (texture) => {
+					const material = new THREE.MeshLambertMaterial({
+					map: texture,
+					});
+					const cube = new THREE.Mesh(geometry6, material);
+					cube.position.x = 97; //고정
+					cube.position.y = 35; //세로로 이동(높이 조정)
+					cube.position.z = -40; //가로로 이동
+                    cube.rotation.y = Math.PI / 2;
+					scene.add(cube);
+				});
+				const geometry7 = new THREE.BoxGeometry(30, 30, 1);
+				img_loader.load(s3_url + "${artworkList[7].artworkAddress}", (texture) => {
+					const material = new THREE.MeshLambertMaterial({
+					map: texture,
+					});
+					const cube = new THREE.Mesh(geometry7, material);
+					cube.position.x = 60; //가로로 이동
+					cube.position.y = 30; //세로로 이동(높이 조정)
+					cube.position.z = -97; //고정
+					scene.add(cube);
+				});
+				const geometry8 = new THREE.BoxGeometry(32, 23, 1);
+				img_loader.load(s3_url + "${artworkList[8].artworkAddress}", (texture) => {
+					const material = new THREE.MeshLambertMaterial({
+					map: texture,
+					});
+					const cube = new THREE.Mesh(geometry8, material);
+					cube.position.x = 0; //가로로 이동
+					cube.position.y = 30; //세로로 이동(높이 조정)
+					cube.position.z = -97; //고정
+					scene.add(cube);
+				});
+				const geometry9 = new THREE.BoxGeometry(30, 20, 1);
+				img_loader.load(s3_url + "${artworkList[9].artworkAddress}", (texture) => {
+					const material = new THREE.MeshLambertMaterial({
+					map: texture,
+					});
+					const cube = new THREE.Mesh(geometry9, material);
+					cube.position.x = -55; //가로로 이동
+					cube.position.y = 30; //세로로 이동(높이 조정)
+					cube.position.z = -97; //고정
+					scene.add(cube);
+				});
+				const geometry10 = new THREE.BoxGeometry(30, 20, 1);
+				img_loader.load(s3_url + "${artworkList[10].artworkAddress}", (texture) => {
+					const material = new THREE.MeshLambertMaterial({
+					map: texture,
+					});
+					const cube = new THREE.Mesh(geometry10, material);
+					cube.position.x = -97; //고정
+					cube.position.y = 30; //세로로 이동(높이 조정)
+					cube.position.z = -62; //가로로 이동
+                    cube.rotation.y = Math.PI / 2;
+					scene.add(cube);
+				});
+				const geometry11 = new THREE.BoxGeometry(40, 25, 1);
+				img_loader.load(s3_url + "${artworkList[11].artworkAddress}", (texture) => {
+					const material = new THREE.MeshLambertMaterial({
+					map: texture,
+					});
+					const cube = new THREE.Mesh(geometry11, material);
+					cube.position.x = -57; //가로로 이동
+					cube.position.y = 30; //세로로 이동(높이 조정)
+					cube.position.z = -28; //고정
+					scene.add(cube);
+				});
+
 			}
 
 			function onWindowResize() {
