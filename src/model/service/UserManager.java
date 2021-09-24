@@ -35,10 +35,12 @@ public class UserManager {
 	}
 	
 	public int create(User user) throws SQLException, ExistingUserException {
-		if (userDAO.existingUser(user.getUserId()) == true) {
-			throw new ExistingUserException(user.getUserId() + "는 존재하는 아이디입니다.");
+		if (userDAO.existingUser(String.valueOf(user.getUserID())) == true) {
+			throw new ExistingUserException(user.getUserID() + "는 존재하는 아이디입니다.");
 		}
-		return userDAO.create(user);
+		//수정 필요
+		CommentDAO commentDAO = new CommentDAO();
+		return commentDAO.create(user);
 	}
 
 	public int update(User user) throws SQLException, UserNotFoundException {
