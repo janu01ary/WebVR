@@ -1,6 +1,7 @@
 package controller.WebVR;
 
 import controller.Controller;
+import controller.WebVR.user.UserSessionUtils;
 import model.GuestBook;
 import model.GuestBookUser;
 import model.dao.ExhibitionDAO;
@@ -19,13 +20,18 @@ public class CreateGuestBookController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 로그인 여부
+				if (!UserSessionUtils.hasLogined(request.getSession())) { // 로그인 안되어있는 있는 경우
+					return "redirect:/WebVR/login/form";	
+				}
+				
 		HttpSession session = request.getSession();
 		int exhbId = Integer.parseInt(request.getParameter("ExhbId"));// 파라미터로 전시 아이디 가져오기
 		// 로그인한 사용자 아이디 어떻게 가져옴..??
 		int userID = Integer.parseInt(request.getParameter("UserId"));// 파라미터로 유저 아이디 가져오기
-		Date date_now = new Date(System.currentTimeMillis());
+		//Date date_now = new Date(System.currentTimeMillis());
 		GuestBook gb = new GuestBook(0/* 자동으로 부여되는 아이디 */, userID, exhbId, request.getParameter("content"),
-				date_now);
+				new Date());
 
 		try {
 			guestBookDAO.create(gb);
