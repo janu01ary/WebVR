@@ -78,9 +78,10 @@ body {
 			function init() {
 				//Ã¬Â¹Â´Ã«Â©ÂÃ«ÂÂ¼ + Ã¬ÂÂ¬ + ÃªÂ´ÂÃ¬ÂÂ Ã¬Â´ÂÃªÂ¸Â° Ã¬ÂÂ¤Ã¬Â Â
 				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
-				camera.position.x = 50;
+				camera.position.x = 90;
 				camera.position.y = 30;
-				camera.position.z = 50;
+				camera.position.z = 60;
+				camera.rotation.y = Math.PI / 2;
 				camera.zoom = 1;
 
 				scene = new THREE.Scene();
@@ -198,11 +199,9 @@ body {
 					if (instructions.style.display == 'none') {
 						event.preventDefault();
 						if ( SELECTED ){
-console.log("SELECTED : ", SELECTED);
-console.log("event: ", e);
-							window.open("<c:url value='/WebVR/exhb/artwork'>
-	                        		   			<c:param name='artworkId' value='7' />
-	                        		   		 </c:url> "); //Ã«ÂÂÃ¬Â¤ÂÃ¬ÂÂ Ã¬ÂÂÃ­ÂÂÃ­ÂÂÃ«Â©Â´Ã¬ÂÂ¼Ã«Â¡Â Ã¬ÂÂ´Ã«ÂÂÃ­ÂÂÃªÂ²Â~
+							console.log("SELECTED : ", SELECTED);
+							console.log("event: ", e);
+							window.open("<c:url value='/WebVR/exhb/artwork?artworkId=' />" + SELECTED.uuid); //Ã«ÂÂÃ¬Â¤ÂÃ¬ÂÂ Ã¬ÂÂÃ­ÂÂÃ­ÂÂÃ«Â©Â´Ã¬ÂÂ¼Ã«Â¡Â Ã¬ÂÂ´Ã«ÂÂÃ­ÂÂÃªÂ²Â~
 							controls.unlock();
 						}
 					} 
@@ -249,6 +248,7 @@ console.log("event: ", e);
 					cube.position.x = 57; //가로로 이동
 					cube.position.y = 30; //세로로 이동(높이 조정)
 					cube.position.z = 28; //고정
+					cube.uuid = "${artworkList[0].artworkId}";
 					scene.add(cube);
 				});
 				const geometry1 = new THREE.BoxGeometry(30, 20, 1);
@@ -260,6 +260,7 @@ console.log("event: ", e);
 					cube.position.x = -55; //가로로 이동
 					cube.position.y = 30; //세로로 이동(높이 조정)
 					cube.position.z = 97; //고정
+					cube.uuid = "${artworkList[1].artworkId}";
 					scene.add(cube);
 				});
 				const geometry2 = new THREE.BoxGeometry(32, 23, 1);
@@ -271,6 +272,7 @@ console.log("event: ", e);
 					cube.position.x = 0; //가로로 이동
 					cube.position.y = 30; //세로로 이동(높이 조정)
 					cube.position.z = 97; //고정
+					cube.uuid = "${artworkList[2].artworkId}";
 					scene.add(cube);
 				});
 				const geometry3 = new THREE.BoxGeometry(58, 39, 1);
@@ -283,6 +285,7 @@ console.log("event: ", e);
 					cube.position.y = 35; //세로로 이동(높이 조정)
 					cube.position.z = 40; //가로로 이동
                     cube.rotation.y = Math.PI / 2;
+					cube.uuid = "${artworkList[3].artworkId}";
 					scene.add(cube);
 				});
 				const geometry4 = new THREE.BoxGeometry(34, 27, 1);
@@ -294,6 +297,7 @@ console.log("event: ", e);
 					cube.position.x = -59; //가로로 이동
 					cube.position.y = 30; //세로로 이동(높이 조정)
 					cube.position.z = -22; //고정
+					cube.uuid = "${artworkList[4].artworkId}";
 					scene.add(cube);
 				});
 				const geometry5 = new THREE.BoxGeometry(36, 24, 1);
@@ -305,6 +309,7 @@ console.log("event: ", e);
 					cube.position.x = 57; //가로로 이동
 					cube.position.y = 30; //세로로 이동(높이 조정)
 					cube.position.z = 22; //고정
+					cube.uuid = "${artworkList[5].artworkId}";
 					scene.add(cube);
 				});
 				const geometry6 = new THREE.BoxGeometry(60, 50, 1);
@@ -317,6 +322,7 @@ console.log("event: ", e);
 					cube.position.y = 35; //세로로 이동(높이 조정)
 					cube.position.z = -40; //가로로 이동
                     cube.rotation.y = Math.PI / 2;
+					cube.uuid = "${artworkList[6].artworkId}";
 					scene.add(cube);
 				});
 				const geometry7 = new THREE.BoxGeometry(30, 30, 1);
@@ -328,6 +334,7 @@ console.log("event: ", e);
 					cube.position.x = 60; //가로로 이동
 					cube.position.y = 30; //세로로 이동(높이 조정)
 					cube.position.z = -97; //고정
+					cube.uuid = "${artworkList[7].artworkId}";
 					scene.add(cube);
 				});
 				const geometry8 = new THREE.BoxGeometry(32, 23, 1);
@@ -339,6 +346,7 @@ console.log("event: ", e);
 					cube.position.x = 0; //가로로 이동
 					cube.position.y = 30; //세로로 이동(높이 조정)
 					cube.position.z = -97; //고정
+					cube.uuid = "${artworkList[8].artworkId}";
 					scene.add(cube);
 				});
 				const geometry9 = new THREE.BoxGeometry(30, 20, 1);
@@ -350,6 +358,7 @@ console.log("event: ", e);
 					cube.position.x = -55; //가로로 이동
 					cube.position.y = 30; //세로로 이동(높이 조정)
 					cube.position.z = -97; //고정
+					cube.uuid = "${artworkList[9].artworkId}";
 					scene.add(cube);
 				});
 				const geometry10 = new THREE.BoxGeometry(30, 20, 1);
@@ -362,6 +371,7 @@ console.log("event: ", e);
 					cube.position.y = 30; //세로로 이동(높이 조정)
 					cube.position.z = -62; //가로로 이동
                     cube.rotation.y = Math.PI / 2;
+					cube.uuid = "${artworkList[10].artworkId}";
 					scene.add(cube);
 				});
 				const geometry11 = new THREE.BoxGeometry(40, 25, 1);
@@ -373,6 +383,7 @@ console.log("event: ", e);
 					cube.position.x = -57; //가로로 이동
 					cube.position.y = 30; //세로로 이동(높이 조정)
 					cube.position.z = -28; //고정
+					cube.uuid = "${artworkList[11].artworkId}";
 					scene.add(cube);
 				});
 
@@ -496,22 +507,24 @@ console.log("event: ", e);
 
 				renderer.render(scene, camera);
 
-				requestAnimationFrame(render);
+				requestAnimationFrame(render); 
 			}
 		</script>
 	<div id="blocker">
-	<tr width = 100%>
-		<td width = 70%>
-				<audio autoplay controls>
-				<source src="../resources/audio/bensound-ukulele.mp3"
-					type="audio/mpeg" />
-				Your browser does not support the audio tag.
-				</audio>
-			</td>
-			<td width = 30%>
-				<button type="button" class="btn btn-default">방명록</button>
-			</td>
-</tr>
+		<tr width=100%>
+			<td width=70%><audio autoplay controls>
+					<source src="../resources/audio/bensound-ukulele.mp3"
+						type="audio/mpeg" />
+					Your browser does not support the audio tag.
+				</audio></td>
+			<td width=30%><a
+				href="<c:url value='/WebVR/exhb/guestbook'>
+                            <c:param name='exhibitionId' value='${exhibitionId}' />
+                        </c:url>"
+				button type="button" class="btn btn-default">방명록
+					</button>
+			</a></td>
+		</tr>
 		<div id="instructions">
 			<p style="font-size: 36px">Click to play</p>
 			<p>

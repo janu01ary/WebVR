@@ -13,10 +13,10 @@ public class UserDAO {
 	public UserDAO() {			
 		jdbcUtil = new JDBCUtil();	// JDBCUtil 객체 생성
 	}
-		
+
 	// USER 테이블에 새로운 User 생성
 	public int create(User user) throws SQLException {
-		String sql = "INSERT INTO user VALUES (?, ?, ?)";		
+		String sql = "INSERT INTO user (email, password, nickname) VALUES (?, ?, ?)";		
 		Object[] param = new Object[] {user.getEmail(), user.getPassword(), user.getNickname()};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 						

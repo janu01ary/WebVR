@@ -3,10 +3,8 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import model.Community;
 import model.User;
 import model.dao.CommentDAO;
-import model.dao.CommunityDAO;
 import model.dao.UserDAO;
 
 /**
@@ -39,8 +37,7 @@ public class UserManager {
 			throw new ExistingUserException(user.getUserID() + "는 존재하는 아이디입니다.");
 		}
 		//수정 필요
-		CommentDAO commentDAO = new CommentDAO();
-		return commentDAO.create(user);
+		return userDAO.create(user);
 	}
 
 	public int update(User user) throws SQLException, UserNotFoundException {
