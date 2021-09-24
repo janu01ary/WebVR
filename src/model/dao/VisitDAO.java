@@ -64,7 +64,7 @@ public class VisitDAO {
 	
 	// 주어진 userId에 해당하는 visit List를 데이터베이스에서 찾아 도메인 클래스에 저장하여 반환
 	public List<Visit> findVisitListByUserId(int userId) throws SQLException {
-		String sql = "SELECT v.id, v.user_id, exhibition_id, e.title, e.description "
+		String sql = "SELECT v.id, v.user_id, exhibition_id, e.title, e.description, e.image_address "
     			+ "FROM visit v "
 				+ "INNER JOIN exhibition e "
     			+ "ON v.exhibition_id = e.id "
@@ -80,7 +80,9 @@ public class VisitDAO {
 						rs.getInt("v.user_id"),
 						rs.getInt("exhibition_id"),
 						rs.getString("e.title"),
-						rs.getString("e.description"));
+						rs.getString("e.description"),
+						rs.getString("e.image_address")
+						);
 				visitList.add(visit);
 			}		
 			return visitList;					

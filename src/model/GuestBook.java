@@ -9,6 +9,8 @@ public class GuestBook {
 	private int userID;//fk
 	private int exhbId;//fk
 	
+	private String exhbTitle; // Exhibition과 JOIN 시 사용
+	
 	public GuestBook(int gbID, int userID, int exhbId, String content, Date date) {
 		super();
 		this.gbID = gbID;
@@ -16,6 +18,16 @@ public class GuestBook {
 		this.date = date;
 		this.userID = userID;
 		this.exhbId = exhbId;
+	}
+	
+	public GuestBook(int gbID, int userID, int exhbId, String content, Date date, String exhbTitle) {
+		super();
+		this.gbID = gbID;
+		this.content = content;
+		this.date = date;
+		this.userID = userID;
+		this.exhbId = exhbId;
+		this.exhbTitle = exhbTitle;
 	}
 	
 	public int getGbID() {
@@ -48,6 +60,13 @@ public class GuestBook {
 	public void setExhbId(int exhbId) {
 		this.exhbId = exhbId;
 	}
+	public String getExhbTitle() {
+		return exhbTitle;
+	}
+	public void setExhbTitle(String exhbTitle) {
+		this.exhbTitle = exhbTitle;
+	}
+	
 	
 
 }

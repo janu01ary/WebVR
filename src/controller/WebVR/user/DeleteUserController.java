@@ -44,15 +44,24 @@ public class DeleteUserController implements Controller {
 				return "redirect:/WebVR/logout";		// logout 처리
 		}
 		
-		/* 삭제가 불가능한 경우 */
+		
+		User user = userDAO.findUser(userId);
+		if(user.matchPassword(request.getParameter("confirm_pwd"))) {
+			userDAO.remove(String.valueOf(userId));
+			return "redirect:/WebVR/home";
+		}
+		
+		/* 삭제가 불가능한 경우 
 		User user = userDAO.findUser(userId);	// 사용자 정보 검색
 		request.setAttribute("user", user);						
 		request.setAttribute("deleteFailed", true);
 		String msg = (UserSessionUtils.isLoginUser(adminId, session)) 
 				   ? "시스템 관리자 정보는 삭제할 수 없습니다."		
 				   : "타인의 정보는 삭제할 수 없습니다.";													
-		request.setAttribute("exception", new IllegalStateException(msg));            
-		return "/WebVR/myPage.jsp";
+		request.setAttribute("exception", new IllegalStateException(msg));  */
+		
+		request.setAttribute("deleteFailed", "true");		
+		return "redirect:/WebVR/myPage?userId=" + userId;
 	}
 
 }

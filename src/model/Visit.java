@@ -8,6 +8,7 @@ public class Visit {
 	
 	private String exhibitionTitle;  // exhibition과 조인했을 때 사용
 	private String exhibitionDesc;
+	private String exhibitionImage;
 	
 	public Visit() { }
 	
@@ -18,13 +19,14 @@ public class Visit {
 		this.exhibitionId = exhibitionId;
 	}
 	
-	public Visit(int visitId, int userId, int exhibitionId, String exhibitionTitle, String exhibitionDesc) {
+	public Visit(int visitId, int userId, int exhibitionId, String exhibitionTitle, String exhibitionDesc, String exhibitionImage) {
 		super();
 		this.visitId = visitId;
 		this.userId = userId;
 		this.exhibitionId = exhibitionId;
 		this.exhibitionTitle = exhibitionTitle;
 		this.exhibitionDesc = exhibitionDesc;
+		this.exhibitionImage = exhibitionImage;
 	}
 
 	public int getVisitId() {
@@ -57,4 +59,11 @@ public class Visit {
 	public void setExhibitionDesc(String exhibitionDesc) {
 		this.exhibitionDesc = exhibitionDesc;
 	}
+	public String getExhibitionImage() {
+		return exhibitionImage;
+	}
+	public void setExhibitionImage(String exhibitionImage) {
+		this.exhibitionImage = exhibitionImage;
+	}
+	
 }
