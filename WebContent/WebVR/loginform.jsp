@@ -68,7 +68,7 @@ Usage as a mixin
 				<input type="password" class="form-control" id="exampleInputPassword" name="password">
 			</div>
 			<div class="clearfix">
-					<u><a href="#" >sign in</a></u>
+					<u><a href="<c:url value='/WebVR/register/form' />" >sign in</a></u>
 				<button type="submit" class="btn btn-outline-light btn-lg float-right">login</button>
 			</div>
 		</form>
