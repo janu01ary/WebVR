@@ -18,20 +18,14 @@ public class LikesDAO {
 	
 	// Likes 생성
 	public int create(User user, Artwork artwork) throws SQLException {
-		String sql = "INSERT INTO likes VALUES (?, ?)";		
+		String sql = "INSERT INTO likes(user_id, artwork_id) VALUES (?, ?)";	
 		Object[] param = new Object[] { user.getUserID(), 
-						artwork.getArtworkId() };	
+						artwork.getArtworkId() };
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 						
-		String key[] = { "id" };
 		try {
-			jdbcUtil.executeUpdate(key); // insert 문 실행
-			ResultSet rs = jdbcUtil.getGeneratedKeys();
-
-			if (rs.next()) {
-				int generatedKey = rs.getInt(1);
-				return generatedKey;
-			}
+			int result = jdbcUtil.executeUpdate();	// insert 문 실행
+			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();

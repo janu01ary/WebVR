@@ -6,9 +6,18 @@
 <head>
 <meta charset="EUC-KR">
 <title>artwork</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/workPage.css' />">
 <style type="text/css">
+	@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+
 	#workPage{
 	  width: 60%; 
 	  text-align: left;
@@ -16,6 +25,7 @@
 	
 	body {
 		background-color: black;
+		font-family: 'NEXON Lv1 Gothic OTF';
 	}
 	th {
 		color: white;
@@ -25,9 +35,22 @@
 		padding: 10px;
 	}
 </style>
+<script>	
+function isLogin(){ 
+     var login = '<%=(String)request.getAttribute("login")%>';
+
+      if (login === 'true'){ // 로그인 되어있는 경우
+    	 const artworkId = '${artwork.artworkId}';
+         location.href='/WebVR/WebVR/artwork/like?artworkId=' + artworkId;
+      }
+      else { // 로그인 되어있지 않은 경우
+    	  alert('로그인이 필요합니다');
+      }	
+}   
+</script>
 </head>
 <body>
-	<div id="workPage" class="center-block">
+	<div id="workPage" class="center-block" >
 		<br><br>
 		<c:set var="s3_bucket_link" value="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" />
 		<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.artworkAddress}"/>"  class="img-responsive">
@@ -39,8 +62,15 @@
 	        		<img src="<c:url value='/resources/icon/comment.png' />" alt="commentIcon" width="50px" /> </a> 
 			    </th>
 				<th>
-					<a href="<c:url value='/WebVR/artwork/like'> <c:param name='artworkId' value='${artwork.artworkId}'/></c:url>">
-	        		<img src="<c:url value='/resources/icon/likes.png' />" alt="commentIcon" width="50px" /> </a>
+	        		<c:choose>
+						<c:when test="${like eq true}">
+							<img src="<c:url value='/resources/icon/redHeart.png' />" alt="likeIcon" width="32px" onClick="isLogin()" />
+						</c:when>
+						<c:otherwise>
+							<img src="<c:url value='/resources/icon/likes.png' />" alt="likeIcon" width="50px" onClick="isLogin()" />
+						</c:otherwise>
+					</c:choose>
+	        		
 				</th>
 				<th> 
 					<c:choose>
@@ -58,7 +88,7 @@
 				
 				<th>
 					<a href="<c:url value='/WebVR/artwork/share'> <c:param name='artworkId' value='${artwork.artworkId}'/></c:url>">
-	        		<img src="<c:url value='/resources/icon/share.png' />" alt="commentIcon" width="50px" /> </a>
+	        		<img src="<c:url value='/resources/icon/share.png' />" alt="shareIcon" width="50px" /> </a>
 				</th>
 				<th>
 					<img src="<c:url value='/resources/icon/view.png' />" alt="viewIcon" width="50px" />
@@ -77,8 +107,8 @@
 	
 			<tr>
 				<td colspan="7" >
-					<h3 style="display:inline"><c:out value="${artwork.title}"/></h3> 
-					<h4 style="display:inline"><c:out value="${artwork.artistName}"/></h4>
+					<h3 style="display:inline"><c:out value="${artwork.title}"/>&nbsp;</h3> 
+					<h4 style="display:inline"><c:out value="${artwork.artistName}"/>&nbsp;</h4>
 					<h5 style="display:inline"><c:out value="${artwork.date}"/></h5>
 				</td>
 			</tr>

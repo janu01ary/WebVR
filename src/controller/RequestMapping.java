@@ -7,6 +7,7 @@ import controller.WebVR.CreateCommentController;
 import controller.WebVR.CreateGuestBookController;
 import controller.WebVR.DeleteCommentController;
 import controller.WebVR.GridViewController;
+import controller.WebVR.LikeArtworkController;
 import controller.WebVR.ListExhibitionController;
 import controller.WebVR.ShareArtworkController;
 import controller.WebVR.ViewArtworkController;
@@ -43,6 +44,7 @@ public class RequestMapping {
         //artwork
         mappings.put("/WebVR/exhb/artwork", new ViewArtworkController());
         mappings.put("/WebVR/artwork/share", new ShareArtworkController());
+        mappings.put("/WebVR/artwork/like", new LikeArtworkController());
         
         //comment
         mappings.put("/WebVR/artwork/comment", new ViewCommentController());

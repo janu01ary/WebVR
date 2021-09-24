@@ -9,6 +9,12 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/listPage.css' />">
 <style type="text/css">
+	@font-face {
+	    font-family: 'NEXON Lv1 Gothic OTF';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
 	#listPage {
 		text-align: center;
 		width: 90%;
@@ -16,6 +22,7 @@
 	
 	body {
 		background-color: black;
+		font-family: 'NEXON Lv1 Gothic OTF';
 	}
 	
 	table {
@@ -64,7 +71,6 @@
 				</c:choose>
 		    </c:forEach>
     	</table>
-
 	</div>
 </body>
 </html>
