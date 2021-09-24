@@ -26,9 +26,9 @@ public class CreateGuestBookController implements Controller {
 				}
 				
 		HttpSession session = request.getSession();
-		int exhbId = Integer.parseInt(request.getParameter("ExhbId"));// 파라미터로 전시 아이디 가져오기
+		int exhbId = Integer.parseInt(request.getParameter("exhibitionId"));// 파라미터로 전시 아이디 가져오기
 		// 로그인한 사용자 아이디 어떻게 가져옴..??
-		int userID = Integer.parseInt(request.getParameter("UserId"));// 파라미터로 유저 아이디 가져오기
+		int userID = Integer.parseInt(UserSessionUtils.getLoginUserId(session));// 파라미터로 유저 아이디 가져오기
 		//Date date_now = new Date(System.currentTimeMillis());
 		GuestBook gb = new GuestBook(0/* 자동으로 부여되는 아이디 */, userID, exhbId, request.getParameter("content"),
 				new Date());

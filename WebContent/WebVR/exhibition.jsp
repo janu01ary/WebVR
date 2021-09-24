@@ -511,18 +511,20 @@ body {
 			}
 		</script>
 	<div id="blocker">
-	<tr width = 100%>
-		<td width = 70%>
-				<audio autoplay controls>
-				<source src="../resources/audio/bensound-ukulele.mp3"
-					type="audio/mpeg" />
-				Your browser does not support the audio tag.
-				</audio>
-			</td>
-			<td width = 30%>
-				<button type="button" class="btn btn-default">방명록</button>
-			</td>
-</tr>
+		<tr width=100%>
+			<td width=70%><audio autoplay controls>
+					<source src="../resources/audio/bensound-ukulele.mp3"
+						type="audio/mpeg" />
+					Your browser does not support the audio tag.
+				</audio></td>
+			<td width=30%><a
+				href="<c:url value='/WebVR/exhb/guestbook'>
+                            <c:param name='exhibitionId' value='${exhibitionId}' />
+                        </c:url>"
+				button type="button" class="btn btn-default">방명록
+					</button>
+			</a></td>
+		</tr>
 		<div id="instructions">
 			<p style="font-size: 36px">Click to play</p>
 			<p>
