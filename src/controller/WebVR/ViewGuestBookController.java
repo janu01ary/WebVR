@@ -4,7 +4,7 @@ import controller.Controller;
 import model.GuestBookUser;
 import model.GuestBook;
 import model.User;
-import model.dao.ExhibitionDAO;
+import model.dao.ExhibitionDAO; 
 import model.dao.GuestBookDAO;
 import model.dao.UserDAO;
 

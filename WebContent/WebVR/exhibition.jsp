@@ -507,7 +507,7 @@ body {
 
 				renderer.render(scene, camera);
 
-				requestAnimationFrame(render);
+				requestAnimationFrame(render); 
 			}
 		</script>
 	<div id="blocker">

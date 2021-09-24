@@ -72,7 +72,7 @@ body {
 							<p class="mb-1">${gb.content}</p>
 						</a>
 					</c:forEach>
-				</div>
+				</div> 
 			</div>
 			<div class="card-footer text-white">
 				<form method="POST" action="<c:url value='/WebVR/exhb/guestbook/create'>

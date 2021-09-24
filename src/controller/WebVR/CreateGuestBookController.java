@@ -25,7 +25,7 @@ public class CreateGuestBookController implements Controller {
 					return "redirect:/WebVR/login/form";	
 				}
 				
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(); 
 		int exhbId = Integer.parseInt(request.getParameter("exhibitionId"));// 파라미터로 전시 아이디 가져오기
 		// 로그인한 사용자 아이디 어떻게 가져옴..??
 		int userID = Integer.parseInt(UserSessionUtils.getLoginUserId(session));// 파라미터로 유저 아이디 가져오기
