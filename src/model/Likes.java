@@ -6,6 +6,8 @@ public class Likes {
 	private int userId; // user의 PK, FK
 	private int artworkId; // artwork의 PK, FK
 	
+	private String artworkAddress; //address와의 join 시 사용
+	
 	public Likes() { }
 	
 	public Likes(int likeId, int userId, int artworkId) {
@@ -13,6 +15,13 @@ public class Likes {
 		this.likeId = likeId;
 		this.userId = userId;
 		this.artworkId = artworkId;
+	}
+	public Likes(int likeId, int userId, int artworkId, String artworkAddress) {
+		super();
+		this.likeId = likeId;
+		this.userId = userId;
+		this.artworkId = artworkId;
+		this.artworkAddress = artworkAddress;
 	}
 	
 	public int getLikeId() {
@@ -38,4 +47,14 @@ public class Likes {
 	public void setArtworkId(int artworkId) {
 		this.artworkId = artworkId;
 	}
+
+	public String getArtworkAddress() {
+		return artworkAddress;
+	}
+
+	public void setArtworkAddress(String artworkAddress) {
+		this.artworkAddress = artworkAddress;
+	}
+	
+	
 }

@@ -142,12 +142,15 @@ public class GuestBookDAO {
 		return null;
 	}
 	
-	public List<GuestBook> myGBList() throws SQLException {//특정 사용자 방명록 리스트 반환
-        String sql = "SELECT id, user_id, exhibition_id, content, date " 
-        		   + "FROM guest_book"
-        		   + "WHERE user_id=?"
-        		   + "ORDER BY date";
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
+	public List<GuestBook> myGBList(int userId) throws SQLException {//특정 사용자 방명록 리스트 반환
+        String sql = "SELECT g.id, g.exhibition_id, g.content, g.date, e.title " 
+        		   + "FROM guest_book g "
+        		   + "INNER JOIN exhibition e "
+        		   + "ON g.exhibition_id = e.id "
+        		   + "WHERE g.user_id=? "
+        		   + "ORDER BY g.date ";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});		// JDBCUtil에 query문 설정
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
@@ -155,10 +158,11 @@ public class GuestBookDAO {
 			while (rs.next()) {
 				GuestBook GB = new GuestBook(			// User 객체를 생성하여 현재 행의 정보를 저장
 					rs.getInt("id"),
-					rs.getInt("user_id"),
+					userId,
 					rs.getInt("exhibition_id"),
 					rs.getString("content"),
-					rs.getDate("date"));
+					rs.getDate("date"),
+					rs.getString("e.title"));
 				myGBList.add(GB);				// List에 User 객체 저장
 			}		
 			return myGBList;					

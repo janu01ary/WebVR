@@ -22,7 +22,7 @@ public class UpdateMyPageController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		/*// 로그인 여부 확인
+		// 로그인 여부 확인
     	if (!UserSessionUtils.hasLogined(request.getSession())) {
             return "redirect:/WebVR/login/form";		// login form 요청으로 redirect
         }
@@ -35,8 +35,8 @@ public class UpdateMyPageController implements Controller {
 		if (request.getMethod().equals("GET")) {
 			request.setAttribute("user", user);
 			
-			if (UserSessionUtils.isLoginUser(userId, session) ||
-				UserSessionUtils.isLoginUser("admin", session)) {
+			if (UserSessionUtils.isLoginUser(Integer.parseInt(userId), session) ||
+				UserSessionUtils.isLoginUser(1, session)) {
 				// 현재 로그인한 사용자가 수정 대상 사용자이거나 관리자인 경우 -> 수정 가능
 								
 				return "/WebVR/myPage.jsp";   // 검색한 사용자 정보를 update form으로 전송     
@@ -47,10 +47,10 @@ public class UpdateMyPageController implements Controller {
 //			request.setAttribute("exception", 
 //				new IllegalStateException("타인의 정보는 수정할 수 없습니다."));            
 //			return "/myPage/myPage.jsp";	// 사용자 보기 화면으로 이동 (forwarding)
-		}*/
+		}
 					
 		User updateUser = new User(
-				1,
+				Integer.parseInt(userId),
 				request.getParameter("edit_email"),
 				request.getParameter("edit_pwd"),
 				request.getParameter("edit_name"));
@@ -61,7 +61,7 @@ public class UpdateMyPageController implements Controller {
 		} 
 
 		request.setAttribute("user", updateUser);
-		return "redirect:/WebVR/myPage";
+		return "redirect:/WebVR/myPage?userId=" + userId;
 	}
 
 }

@@ -9,6 +9,7 @@
 	List<Likes> likesList = (List<Likes>)request.getAttribute("likesList");
 	List<Visit> visitList = (List<Visit>)request.getAttribute("visitList");
 	List<Comment> commentList = (List<Comment>)request.getAttribute("commentList");
+	List<GuestBook> guestBookList = (List<GuestBook>)request.getAttribute("guestBookList");
 	List<Exhibition> exhibitionList = (List<Exhibition>)request.getAttribute("exhibitionList");
 	HashMap<Integer, List<Artwork>> artworkMap = (HashMap<Integer, List<Artwork>>)request.getAttribute("artworkMap");
 %>
@@ -22,12 +23,12 @@
     </head>
     <body>
         <!-- 사이트 이름이나 로고 나중에 추가 -->
-        <h1 id="title">Untact Gallery</h1>
+        <h1 id="title" onclick="location.href='/WebVR/WebVR/home'">Untact Gallery</h1>
         <div id="entire">
             <!-- 마이페이지 메뉴 리스트 -->
             <!-- 나중에 클릭 시 해당 메뉴는 색칠하는 것도 좋을 듯~ -->
             <div id="menuList">
-                <h2 id="menuTitle">마이 페이지</h2>
+                <h2 id="menuTitle">My Page</h2>
                 <h3 class="headMenu">나의 정보</h3>
                 <hr>
                 <p class="menuItem" onClick="openMenu(event, 'my_profile')" id="defaultOpen">마이 프로필</p>
@@ -38,6 +39,7 @@
                 <p class="menuItem" onClick="openMenu(event, 'watch_history')">관람 이력</p>
                 <p class="menuItem" onClick="openMenu(event, 'favorite_art')">내가 좋아한 작품</p>
                 <p class="menuItem" onClick="openMenu(event, 'my_reply')">작성한 댓글 보기</p>
+                <p class="menuItem" onClick="openMenu(event, 'my_guestBook')">작성한 방명록 보기</p>
                 <br>
                 <h3 class="headMenu">나의 전시</h3>
                 <hr>
@@ -51,7 +53,7 @@
             <div id="my_profile" class="content">
                 <table>
                     <tr>
-                        <th id="profile_title" colspan="2">
+                        <th id="profile_title" colspan="2" style="padding-top:50px;">
                         	<%=user.getNickname() %>
                         </th> <!-- user 이름 -->
                     </tr>
@@ -92,16 +94,25 @@
             <div id="watch_history" class="content">
                 <table style="margin-top: 40px; border-spacing:10px">
                 <%
-                	Iterator<Visit> visitIter = visitList.iterator();
-                	for(int i = 0; visitIter.hasNext(); i++){
-                		Visit visit = (Visit)visitIter.next();
-                		if(i % 3 == 0){
+                	if(visitList.size() == 0){
+                %>
+                	<tr>
+                		<th id="profile_title" colspan="2"> 관람 내역이 없습니다. </th>
+                	</tr>
+                <%
+                	}
+                	else{
+              			Iterator<Visit> visitIter = visitList.iterator();
+                		for(int i = 0; visitIter.hasNext(); i++){
+                			Visit visit = (Visit)visitIter.next();
+                			String url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" + visit.getExhibitionImage();
+                			if(i % 3 == 0){
                 %>
                     <tr>
                     <% } %>
                         <td>
                             <div class="watch_card">
-                                <img src="../resources/img/img.png" class="card_image" alt="...">
+                                <img src="<%=url %>" class="card_image" alt="exhibitionImage">
                                 <div class="card_body">
                                     <h2 class="card_title"><%=visit.getExhibitionTitle() %></h2>
                                     <p class="card_text"><%=visit.getExhibitionDesc() %></p>
@@ -111,36 +122,52 @@
                         </td>
                     <% if(i % 3 == 2){ %>
                     </tr>
-                    <% }} %>
+                    <% }}} %>
                 </table>
             </div>
             <!-- 좋아한 작품 보기 -->
             <div id="favorite_art" class="content">
-                <table style="width: 90%; table-layout: fixed; border-spacing: 13px;">
+                <table style="width: 90%; table-layout: fixed; border-spacing: 13px; margin-top:20px;">
                 <%
-                	Iterator<Likes> likesIter = likesList.iterator();
-                	for(int i = 0; likesIter.hasNext(); i++){
-                		Likes likes = (Likes)likesIter.next();
-                		if(i % 4 == 0){
+                	if(likesList.size() == 0){
+                %>
+                	<tr>
+                		<th id="profile_title" colspan="2" style="padding-top: 47px;"> 좋아하는 작품이 없습니다. </th>
+                	</tr>
+                <%
+                	}
+                	else{
+                		Iterator<Likes> likesIter = likesList.iterator();
+                		for(int i = 0; likesIter.hasNext(); i++){
+                			Likes likes = (Likes)likesIter.next();
+                			String url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" + likes.getArtworkAddress();
+                			if(i % 4 == 0){
                 %>
                     <tr>
                     <% } %>
                         <td class="like_td">
-                        	<p> <%= likes.getLikeId() %>
-                            <img src="../resources/img/shiba.jpg" class="like_image" alt="...">
+                            <img src="<%=url %>" class="like_image" alt="...">
                         </td>
                     <% if(i % 4 == 3){ %>
                     </tr>
-                <% }} %>
+                <% }}} %>
                 </table>
             </div>
             <!-- 작성한 댓글 보기 -->
             <div id="my_reply" class="content">
                 <table style="margin-top:20px;">
                 <%
-                	Iterator<Comment> commentIter = commentList.iterator();
-                	for(int i = 0; commentIter.hasNext(); i++){
-                		Comment comment = (Comment)commentIter.next();
+                	if(commentList.size() == 0){
+            	%>
+            		<tr>
+                		<th id="profile_title" colspan="2" style="padding-top:60px;"> 작성한 댓글이 없습니다. </th>
+                	</tr>
+                <%
+                	}
+                	else{
+      	     	     	Iterator<Comment> commentIter = commentList.iterator();
+                		for(int i = 0; commentIter.hasNext(); i++){
+                			Comment comment = (Comment)commentIter.next();
                 %>
                     <tr>
                         <td class="reply_box">
@@ -148,26 +175,63 @@
                             <p class="reply_content"><%= comment.getContent() %></p>
                         </td>
                         <td>
-                            <button class="reply_delete">삭제</button>
+                            <button onclick="location.href='<c:url value='/WebVR/myPage/commentDelete'/>?commentId=<%=comment.getCmtID() %>'" class="reply_delete">삭제</button>
                         </td>
                     </tr>
-                <% } %>
+                <% }} %>
+                </table>
+            </div>
+            <!-- 작성한 방명록 보기 -->
+            <div id="my_guestBook" class="content">
+                <table style="margin-top:20px;">
+                <%
+                	if(guestBookList.size() == 0){
+            	%>
+            		<tr>
+                		<th id="profile_title" colspan="2" style="padding-top:60px;"> 작성한 방명록이 없습니다. </th>
+                	</tr>
+                <%
+                	}
+                	else{
+      	     	     	Iterator<GuestBook> guestBookIter = guestBookList.iterator();
+                		for(int i = 0; guestBookIter.hasNext(); i++){
+                			GuestBook guestBook = (GuestBook)guestBookIter.next();
+                %>
+                    <tr>
+                        <td class="reply_box">
+                            <h3 class="reply_exhib" style="display: inline"><%= guestBook.getExhbTitle() %></h3>
+                            <p class="reply_content"><%= guestBook.getContent() %></p>
+                        </td>
+                        <td>
+                            <button onclick="location.href='<c:url value='/WebVR/myPage/guestBookDelete'/>?guestBookId=<%=guestBook.getGbID() %>'" class="reply_delete">삭제</button>
+                        </td>
+                    </tr>
+                <% }} %>
                 </table>
             </div>
             <!-- 전시 목록 보기 -->
             <div id="exhib_list" class="content">
                 <table style="margin-top: 40px; border-spacing:10px">
                 <%
-                	Iterator<Exhibition> exhibitionIter = exhibitionList.iterator();
-                	for(int i = 0; exhibitionIter.hasNext(); i++){
-                		Exhibition exhibition = (Exhibition)exhibitionIter.next();
-                		if(i % 3 == 0){
+                	if(exhibitionList.size() == 0){
+                %>
+                	<tr>
+                		<th id="profile_title" colspan="2"> 주최한 전시가 없습니다. </th>
+                	</tr>
+                <%
+                	}
+                	else{
+                		Iterator<Exhibition> exhibitionIter = exhibitionList.iterator();
+                		for(int i = 0; exhibitionIter.hasNext(); i++){
+                			Exhibition exhibition = (Exhibition)exhibitionIter.next();
+                			String url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" + exhibition.getImageAddress();
+               	 			if(i % 3 == 0){
                 %>
                     <tr>
                     <% } %>
                         <td>
                             <div class="exhib_card">
-                                <img src="../resources/img/shiba.jpg" class="card_image" alt="...">
+                                <img src="<%=url %>" class="card_image" alt="exhibitionImage">
                                 <div class="card_body">
                                     <h2 class="card_title"><%=exhibition.getTitle() %></h2>
                                     <p class="card_text"><%=exhibition.getDescription() %></p>
@@ -177,39 +241,51 @@
                         </td>
                     <% if(i % 3 == 2){ %>
                     </tr>
-                    <% }} %>
+                    <% }}} %>
                 </table>
             </div>
             <!-- 전시 작품 관리 -->
             <div id="exhib_manage" class="content">
                 <table style="margin-top:20px;">
                 <%
-          	      	Iterator<Integer> keys = artworkMap.keySet().iterator();
-         			while( keys.hasNext() ){
-                    	int key = keys.next();
-                    	Iterator<Artwork> artworkIter = artworkMap.get(key).iterator();
-                    	for(int i = 0; artworkIter.hasNext(); i++){
-                    		Artwork artwork = (Artwork)artworkIter.next();
+                	if(artworkMap.size() == 0){
+                %>
+                	<tr>
+                		<th id="profile_title" colspan="2" style="padding-top:60px;"> 전시한 작품이 없습니다. </th>
+                	</tr>
+                <%
+                	}
+                	else{
+          	      		Iterator<Integer> keys = artworkMap.keySet().iterator();
+         				while( keys.hasNext() ){
+                    		int key = keys.next();
+                    		Iterator<Artwork> artworkIter = artworkMap.get(key).iterator();
+                    		for(int i = 0; artworkIter.hasNext(); i++){
+                    			Artwork artwork = (Artwork)artworkIter.next();
+                    			String url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" + artwork.getArtworkAddress();
                 %>
                     <tr>
                         <td>
-                            <img src="../resources/img/korea.jpg" class="manage_image" alt="...">
+                            <img src="<%=url %>"  class="manage_image" alt="artworkImage">
                         </td>
                         <td class="manage_box">
-                            <div style="margin-bottom:10px;">
-                                <h3 class="manage_exhib" style="display: inline">전시회 이름</h3>
-                                <p class="manage_artwork" style="display: inline"><%=artwork.getTitle() %></p>
+                            <div style="margin-top:20px;">
+                                <h3 class="manage_artwork" style="display: inline"><%=artwork.getTitle() %></h3>
+                                <p class="manage_exhibition" style="display: inline; margin-left: 10px;"><%=exhibitionList.get(key).getTitle() %></p>
                             </div>
-                            <div>
+                            <div class="manage_countBox">
+                            	<img src="<c:url value='/resources/icon/view_white.png' />" style="display: inline" alt="viewIcon" height="30px" width="30px" />
                                 <p class="manage_views" style="display: inline"><%=artwork.getViewCount() %></p>
+                                <img src="<c:url value='/resources/icon/likes_white.png' />" style="display: inline; margin-left:20px;" alt="likesIcon" height="30px" width="30px" />
                                 <p class="manage_likes" style="display: inline"><%=artwork.getLikesCount() %></p>
                             </div>
                         </td>
                         <td>
-                            <button class="manage_delete">삭제</button>
+                            <button onclick="location.href='<c:url value='/WebVR/myPage/artworkDelete'/>?artworkId=<%=artwork.getArtworkId() %>'"
+                            class="manage_delete">삭제</button>
                         </td>
                     </tr>
-                 <% }} %>
+                 <% }}} %>
                 </table>
             </div>
             <!-- 회원 탈퇴 -->
@@ -223,11 +299,19 @@
                     </tr>
                     <tr>
                        	<th class="editForm_title">비밀번호 | </th>
-                      	<td><input type="password" id="edit_pwd" name="edit_pwd" class="edit_input"></td>
+                      	<td><input type="password" id="edit_pwd" name="confirm_pwd" class="edit_input"></td>
                  	</tr>
             	</table>
-               	<button type="submit" id="delete_confirm">탈퇴</button>
+               	<button type="submit" id="delete_confirm" style="margin-left: 0px; margin-top:20px;">탈퇴</button>
            	</form>
+           	<%-- <%
+           		if(request.getAttribute("deleteFailed").equals("true")){
+           	%>
+        		<script>alert("비밀번호 불일치.");</script>
+        	<%
+        		request.setAttribute("deleteFailed", "false");
+           		}
+           	%> --%>
             </div>
         </div>
         <script>

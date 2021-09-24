@@ -1,9 +1,17 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body{
 	background:  black;
 	color:  white;
 	min-width:1000px;
+	font-family: 'NEXON Lv1 Gothic OTF';
 }
 div#entire{
 	margin: 15px 150px;
@@ -25,6 +33,7 @@ div.content{
 	overflow: auto;
 }
 h1#title{
+	cursor: pointer;
 	white-space: nowrap;
 	margin: 10px 0px;
 	padding-top: 40px;
@@ -68,7 +77,7 @@ h3#warning:hover{
  }
 /* 마이 프로필 */
 th#profile_title{
-	padding-top: 30px;
+	padding-top: 50px;
 	padding-bottom: 40px;
 	font-size: 50px;
 	text-align:  left;
@@ -108,6 +117,7 @@ button#edit_confirm{
 	color: black;
 	border: #000000 solid 1px;
 	border-radius: 6px;
+	font-family: 'NEXON Lv1 Gothic OTF';
 }
 button#edit_confirm:hover{
 	background-color: #333333;
@@ -147,6 +157,7 @@ button.card_button{
 	color: black;
 	border: #000000 solid 1px;
 	border-radius: 6px;
+	font-family: 'NEXON Lv1 Gothic OTF';
 }
 button.card_button:hover{
 	background-color: #333333;
@@ -165,7 +176,6 @@ td.like_td{
 	text-align: center;
 }
 img.like_image{
-	cursor: pointer;
 	width: 160px;
 	height: 160px;
 }
@@ -189,6 +199,7 @@ button.reply_delete, button.manage_delete{
 	color: white;
 	border: #000000 solid 1px;
 	border-radius: 6px;
+	font-family: 'NEXON Lv1 Gothic OTF';
 }
 button.reply_delete:hover, button.manage_delete:hover{
 	background-color: white;
@@ -206,7 +217,11 @@ td.manage_box{
 	height: 100px;
 	border-bottom: 1px solid white;
 }
-button.manage_edit{
+div.manage_countBox{
+	  display: flex;
+      align-items: center;
+}
+/* button.manage_edit{
 	cursor: pointer;
 	margin-left: 10px;
 	width: 50px;
@@ -220,12 +235,13 @@ button.manage_edit:hover{
 	background-color: #333333;
 	color: white;
 	border: #FFFFFF solid 1px;
-}
+} */
 button.manage_delete{
 	margin-left: 10px;
+	font-family: 'NEXON Lv1 Gothic OTF';
 }
-p.manage_likes{
-	margin-left: 20px;
+p.manage_likes, p.manage_views{
+	margin-left: 5px;
 }
 /* 회원 탈퇴 */
 button#delete_confirm{
@@ -237,6 +253,7 @@ button#delete_confirm{
 	color: white;
 	border: #000000 solid 1px;
 	border-radius: 6px;
+	font-family: 'NEXON Lv1 Gothic OTF';
 }
 button#delete_confirm:hover{
 	background-color: white;

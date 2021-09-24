@@ -23,14 +23,13 @@ public class DeleteGuestBookController implements Controller {
 	            return "redirect:/WebVR/login/form";		// login form 요청으로 redirect
 	        }
 			HttpSession session = request.getSession();
+			String userId = UserSessionUtils.getLoginUserId(session);
 		
-			int gbID = Integer.parseInt(request.getParameter("gbID"));// 파라미터로 게스트북 아이디
-			
-		
+			int gbID = Integer.parseInt(request.getParameter("guestBookId"));// 파라미터로 게스트북 아이디
 			guestBookDAO.remove(gbID);//삭제 
 		
 		
-		return "/WebVR/myPage.jsp";//마이페이지에서 해야할듯
+			return "redirect:/WebVR/myPage?userId=" + userId;
 	}
 
 }

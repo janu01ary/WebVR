@@ -19,7 +19,7 @@
         <!-- 로그인 되어 있으면 -->
         <c:if test="${!empty userId}">
 	        <a href="<c:url value='/WebVR/logout' />" type="button" class="btn btn-outline-light">LOGOUT</a>
-	        <a href=""><img class="icon" src="<c:url value='/resources/icon/mypage_circle.png' />" alt="My Page"></a>
+	        <a href="<c:url value='/WebVR/myPage' />?userId=${userId}"><img class="icon" src="<c:url value='/resources/icon/mypage_circle.png' />" alt="My Page"></a>
         </c:if>
     </div>
     
