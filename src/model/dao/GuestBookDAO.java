@@ -19,7 +19,7 @@ public class GuestBookDAO {
 	}
 	
 	public int create(GuestBook gtb) throws SQLException {//货肺款 规疙废 累己
-		String sql = "INSERT INTO guest_book VALUES (?, ?, ?, ?)";		
+		String sql = "INSERT INTO guest_book (content, date, user_id, exhibition_id) VALUES (?, ?, ?, ?)";		
 		Object[] param = new Object[] {gtb.getContent(), 
 						gtb.getDate(), gtb.getUserID(), gtb.getExhbId()
 						//(user.getCommId()!=0) ? user.getCommId() : null 
