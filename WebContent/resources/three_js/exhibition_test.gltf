@@ -7,7 +7,8 @@
     {
       "name": "Scene",
       "nodes": [
-        8
+        8,
+        9
       ]
     }
   ],
@@ -200,6 +201,26 @@
         5,
         6,
         7
+      ]
+    },
+    {
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        5,
+        31.87214047358264,
+        7.5,
+        1
       ]
     }
   ],
@@ -896,93 +917,74 @@
   "materials": [
     {
       "pbrMetallicRoughness": {
-        "baseColorFactor": [
-          1,
-          1,
-          1,
-          0.7
-        ],
-        "metallicFactor": 0,
-        "roughnessFactor": 0.9,
+        "metallicFactor": 0.5,
+        "roughnessFactor": 0.5,
         "baseColorTexture": {
           "index": 1
         }
-      },
-      "alphaMode": "BLEND",
-      "extensions": {
-        "KHR_materials_unlit": {}
       }
     },
     {
       "pbrMetallicRoughness": {
-        "metallicFactor": 0,
-        "roughnessFactor": 0.9,
+        "metallicFactor": 0.5,
+        "roughnessFactor": 0.5,
         "baseColorTexture": {
           "index": 0
         }
-      },
-      "extensions": {
-        "KHR_materials_unlit": {}
       }
     },
     {
       "pbrMetallicRoughness": {
-        "metallicFactor": 0,
-        "roughnessFactor": 0.9,
+        "metallicFactor": 0.5,
+        "roughnessFactor": 0.5,
         "baseColorTexture": {
           "index": 0
         }
-      },
-      "extensions": {
-        "KHR_materials_unlit": {}
       }
     },
     {
       "pbrMetallicRoughness": {
-        "metallicFactor": 0,
-        "roughnessFactor": 0.9,
+        "metallicFactor": 0.5,
+        "roughnessFactor": 0.5,
         "baseColorTexture": {
           "index": 0
         }
-      },
-      "extensions": {
-        "KHR_materials_unlit": {}
       }
     },
     {
       "pbrMetallicRoughness": {
-       "metallicFactor": 0,
-        "roughnessFactor": 0.9,
+        "metallicFactor": 0.5,
+        "roughnessFactor": 0.5,
         "baseColorTexture": {
           "index": 0
         }
-      },
-      "extensions": {
-        "KHR_materials_unlit": {}
       }
     },
     {
       "pbrMetallicRoughness": {
-        "metallicFactor": 0,
-        "roughnessFactor": 0.9,
+        "metallicFactor": 0.7,
+        "roughnessFactor": 0.5,
         "baseColorTexture": {
           "index": 0
         }
-      },
-      "extensions": {
-        "KHR_materials_unlit": {}
       }
     },
     {
       "pbrMetallicRoughness": {
-        "metallicFactor": 0,
-        "roughnessFactor": 0.9,
+        "metallicFactor": 0.7,
+        "roughnessFactor": 0.5,
         "baseColorTexture": {
           "index": 0
         }
-      },
-       "extensions": {
-        "KHR_materials_unlit": {}
+      }
+    },
+    {
+      "pbrMetallicRoughness": {
+        "metallicFactor": 0.5,
+        "roughnessFactor": 0.5,
+        "baseColorTexture": {
+          "index": 0
+        }
       }
     },
     {
@@ -995,92 +997,6 @@
         0.5294117647058824,
         0.5294117647058824
       ]
-    }
-  ],
-  "textures": [
-    {
-      "sampler": 0,
-      "source": 0
-    },
-    {
-      "sampler": 1,
-      "source": 1
-    },
-    {
-      "sampler": 2,
-      "source": 2
-    },
-    {
-      "sampler": 3,
-      "source": 3
-    },
-    {
-      "sampler": 4,
-      "source": 4
-    },
-    {
-      "sampler": 5,
-      "source": 5
-    },
-    {
-      "sampler": 6,
-      "source": 6
-    },
-    {
-      "sampler": 7,
-      "source": 7
-    },
-     {
-      "sampler": 8,
-      "source": 8
-    }
-  ],
-  "samplers": [
-    {
-      "magFilter": 9729,
-      "minFilter": 9987,
-      "wrapS": 33071,
-      "wrapT": 33071
-    },
-    {
-      "magFilter": 9729,
-      "minFilter": 9987,
-      "wrapS": 33071,
-      "wrapT": 33071
-    },
-    {
-      "magFilter": 9729,
-      "minFilter": 9987,
-      "wrapS": 33071,
-      "wrapT": 33071
-    },
-    {
-      "magFilter": 9729,
-      "minFilter": 9987,
-      "wrapS": 33071,
-      "wrapT": 33071
-    },
-    {
-      "magFilter": 9729,
-      "minFilter": 9987,
-      "wrapS": 33071,
-      "wrapT": 33071
-    },
-    {
-      "magFilter": 9729,
-      "minFilter": 9987,
-      "wrapS": 33071,
-      "wrapT": 33071
-    }
-  ], 
-  "images": [
-    {
-      "mimeType": "image/jpg",     
-      "uri": "../img/wallbk.jpg"
-    },
-    {
-      "mimeType": "image/jpg",
-      "uri": "../img/floor.jpg"
     }
   ],
   "meshes": [
@@ -1197,7 +1113,100 @@
       ]
     }
   ],
+  "textures": [
+     {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 1,
+      "source": 1
+    },
+    {
+      "sampler": 2,
+      "source": 2
+    },
+    {
+      "sampler": 3,
+      "source": 3
+    },
+    {
+      "sampler": 4,
+      "source": 4
+    },
+    {
+      "sampler": 5,
+      "source": 5
+    },
+    {
+      "sampler": 6,
+      "source": 6
+    },
+    {
+      "sampler": 7,
+      "source": 7
+    },
+     {
+      "sampler": 8,
+      "source": 8
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    },
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 33071,
+      "wrapT": 33071
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/jpeg",
+      "uri": "../img/wallGR.jpg"
+      },
+    {
+      "mimeType": "image/jpg",
+      "uri": "../img/floor.jpg"
+    }
+  ],
+  
   "extensionsUsed": [
-    "KHR_materials_unlit"
+    "KHR_lights_punctual"
   ]
 }

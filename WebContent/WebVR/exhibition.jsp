@@ -222,7 +222,7 @@ body {
 				const loader2 = new GLTFLoader();
        		    loader2.load(
                 	// resource URL
-                	'<c:url value='/resources/three_js/exhibition01.gltf' />',
+                	'<c:url value='/resources/three_js/exhibition_test.gltf' />',
 
                 	// called when the resource is loaded
                 	function ( gltf ) {
