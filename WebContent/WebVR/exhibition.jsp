@@ -11,14 +11,16 @@
 <!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
 <style>
 @font-face {
-    font-family: 'NEXON Lv1 Gothic OTF';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'NEXON Lv1 Gothic OTF';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
-		
+
 body {
-   	font-family: 'NEXON Lv1 Gothic OTF';
+	font-family: 'NEXON Lv1 Gothic OTF';
 }
 
 #blocker {
@@ -498,6 +500,18 @@ console.log("event: ", e);
 			}
 		</script>
 	<div id="blocker">
+	<tr width = 100%>
+		<td width = 70%>
+				<audio autoplay controls>
+				<source src="../resources/audio/bensound-ukulele.mp3"
+					type="audio/mpeg" />
+				Your browser does not support the audio tag.
+				</audio>
+			</td>
+			<td width = 30%>
+				<button type="button" class="btn btn-default">방명록</button>
+			</td>
+</tr>
 		<div id="instructions">
 			<p style="font-size: 36px">Click to play</p>
 			<p>

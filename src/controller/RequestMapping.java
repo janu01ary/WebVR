@@ -6,6 +6,7 @@ import java.util.Map;
 import controller.WebVR.CreateCommentController;
 import controller.WebVR.CreateGuestBookController;
 import controller.WebVR.DeleteCommentController;
+import controller.WebVR.DeleteGuestBookController;
 import controller.WebVR.GridViewController;
 import controller.WebVR.ListExhibitionController;
 import controller.WebVR.ShareArtworkController;
@@ -56,6 +57,8 @@ public class RequestMapping {
         
         //guestbook
         mappings.put("/WebVR/exhb/guestbook", new ViewGuestBookController());
+        mappings.put("/WebVR/exhb/guestbook/create", new CreateGuestBookController());
+        mappings.put("/WebVR/exhb/guestbook/delete", new DeleteGuestBookController());
         
         //gridview
         mappings.put("/WebVR/exhb/List", new GridViewController());
