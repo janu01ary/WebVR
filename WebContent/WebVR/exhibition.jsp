@@ -199,11 +199,9 @@ body {
 					if (instructions.style.display == 'none') {
 						event.preventDefault();
 						if ( SELECTED ){
-console.log("SELECTED : ", SELECTED);
-console.log("event: ", e);
-							window.open("<c:url value='/WebVR/exhb/artwork'>
-	                        		   			<c:param name='artworkId' value='7' />
-	                        		   		 </c:url> "); //Ã«ÂÂÃ¬Â¤ÂÃ¬ÂÂ Ã¬ÂÂÃ­ÂÂÃ­ÂÂÃ«Â©Â´Ã¬ÂÂ¼Ã«Â¡Â Ã¬ÂÂ´Ã«ÂÂÃ­ÂÂÃªÂ²Â~
+							console.log("SELECTED : ", SELECTED);
+							console.log("event: ", e);
+							window.open("<c:url value='/WebVR/exhb/artwork?artworkId=' />" + SELECTED.uuid); //Ã«ÂÂÃ¬Â¤ÂÃ¬ÂÂ Ã¬ÂÂÃ­ÂÂÃ­ÂÂÃ«Â©Â´Ã¬ÂÂ¼Ã«Â¡Â Ã¬ÂÂ´Ã«ÂÂÃ­ÂÂÃªÂ²Â~
 							controls.unlock();
 						}
 					} 
