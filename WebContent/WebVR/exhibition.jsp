@@ -90,6 +90,11 @@ body {
 			const vertex = new THREE.Vector3();
 			const color = new THREE.Color();
 
+			// mouse hober 시 사용
+			let boxEdge;
+			let boxWireframe;
+			let tempObject;
+
 			const s3_url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/${exhibitionId}/";
 
 			init();
@@ -444,10 +449,49 @@ body {
 					controls.getObject().position.y += ( velocity.y * delta ); // new behavior
 
 					if ( controls.getObject().position.y < 30 ) {
-
 						velocity.y = 0;
 						controls.getObject().position.y = 30;
+					}
 
+					// 벽이나 바닥 너머로 못 가게 함
+					if ( controls.getObject().position.y < 30 ) {
+						velocity.y = 0;
+						controls.getObject().position.y = 30;
+					}
+					if ( controls.getObject().position.x < -92) {
+						controls.getObject().position.x = -92;
+					}
+					if ( controls.getObject().position.x > 92 ) {
+						controls.getObject().position.x = 92;
+					}
+					if ( controls.getObject().position.z < -92) {
+						controls.getObject().position.z = -92;
+					}
+					if ( controls.getObject().position.z > 92 ) {
+						controls.getObject().position.z = 92;
+					}
+					if ( controls.getObject().position.z < -92) {
+						controls.getObject().position.z = -92;
+					}
+					if ( controls.getObject().position.z > 92 ) {
+						controls.getObject().position.z = 92;
+					}
+					// 가벽 뚫고 못 가게 하기
+					if ( controls.getObject().position.z < 36 && controls.getObject().position.z > 17 && controls.getObject().position.x > 12 ) {
+						let dist1 = Math.abs(36 - controls.getObject().position.z);
+						let dist2 = Math.abs(17 - controls.getObject().position.z)
+						if(dist1 < dist2)
+							controls.getObject().position.z = 36;
+						else if(dist1 > dist2)
+							controls.getObject().position.z = 17;
+					} 
+					if ( controls.getObject().position.z < -17 && controls.getObject().position.z > -36 && controls.getObject().position.x < -12 ) {
+						let dist1 = Math.abs(-17 - controls.getObject().position.z);
+						let dist2 = Math.abs(-36 - controls.getObject().position.z)
+						if(dist1 < dist2)
+							controls.getObject().position.z = -17;
+						else if(dist1 > dist2)
+							controls.getObject().position.z = -36;
 					}
 
 				}
@@ -476,6 +520,20 @@ body {
 				// intersects.forEach(obj=>obj.object.material.color.set(0x00ff00));
 
 				if ( intersects.length > 0 ) {
+					// 마우스 hover 시 큐브 따라 윤곽선 뜨게 하기
+					if(intersects[0].object.getObjectByName("boxWireframe") == null){
+						tempObject = intersects[0].object;
+						boxEdge = new THREE.EdgesGeometry(intersects[0].object.geometry);
+						
+						if(intersects[0].object.rotation.y != 0)
+							boxEdge.rotateY(Math.PI / 2);
+						boxEdge.translate(intersects[0].object.position.x, intersects[0].object.position.y, intersects[0].object.position.z);
+	
+						boxWireframe = new THREE.LineSegments( boxEdge, new THREE.LineBasicMaterial({ color : 0xffee00, linewidth : 10 }));
+						boxWireframe.renderOrder = 1;
+						tempObject.attach( boxWireframe );
+					}
+
 					if ( SELECTED != intersects[ 0 ].object ) {
 						// if ( SELECTED ) SELECTED.material.emissive.setHex( SELECTED.currentHex );
 						SELECTED = intersects[ 0 ].object;
@@ -485,6 +543,9 @@ body {
 						blocker.style.cursor = 'pointer';
 					}
 				} else {
+					if(tempObject != null){
+						tempObject.clear();
+					}
 					if ( SELECTED ) {
 						// SELECTED.material.emissive.setHex( SELECTED.currentHex );
 						SELECTED = null;

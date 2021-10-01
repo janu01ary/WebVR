@@ -83,7 +83,7 @@ public class LikesDAO {
 	
 	// 주어진 userId에 해당하는 likes List를 데이터베이스에서 찾아 도메인 클래스에 저장하여 반환
 		public List<Likes> findLikesListByUserId(int userId) throws SQLException {
-			String sql = "SELECT l.id, l.user_id, l.artwork_id, a.artwork_address "
+			String sql = "SELECT l.id, l.user_id, l.artwork_id, a.artwork_address, a.exhibition_id "
 	    			+ "FROM likes l "
 					+ "INNER JOIN artwork a "
 	    			+ "ON l.artwork_id = a.id "
@@ -98,7 +98,8 @@ public class LikesDAO {
 							rs.getInt("l.id"),
 							rs.getInt("l.user_id"),
 							rs.getInt("l.artwork_id"),
-							rs.getString("a.artwork_address")
+							rs.getString("a.artwork_address"),
+							rs.getInt("a.exhibition_id")
 							);
 					likesList.add(like);
 				}		
