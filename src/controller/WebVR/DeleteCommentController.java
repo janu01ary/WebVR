@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import controller.WebVR.user.UserSessionUtils;
+import model.Comment;
 import model.dao.CommentDAO;
 
 public class DeleteCommentController implements Controller {
@@ -25,8 +26,11 @@ public class DeleteCommentController implements Controller {
 		int userId = Integer.parseInt(UserSessionUtils.getLoginUserId(session));
 		
 		int commentId = Integer.parseInt(request.getParameter("commentId"));
+		Comment comment = commentDAO.findCommentById(commentId);
 		
-		if(userId == commentId) {
+		if (comment == null ) {
+			return "redirect:/WebVR/home";
+		} else if (userId == comment.getUserID()) {
 			commentDAO.delete(commentId);
 		} else {
 			return "redirect:/WebVR/login/form";
