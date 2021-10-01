@@ -8,6 +8,10 @@
 <title>artwork list</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/listPage.css' />">
+
+<!-- favicon -->
+<link rel="shortcut icon" href="<c:url value='/resources/icon/palette_black.png' />">
+
 <style type="text/css">
 	@font-face {
 	    font-family: 'NEXON Lv1 Gothic OTF';

@@ -14,6 +14,9 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
 	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
 	crossorigin="anonymous">
+	
+<!-- favicon -->
+<link rel="shortcut icon" href="<c:url value='/resources/icon/palette_black.png' />">
 
 <style type="text/css">
 .bgdiv{

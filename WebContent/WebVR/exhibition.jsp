@@ -8,6 +8,10 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	
+<!-- favicon -->
+<link rel="shortcut icon" href="<c:url value='/resources/icon/palette_black.png' />">
+
 <style>
 @font-face {
 	font-family: 'NEXON Lv1 Gothic OTF';
