@@ -105,7 +105,8 @@
               			Iterator<Visit> visitIter = visitList.iterator();
                 		for(int i = 0; visitIter.hasNext(); i++){
                 			Visit visit = (Visit)visitIter.next();
-                			String url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" + visit.getExhibitionImage();
+                			
+                			String url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/" + visit.getExhibitionId() + "/" + visit.getExhibitionImage();
                 			if(i % 3 == 0){
                 %>
                     <tr>
@@ -140,7 +141,8 @@
                 		Iterator<Likes> likesIter = likesList.iterator();
                 		for(int i = 0; likesIter.hasNext(); i++){
                 			Likes likes = (Likes)likesIter.next();
-                			String url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" + likes.getArtworkAddress();
+                			
+                			String url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/" + likes.getExhibitionId() + "/" + likes.getArtworkAddress();
                 			if(i % 4 == 0){
                 %>
                     <tr>
@@ -224,7 +226,7 @@
                 		Iterator<Exhibition> exhibitionIter = exhibitionList.iterator();
                 		for(int i = 0; exhibitionIter.hasNext(); i++){
                 			Exhibition exhibition = (Exhibition)exhibitionIter.next();
-                			String url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" + exhibition.getImageAddress();
+                			String url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/" + exhibition.getId() + "/" + exhibition.getImageAddress();
                	 			if(i % 3 == 0){
                 %>
                     <tr>
@@ -262,7 +264,7 @@
                     		Iterator<Artwork> artworkIter = artworkMap.get(key).iterator();
                     		for(int i = 0; artworkIter.hasNext(); i++){
                     			Artwork artwork = (Artwork)artworkIter.next();
-                    			String url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" + artwork.getArtworkAddress();
+                    			String url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/" + artwork.getExhibitionId() + "/" + artwork.getArtworkAddress();
                 %>
                     <tr>
                         <td>
