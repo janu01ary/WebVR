@@ -118,7 +118,7 @@
                                     <h2 class="card_title"><%=visit.getExhibitionTitle() %></h2>
                                     <p class="card_text"><%=visit.getExhibitionDesc() %></p>
                                 </div>
-                                <div class="card_button_box"><button class="card_button">자세히</button></div>
+                                
                             </div>
                         </td>
                     <% if(i % 3 == 2){ %>
@@ -238,7 +238,7 @@
                                     <h2 class="card_title"><%=exhibition.getTitle() %></h2>
                                     <p class="card_text"><%=exhibition.getDescription() %></p>
                                 </div>
-                                <div class="card_button_box"><button class="card_button">자세히</button></div>
+                                
                             </div>
                         </td>
                     <% if(i % 3 == 2){ %>
