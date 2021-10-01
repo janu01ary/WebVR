@@ -20,6 +20,9 @@
         <meta charset="UTF-8">
         <title>my_page</title>
         <link rel="stylesheet" href="../resources/css/myPage.css" type="text/css">
+        
+		<!-- favicon -->
+		<link rel="shortcut icon" href="<c:url value='/resources/icon/palette_black.png' />">
     </head>
     <body>
         <!-- 사이트 이름이나 로고 나중에 추가 -->

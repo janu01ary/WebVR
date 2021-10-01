@@ -17,8 +17,11 @@
     <!-- Google font -->
 	<link rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons">
+          
+	<!-- favicon -->
+	<link rel="shortcut icon" href="<c:url value='/resources/icon/palette_black.png' />">
 
-    <title>댓글화면</title>
+    <title>Untact Gallery</title>
 
    <style type="text/css">
 	   @font-face {

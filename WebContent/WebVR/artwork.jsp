@@ -10,6 +10,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/workPage.css' />">
+
+<!-- favicon -->
+<link rel="shortcut icon" href="<c:url value='/resources/icon/palette_black.png' />">
+
 <style type="text/css">
 	@font-face {
     font-family: 'NEXON Lv1 Gothic OTF';
