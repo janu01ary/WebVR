@@ -16,8 +16,9 @@
     </script>
     
     <script>
-    	const s3_bucket_link = 'https://webvrbucket.s3.ap-northeast-2.amazonaws.com/';
+	    const s3_bucket_link = 'https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/';
 	    const artworkId = '${artwork.artworkId}';
+	    const exhibitionId = '${artwork.exhibitionId}';
 	    const title = '${artwork.title}';
 	    const artworkAddress = '${artwork.artworkAddress}';
 	    const description = '${artwork.description}';
@@ -25,14 +26,14 @@
 	    const likesCount = parseInt('${artwork.likesCount}');
 	    const url = 'http://localhost:8080/WebVR/WebVR/exhb/List/artwork?artworkId='; // 추후 수정 필요(현재는 로컬에서만 돌아감)
 	    const shareURL = url + artworkId;
-	
+		
 	    function setShare() {
 	        Kakao.Link.sendDefault({
 	        objectType: 'feed',
 	        content: {
         	  title: title,
 	          description: description,
-	          imageUrl: s3_bucket_link + artworkAddress,
+	          imageUrl: s3_bucket_link + exhibitionId + '/' + artworkAddress ,
 	          link: {
 	            mobileWebUrl: shareURL,
 	            webUrl: shareURL
@@ -81,8 +82,8 @@
 
     <div class="artwork">
         <div class="artwork-img-block">   
-            <c:set var="s3_bucket_link" value="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" />
-			<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.artworkAddress}"/>"  class="artwork-img">
+            <c:set var="s3_bucket_link" value="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/" />
+			<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.exhibitionId}"/>/<c:out value="${artwork.artworkAddress}"/>"  class="artwork-img">
         </div>
         <div class="about-artwork">
             <span class="artwork-title"><c:out value="${artwork.title}"/></span>

@@ -52,8 +52,8 @@ function isLogin(){
 <body>
 	<div id="workPage" class="center-block" >
 		<br><br>
-		<c:set var="s3_bucket_link" value="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" />
-		<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.artworkAddress}"/>"  class="img-responsive">
+		<c:set var="s3_bucket_link" value="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/" />
+		<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.exhibitionId}"/>/<c:out value="${artwork.artworkAddress}"/>"  class="artwork-img">
 		
 	    <table width="100%" style="text-align:left;">
 			<tr>
