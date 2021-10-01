@@ -535,7 +535,7 @@ body {
 	<div id="blocker">
 		<tr>
 			<td width=70%><audio autoplay controls>
-					<source src="../resources/audio/bensound-ukulele.mp3"
+					<source src="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/bgm/bensound-pianomoment.mp3"
 						type="audio/mpeg" />
 					Your browser does not support the audio tag.
 				</audio></td>
