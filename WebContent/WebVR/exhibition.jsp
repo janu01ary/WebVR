@@ -41,6 +41,28 @@ body {
 	font-size: 14px;
 	cursor: pointer;
 }
+
+.btn {
+	display: block;
+	float:right;
+	width: 150px;
+	height: 50px;
+	line-height: 40px;
+	border: 1px white solid;
+	border-radius:5px;
+	margin: 5px auto;
+	 margin-right: 15px;
+	background-color: black;
+	text-align: center;
+	font-size: 17px;
+	cursor: pointer;
+	color: white;
+	transition: all 0.9s, color 0.2;
+}
+
+.btn:hover {
+	box-shadow:200px 0 0 0 rgba(255,255,255,0.5) inset;
+}
 </style>
 </head>
 <body>
@@ -511,18 +533,17 @@ body {
 			}
 		</script>
 	<div id="blocker">
-		<tr width=100%>
+		<tr>
 			<td width=70%><audio autoplay controls>
 					<source src="../resources/audio/bensound-ukulele.mp3"
 						type="audio/mpeg" />
 					Your browser does not support the audio tag.
 				</audio></td>
-			<td width=30%><a
+			<td><a
 				href="<c:url value='/WebVR/exhb/guestbook'>
                             <c:param name='exhibitionId' value='${exhibitionId}' />
-                        </c:url>"
-				button type="button" class="btn btn-default">방명록
-					</button>
+                        </c:url>">
+					<button type="button" class="btn">방명록</button>
 			</a></td>
 		</tr>
 		<div id="instructions">
