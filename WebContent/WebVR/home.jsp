@@ -34,14 +34,14 @@
         <div class="list-title">진행 중인 전시 목록</div>
         <div class="list">  
             <c:forEach var="exhb" items="${exhibitionList}" varStatus="status">
-	            <a href="<c:url value='/WebVR/exhb'>
-	            			<c:param name='exhibitionId' value='${exhb.id}' />
-	            		</c:url>" class="exhibition-link">
-	                <div class="exhibition"> 
-	                    <img src="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/<c:url value='${exhb.imageAddress}' />" class="exhibition-img"><br> <!-- 이미지 링크 수정 필요 -->
-	                    <h4 class="mt-4 mx-4">${exhb.title}</h4>
-	                </div>
-	            </a>
+            <a href="<c:url value='/WebVR/exhb'>
+            			<c:param name='exhibitionId' value='${exhb.id}' />
+            		</c:url>" class="exhibition-link">
+                <div class="exhibition"> 
+                    <img src="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/${exhb.id}/<c:url value='${exhb.imageAddress}' />" class="exhibition-img"><br> <!-- 이미지 링크 수정 필요 -->
+                    <h4 class="mt-4 mx-4">${exhb.title}</h4>
+                </div>
+            </a>
             </c:forEach>
         </div>
     </div>
