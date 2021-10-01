@@ -56,6 +56,34 @@ private JDBCUtil jdbcUtil = null;
 		return 0;
 	}
 	
+	//comment의 id를 가지고 comment를 가져옴
+	public Comment findCommentById(int commentId) throws SQLException {
+		String sql = "select content, date, user_id, artwork_id " 
+	      		   + "from comment "
+	      		   + "where id=?";
+			jdbcUtil.setSqlAndParameters(sql, new Object[] {commentId});	
+						
+			try {
+				ResultSet rs = jdbcUtil.executeQuery();			
+				Comment comment = null;
+				while (rs.next()) {
+					comment = new Comment(
+						commentId,
+						rs.getString("content"),
+						new java.util.Date(rs.getDate("date").getTime()),
+						rs.getInt("user_id"),
+						rs.getInt("artwork_id"));
+				}		
+				return comment;					
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			} finally {
+				jdbcUtil.close();
+			}
+			return null;
+	}
+	
 	// artwork id를 통해 해당 작품에 속한 최근 30개의 comment의 list 조회
 	public List<Comment> findCommentListByArtworkId(int artworkId) {
 		String sql = "select id, content, date, user_id " 
