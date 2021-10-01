@@ -18,9 +18,8 @@ public class GridViewController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		// 나중에 전체 ArtworkList가 아닌 해당하는 exhibition의 ArtworkList를 불러와야 함! 
-		// ArtworkDAOd의 findArtworkListByExhibitionId 사용하여 수정 필요
-		List<Artwork> artworkList = artworkDAO.findArtworkList();
+		int exhibitionId = Integer.parseInt(request.getParameter("exhibitionId"));
+		List<Artwork> artworkList = artworkDAO.findArtworkListByExhibitionId(exhibitionId);
 		request.setAttribute("artworkList", artworkList);
 		System.out.println(artworkList.size()); // 테스트용 출력문, 최종때 삭제 필요
 		
