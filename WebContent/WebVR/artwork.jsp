@@ -1,6 +1,7 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +54,7 @@ function isLogin(){
 	<div id="workPage" class="center-block" >
 		<br><br>
 		<c:set var="s3_bucket_link" value="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/" />
-		<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.exhibitionId}"/>/<c:out value="${artwork.artworkAddress}"/>"  class="artwork-img">
+		<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.exhibitionId}"/>/<c:out value="${artwork.artworkAddress}"/>"  class="artwork-img" width="100%">
 		
 	    <table width="100%" style="text-align:left;">
 			<tr>
@@ -109,7 +110,8 @@ function isLogin(){
 				<td colspan="7" >
 					<h3 style="display:inline"><c:out value="${artwork.title}"/>&nbsp;</h3> 
 					<h4 style="display:inline"><c:out value="${artwork.artistName}"/>&nbsp;</h4>
-					<h5 style="display:inline"><c:out value="${artwork.date}"/></h5>
+					<fmt:formatDate value="${artwork.date}" pattern="yyyy" var="date"/>
+                    <h5 style="display:inline"><c:out value="${date}"/></h5>
 				</td>
 			</tr>
 			<tr>
