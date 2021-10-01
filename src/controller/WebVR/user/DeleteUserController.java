@@ -48,7 +48,7 @@ public class DeleteUserController implements Controller {
 		User user = userDAO.findUser(userId);
 		if(user.matchPassword(request.getParameter("confirm_pwd"))) {
 			userDAO.remove(String.valueOf(userId));
-			return "redirect:/WebVR/home";
+			return "redirect:/WebVR/logout";
 		}
 		
 		/* 삭제가 불가능한 경우 
