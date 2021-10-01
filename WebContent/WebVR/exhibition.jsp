@@ -212,7 +212,7 @@ p {
 
 
 				// raycaster + 그림 클릭 이벤트
-				raycaster = new THREE.Raycaster();
+				raycaster = new THREE.Raycaster(new THREE.Vector3(), new THREE.Vector3(), 0, 100);
 
 				mouse = new THREE.Vector2();
 				mouse.x = mouse.y = -1;
@@ -477,6 +477,7 @@ p {
 						tempObject = intersects[0].object;
 						boxEdge = new THREE.EdgesGeometry(intersects[0].object.geometry);
 						
+						boxEdge.scale(intersects[0].object.scale.x * 1.1, intersects[0].object.scale.y * 1.1, intersects[0].object.scale.z * 1.1);
 						if(intersects[0].object.rotation.y != 0)
 							boxEdge.rotateY(Math.PI / 2);
 						boxEdge.translate(intersects[0].object.position.x, intersects[0].object.position.y, intersects[0].object.position.z);
@@ -534,7 +535,7 @@ p {
 			<p style="font-size: 36px">${exhibition.title}</p>
 			<p style="font-size: 24px">${exhibition.description}</p>
 			<p>
-				Move: WASD<br /> Look: MOUSE<br /><br /><br /><br />
+				Move : WASD<br /> Look : Click<br />Pause : Esc<br /><br /><br /><br />
 			</p>
 		</div>
 	</div>
