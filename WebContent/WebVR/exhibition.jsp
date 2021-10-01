@@ -223,7 +223,7 @@ p {
 						if ( SELECTED ){
 							console.log("SELECTED : ", SELECTED);
 							console.log("event: ", e);
-							window.open("<c:url value='/WebVR/exhb/artwork?artworkId=' />" + SELECTED.uuid);
+							window.open("<c:url value='/WebVR/exhb/List/artwork?artworkId=' />" + SELECTED.uuid);
 							controls.unlock();
 						}
 					} 
@@ -532,6 +532,12 @@ p {
                             <c:param name='exhibitionId' value='${exhibition.id}' />
                         </c:url>">
 					<button type="button" class="btn">방명록</button>
+			</a></td>
+			<td><a
+				href="<c:url value='/WebVR/exhb/List'>
+                            <c:param name='exhibitionId' value='${exhibition.id}' />
+                        </c:url>">
+					<button type="button" class="btn">작품 모아 보기</button>
 			</a></td>
 		</tr>
 		<div id="instructions">
