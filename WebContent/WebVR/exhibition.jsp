@@ -84,6 +84,7 @@ p {
 			let raycaster;
 			let cameraDirection = new THREE.Vector3();
 
+			// 카메라 이동 관련 변수들
 			let moveForward = false;
 			let moveBackward = false;
 			let moveLeft = false;
@@ -95,7 +96,7 @@ p {
 			const vertex = new THREE.Vector3();
 			const color = new THREE.Color();
 
-			// mouse hober 시 사용
+			// mouse ober 시 사용
 			let boxEdge;
 			let boxWireframe;
 			let tempObject;
@@ -106,7 +107,7 @@ p {
 			animate();
 
 			function init() {
-				//Ã¬Â¹Â´Ã«Â©ÂÃ«ÂÂ¼ + Ã¬ÂÂ¬ + ÃªÂ´ÂÃ¬ÂÂ Ã¬Â´ÂÃªÂ¸Â° Ã¬ÂÂ¤Ã¬Â Â
+				// scene, camera, light 등 선언하고 추가
 				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
 				camera.position.x = 90;
 				camera.position.y = 30;
@@ -121,18 +122,19 @@ p {
 				const light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 1 );
 				scene.add( light );
 
-				//PointerLockControls Ã¬Â´ÂÃªÂ¸Â°Ã­ÂÂ Ã¬ÂÂ¤Ã¬Â Â
+				// PointerLockControls 선언
 				controls = new PointerLockControls( camera, document.body );
 
+				// html요소 가져오기
 				const blocker = document.getElementById( 'blocker' );
 				const instructions = document.getElementById( 'instructions' );
 
-				//Ã¬Â²ÂÃ¬ÂÂ Ã¬ÂÂ¤Ã­ÂÂ + EscÃ«Â¡Â Ã¬ÂÂ¼Ã¬ÂÂÃ¬Â ÂÃ¬Â§Â + Ã«Â¸ÂÃ«ÂÂ¼Ã¬ÂÂ°Ã¬Â Â Ã«Â°ÂÃªÂ¹Â¥Ã¬ÂÂ¼Ã«Â¡Â Ã«Â²ÂÃ¬ÂÂ´Ã«ÂÂ¬Ã¬ÂÂ Ã«ÂÂ Ã«ÂÂÃ¬ÂÂ°Ã«ÂÂ Ã¬ÂÂÃ«ÂÂ´Ã«Â¬Â¸ Ã¬ÂÂ´Ã«Â²Â¤Ã­ÂÂ¸
+				// 처음 실행 + Esc로 일시정지 + 브라우저 바깥으로 벗어났을 때 띄우는 안내문 이벤트
 				instructions.addEventListener( 'click', function () {
 					controls.lock();
 				} );
 
-				//Ã¬ÂÂÃ«ÂÂ´Ã«Â¬Â¸ Ã­ÂÂ´Ã«Â¦Â­ Ã¬ÂÂ Ã¬ÂÂ¬Ã«ÂÂ¼Ã¬Â¡ÂÃ«ÂÂ¤ÃªÂ°Â, Ã¬ÂÂÃ«ÂÂÃ«Â©Â´ Ã«ÂÂ¤Ã¬ÂÂ Ã«ÂÂÃ­ÂÂÃ«ÂÂ¨
+				// 안내문 클릭 시 사라졌다가, 아니면 다시 나타남
 				controls.addEventListener( 'lock', function () {
 					instructions.style.display = 'none';
 					blocker.style.display = 'none';
@@ -145,7 +147,7 @@ p {
 
 				scene.add( controls.getObject() );
 
-				//Ã­ÂÂ¤(w, a, s, d, space bar, Ã­ÂÂÃ¬ÂÂ´Ã­ÂÂ)Ã«Â¥Â¼ Ã«ÂÂÃ«Â ÂÃ¬ÂÂ Ã«ÂÂÃ¬ÂÂ Ã¬ÂÂ´Ã«Â²Â¤Ã­ÂÂ¸
+				// 이동 이벤트
 				const onKeyDown = function ( event ) {
 
 					switch ( event.code ) {
@@ -178,8 +180,6 @@ p {
 					}
 
 				};
-
-				//Ã­ÂÂ¤Ã¬ÂÂÃ¬ÂÂ Ã«ÂÂÃ¬ÂÂ Ã«ÂÂÃ¬ÂÂ Ã¬ÂÂ´Ã«Â²Â¤Ã­ÂÂ¸
 				const onKeyUp = function ( event ) {
 
 					switch ( event.code ) {
@@ -212,12 +212,7 @@ p {
 				document.addEventListener( 'keyup', onKeyUp );
 
 
-				//******************************************************
-
-				//Ã«Â ÂÃ¬ÂÂ´Ã¬ÂºÂÃ¬ÂÂ¤Ã­ÂÂ° Ã¬ÂÂ´Ã«Â²Â¤Ã­ÂÂ¸
-
-				//******************************************************
-
+				// raycaster + 그림 클릭 이벤트
 				raycaster = new THREE.Raycaster();
 
 				mouse = new THREE.Vector2();
@@ -236,7 +231,7 @@ p {
 					} 
 				}
 
-				//renderer Ã¬ÂÂ¤Ã¬Â ÂÃ¬ÂÂ´Ã«ÂÂ Ã¬ÂÂÃ«ÂÂÃ¬ÂÂ° Ã¬Â°Â½ Ã­ÂÂ¬ÃªÂ¸Â°Ã¬ÂÂ Ã«Â§ÂÃ¬Â¶ÂÃªÂ¸Â°
+				// renderer 관련 함수 + 윈도우 창 크기 조절 이벤트
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
@@ -247,25 +242,23 @@ p {
 
 				requestAnimationFrame(render);
 
-				//GLTF Ã«Â¡ÂÃ«ÂÂ
+				//GLTF (전시회장) 불러오기
 				const loader2 = new GLTFLoader();
        		    loader2.load(
-                	// resource URL
                 	'<c:url value='/resources/three_js/exhibition_test.gltf' />',
 
-                	// called when the resource is loaded
                 	function ( gltf ) {
                     	scene.add( gltf.scene );
-                    	gltf.animations; // Array<THREE.AnimationClip>
-                    	gltf.scene; // THREE.Group
-                    	gltf.scenes; // Array<THREE.Group>
-                    	gltf.cameras; // Array<THREE.Camera>
-                    	gltf.asset; // Object
+                    	gltf.animations; 
+                    	gltf.scene; 
+                    	gltf.scenes; 
+                    	gltf.cameras; 
+                    	gltf.asset; 
                 	}
             	);
 
 
-				//Ã¬ÂÂ´Ã«Â¯Â¸Ã¬Â§Â Ã­ÂÂÃ«Â¸Â
+				// 큐브에 작품 이미지 배치
 				const img_loader = new THREE.TextureLoader();
 
 				function Vector(x, y, z) {
@@ -274,8 +267,7 @@ p {
 					this.z = z;
 				}
 
-				//작품 이미지 큐브를 만들어 배치
-				//파라미터 id: artwork의 id / imgUrl: artwork의 이미지 url / size: artwork의 크기(Vector) / position: artwork의 위치 / rotation: artwork 회전 여부(T/F) 
+				// 파라미터 id: artwork의 id / imgUrl: artwork의 이미지 url / size: artwork의 크기(Vector) / position: artwork의 위치 / rotation: artwork 회전 여부(T/F) 
 				function makeImgCube(id, imgUrl, size, position, rotation) {
 					const geometry = new THREE.BoxGeometry(size.x, size.y, size.z);
 					img_loader.load(s3_url + imgUrl, (texture) => {
@@ -283,9 +275,9 @@ p {
 							map: texture,
 						});
 						const cube = new THREE.Mesh(geometry, material);
-						cube.position.x = position.x; //가로로 이동
-						cube.position.y = position.y; //세로로 이동(높이 조정)
-						cube.position.z = position.z; //고정
+						cube.position.x = position.x; // 가로로 이동
+						cube.position.y = position.y; // 세로로 이동(높이 조정)
+						cube.position.z = position.z; // 고정
 						cube.uuid = id;
 						if (rotation) {
                     		cube.rotation.y = Math.PI / 2;
@@ -294,7 +286,7 @@ p {
 					});
 				}
 
-				//작품의 위치 리스트
+				// 작품의 위치 리스트
 				const positionList = [
 					new Vector(57, 30, 28),
 					new Vector(-55, 30, 97),
@@ -310,7 +302,7 @@ p {
 					new Vector(-57, 30, -28),
 				];
 					
-				//작품들을 모두 장면에 배치
+				// 작품들을 모두 장면에 배치
 				<c:forEach var="artwork" items="${artworkList}" varStatus="status">
 					makeImgCube(
 						"${artwork.artworkId}", 
@@ -358,8 +350,9 @@ p {
 				light3.angle = 0.5;
 				scene.add(light3);
     			scene.add(light3.target);
-*/
-				//spotlight를 만들어 장면에 배치
+				*/
+
+				// spotlight를 만들어 장면에 배치
 				function makeSpotLight(start, target) {
 					const light = new THREE.SpotLight(0xffffff, 1);
 					light.target.position.set(target.x, target.y, target.z);
@@ -370,7 +363,7 @@ p {
     				scene.add(light.target);
 				}
 
-				//spotlight 12개를 만들어 배치
+				// spotlight 12개를 만들어 배치
 				makeSpotLight(new Vector(57, 95, 58), positionList[0]); //0
 				makeSpotLight(new Vector(-55, 95, 87), positionList[1]); //1
 				makeSpotLight(new Vector(0, 95, 87), positionList[2]); //2
@@ -512,17 +505,17 @@ p {
 					camera.updateProjectionMatrix();
 				}
 
-				//Ã¬ÂÂ¬ÃªÂ¸Â°
+				// raycaster가 카메라 방향을 바라보게 직진하도록 함
                 raycaster.setFromCamera( camera.getWorldDirection( cameraDirection ), camera );
 
-				//Ã«Â ÂÃ¬ÂÂ´Ã¬ÂºÂÃ¬ÂÂ¤Ã­ÂÂ° Ã«Â³Â´Ã¬ÂÂ´Ã«ÂÂ Ã¬Â½ÂÃ«ÂÂ (Ã­ÂÂÃ¬ÂÂ¸Ã¬ÂÂ©) 
+				// raycaster 확인용 arrow (사용할 떈 주석 풀기)
 				//scene.add(new THREE.ArrowHelper(raycaster.ray.direction, raycaster.ray.origin, 300, 0xff0000) );
 
 				let intersects = raycaster.intersectObjects(scene.children);
 				// intersects.forEach(obj=>obj.object.material.color.set(0x00ff00));
 
 				if ( intersects.length > 0 ) {
-					// 마우스 hover 시 큐브 따라 윤곽선 뜨게 하기
+					// 마우스 over 시 큐브 따라 윤곽선 뜨게 하기
 					if(intersects[0].object.getObjectByName("boxWireframe") == null){
 						tempObject = intersects[0].object;
 						boxEdge = new THREE.EdgesGeometry(intersects[0].object.geometry);
