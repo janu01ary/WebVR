@@ -127,7 +127,7 @@ button#edit_confirm:hover{
 /* 관람 내역 + 전시 목록 (카드) */
 div.watch_card, div.exhib_card{
 	width: 250px;
-	height: 405px;
+	height: 300px;
 	padding-bottom: 10px;
 	text-align: center;
 	border: #FFFFFF solid 1px;
