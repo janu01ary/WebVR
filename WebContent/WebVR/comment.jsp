@@ -72,7 +72,7 @@
 <body>
 <div class="card-group">
     <div class="card">
-        <img src="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/<c:out value="${artwork.artworkAddress}"/>" class="card-img-top" alt="sample">
+        <img src="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/${artwork.exhibitionId}/<c:out value="${artwork.artworkAddress}"/>" class="card-img-top" alt="sample">
         <div class="card-body text-white">
             <h5 class="card-title">${artwork.title}</h5>
             <p class="card-text">${artwork.description}</p>
@@ -86,23 +86,23 @@
         <div class="card-body overflow-auto">
             <div class="list-group">
 	            <c:forEach var="comment" items="${commentList}" varStatus="status">
-	            	<div class="list-group-item" aria-current="true">
-	                    <div class="d-flex w-100 justify-content-between">
-	                        <h5 class="mb-1">${userList[status.index].nickname}</h5>
-	                        <small class="mb-2">
-	                        	<fmt:formatDate value="${comment.date}" pattern="yyyy-MM-dd" var="date"/>
-	                        	${date}
-	                        	<c:if test="${userList[status.index].userID eq userID}"> <!-- 댓글 작성자와 현재 로그인된 사용자가 같으면 -->
-	                        		<a class="material-icons icon ml-1"
-	                        		   href="<c:url value='/WebVR/artwork/comment/delete'>
-	                        		   			<c:param name='commentId' value='${comment.cmtID}' />
-            									<c:param name='artworkId' value='${artwork.artworkId}'/>
-	                        		   		 </c:url>">delete</a>
-	                        	</c:if>
-	                        </small>
-	                    </div>
-	                    <p class="mb-1">${comment.content}</p>
-                	</div>
+            	<div class="list-group-item" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">${userList[status.index].nickname}</h5>
+                        <small class="mb-2">
+                        	<fmt:formatDate value="${comment.date}" pattern="yyyy-MM-dd" var="date"/>
+                        	${date}
+                        	<c:if test="${userList[status.index].userID eq userId}"> <!-- 댓글 작성자와 현재 로그인된 사용자가 같으면 -->
+                        		<a class="material-icons icon ml-1"
+                        		   href="<c:url value='/WebVR/artwork/comment/delete'>
+                        		   			<c:param name='commentId' value='${comment.cmtID}' />
+           									<c:param name='artworkId' value='${artwork.artworkId}'/>
+                        		   		 </c:url>">delete</a>
+                        	</c:if>
+                        </small>
+                    </div>
+                    <p class="mb-1">${comment.content}</p>
+               	</div>
 	            </c:forEach>
 	            <!-- 
                 <a class="list-group-item" aria-current="true">

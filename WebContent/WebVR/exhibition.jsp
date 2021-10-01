@@ -41,6 +41,28 @@ body {
 	font-size: 14px;
 	cursor: pointer;
 }
+
+.btn {
+	display: block;
+	float:right;
+	width: 150px;
+	height: 50px;
+	line-height: 40px;
+	border: 1px white solid;
+	border-radius:5px;
+	margin: 5px auto;
+	 margin-right: 15px;
+	background-color: black;
+	text-align: center;
+	font-size: 17px;
+	cursor: pointer;
+	color: white;
+	transition: all 0.9s, color 0.2;
+}
+
+.btn:hover {
+	box-shadow:200px 0 0 0 rgba(255,255,255,0.5) inset;
+}
 </style>
 </head>
 <body>
@@ -68,8 +90,6 @@ body {
 			const vertex = new THREE.Vector3();
 			const color = new THREE.Color();
 
-			let imgUrl = "../resources/img/7.png";
-			let artworkId = 7;
 			const s3_url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/${exhibitionId}/";
 
 			init();
@@ -88,8 +108,7 @@ body {
 				scene.background = new THREE.Color( 0xffffff );
 				scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
 
-				const light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
-				light.position.set( 0.5, 1, 0.75 );
+				const light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 1 );
 				scene.add( light );
 
 				//PointerLockControls Ã¬Â´ÂÃªÂ¸Â°Ã­ÂÂ Ã¬ÂÂ¤Ã¬Â Â
@@ -239,163 +258,131 @@ body {
 				//Ã¬ÂÂ´Ã«Â¯Â¸Ã¬Â§Â Ã­ÂÂÃ«Â¸Â
 				const img_loader = new THREE.TextureLoader();
 
-				const geometry0 = new THREE.BoxGeometry(40, 25, 1);
-				img_loader.load(s3_url + "${artworkList[0].artworkAddress}", (texture) => {
-					const material = new THREE.MeshLambertMaterial({
-					map: texture,
-					});
-					const cube = new THREE.Mesh(geometry0, material);
-					cube.position.x = 57; //가로로 이동
-					cube.position.y = 30; //세로로 이동(높이 조정)
-					cube.position.z = 28; //고정
-					cube.uuid = "${artworkList[0].artworkId}";
-					scene.add(cube);
-				});
-				const geometry1 = new THREE.BoxGeometry(30, 20, 1);
-				img_loader.load(s3_url + "${artworkList[1].artworkAddress}", (texture) => {
-					const material = new THREE.MeshLambertMaterial({
-					map: texture,
-					});
-					const cube = new THREE.Mesh(geometry1, material);
-					cube.position.x = -55; //가로로 이동
-					cube.position.y = 30; //세로로 이동(높이 조정)
-					cube.position.z = 97; //고정
-					cube.uuid = "${artworkList[1].artworkId}";
-					scene.add(cube);
-				});
-				const geometry2 = new THREE.BoxGeometry(32, 23, 1);
-				img_loader.load(s3_url + "${artworkList[2].artworkAddress}", (texture) => {
-					const material = new THREE.MeshLambertMaterial({
-					map: texture,
-					});
-					const cube = new THREE.Mesh(geometry2, material);
-					cube.position.x = 0; //가로로 이동
-					cube.position.y = 30; //세로로 이동(높이 조정)
-					cube.position.z = 97; //고정
-					cube.uuid = "${artworkList[2].artworkId}";
-					scene.add(cube);
-				});
-				const geometry3 = new THREE.BoxGeometry(58, 39, 1);
-				img_loader.load(s3_url + "${artworkList[3].artworkAddress}", (texture) => {
-					const material = new THREE.MeshLambertMaterial({
-					map: texture,
-					});
-					const cube = new THREE.Mesh(geometry3, material);
-					cube.position.x = -97; //고정
-					cube.position.y = 35; //세로로 이동(높이 조정)
-					cube.position.z = 40; //가로로 이동
-                    cube.rotation.y = Math.PI / 2;
-					cube.uuid = "${artworkList[3].artworkId}";
-					scene.add(cube);
-				});
-				const geometry4 = new THREE.BoxGeometry(34, 27, 1);
-				img_loader.load(s3_url + "${artworkList[4].artworkAddress}", (texture) => {
-					const material = new THREE.MeshLambertMaterial({
-					map: texture,
-					});
-					const cube = new THREE.Mesh(geometry4, material);
-					cube.position.x = -59; //가로로 이동
-					cube.position.y = 30; //세로로 이동(높이 조정)
-					cube.position.z = -22; //고정
-					cube.uuid = "${artworkList[4].artworkId}";
-					scene.add(cube);
-				});
-				const geometry5 = new THREE.BoxGeometry(36, 24, 1);
-				img_loader.load(s3_url + "${artworkList[5].artworkAddress}", (texture) => {
-					const material = new THREE.MeshLambertMaterial({
-					map: texture,
-					});
-					const cube = new THREE.Mesh(geometry5, material);
-					cube.position.x = 57; //가로로 이동
-					cube.position.y = 30; //세로로 이동(높이 조정)
-					cube.position.z = 22; //고정
-					cube.uuid = "${artworkList[5].artworkId}";
-					scene.add(cube);
-				});
-				const geometry6 = new THREE.BoxGeometry(60, 50, 1);
-				img_loader.load(s3_url + "${artworkList[6].artworkAddress}", (texture) => {
-					const material = new THREE.MeshLambertMaterial({
-					map: texture,
-					});
-					const cube = new THREE.Mesh(geometry6, material);
-					cube.position.x = 97; //고정
-					cube.position.y = 35; //세로로 이동(높이 조정)
-					cube.position.z = -40; //가로로 이동
-                    cube.rotation.y = Math.PI / 2;
-					cube.uuid = "${artworkList[6].artworkId}";
-					scene.add(cube);
-				});
-				const geometry7 = new THREE.BoxGeometry(30, 30, 1);
-				img_loader.load(s3_url + "${artworkList[7].artworkAddress}", (texture) => {
-					const material = new THREE.MeshLambertMaterial({
-					map: texture,
-					});
-					const cube = new THREE.Mesh(geometry7, material);
-					cube.position.x = 60; //가로로 이동
-					cube.position.y = 30; //세로로 이동(높이 조정)
-					cube.position.z = -97; //고정
-					cube.uuid = "${artworkList[7].artworkId}";
-					scene.add(cube);
-				});
-				const geometry8 = new THREE.BoxGeometry(32, 23, 1);
-				img_loader.load(s3_url + "${artworkList[8].artworkAddress}", (texture) => {
-					const material = new THREE.MeshLambertMaterial({
-					map: texture,
-					});
-					const cube = new THREE.Mesh(geometry8, material);
-					cube.position.x = 0; //가로로 이동
-					cube.position.y = 30; //세로로 이동(높이 조정)
-					cube.position.z = -97; //고정
-					cube.uuid = "${artworkList[8].artworkId}";
-					scene.add(cube);
-				});
-				const geometry9 = new THREE.BoxGeometry(30, 20, 1);
-				img_loader.load(s3_url + "${artworkList[9].artworkAddress}", (texture) => {
-					const material = new THREE.MeshLambertMaterial({
-					map: texture,
-					});
-					const cube = new THREE.Mesh(geometry9, material);
-					cube.position.x = -55; //가로로 이동
-					cube.position.y = 30; //세로로 이동(높이 조정)
-					cube.position.z = -97; //고정
-					cube.uuid = "${artworkList[9].artworkId}";
-					scene.add(cube);
-				});
-				const geometry10 = new THREE.BoxGeometry(30, 20, 1);
-				img_loader.load(s3_url + "${artworkList[10].artworkAddress}", (texture) => {
-					const material = new THREE.MeshLambertMaterial({
-					map: texture,
-					});
-					const cube = new THREE.Mesh(geometry10, material);
-					cube.position.x = -97; //고정
-					cube.position.y = 30; //세로로 이동(높이 조정)
-					cube.position.z = -62; //가로로 이동
-                    cube.rotation.y = Math.PI / 2;
-					cube.uuid = "${artworkList[10].artworkId}";
-					scene.add(cube);
-				});
-				const geometry11 = new THREE.BoxGeometry(40, 25, 1);
-				img_loader.load(s3_url + "${artworkList[11].artworkAddress}", (texture) => {
-					const material = new THREE.MeshLambertMaterial({
-					map: texture,
-					});
-					const cube = new THREE.Mesh(geometry11, material);
-					cube.position.x = -57; //가로로 이동
-					cube.position.y = 30; //세로로 이동(높이 조정)
-					cube.position.z = -28; //고정
-					cube.uuid = "${artworkList[11].artworkId}";
-					scene.add(cube);
-				});
+				function Vector(x, y, z) {
+					this.x = x;
+					this.y = y;
+					this.z = z;
+				}
 
+				//작품 이미지 큐브를 만들어 배치
+				//파라미터 id: artwork의 id / imgUrl: artwork의 이미지 url / size: artwork의 크기(Vector) / position: artwork의 위치 / rotation: artwork 회전 여부(T/F) 
+				function makeImgCube(id, imgUrl, size, position, rotation) {
+					const geometry = new THREE.BoxGeometry(size.x, size.y, size.z);
+					img_loader.load(s3_url + imgUrl, (texture) => {
+						const material = new THREE.MeshLambertMaterial({
+							map: texture,
+						});
+						const cube = new THREE.Mesh(geometry, material);
+						cube.position.x = position.x; //가로로 이동
+						cube.position.y = position.y; //세로로 이동(높이 조정)
+						cube.position.z = position.z; //고정
+						cube.uuid = id;
+						if (rotation) {
+                    		cube.rotation.y = Math.PI / 2;
+						}
+						scene.add(cube);
+					});
+				}
+
+				//작품의 위치 리스트
+				const positionList = [
+					new Vector(57, 30, 28),
+					new Vector(-55, 30, 97),
+					new Vector(0, 30, 97),
+					new Vector(-97, 35, 40),
+					new Vector(-59, 30, -22),
+					new Vector(57, 30, 22),
+					new Vector(97, 35, -40),
+					new Vector(60, 30, -97),
+					new Vector(0, 30, -97),
+					new Vector(-60, 30, -97),
+					new Vector(-97, 30, -62),
+					new Vector(-57, 30, -28),
+				];
+					
+				//작품들을 모두 장면에 배치
+				<c:forEach var="artwork" items="${artworkList}" varStatus="status">
+					makeImgCube(
+						"${artwork.artworkId}", 
+						"${artwork.artworkAddress}", 
+						//new Vector(40, 25, 1), 
+						//positionList[${status.index}], 
+						<c:choose>
+							<c:when test="${status.index eq 3 || status.index eq 6}"> 
+								<%--new Vector(${artwork.width} / 20, ${artwork.height} / 20, 1),--%>
+								new Vector(60, 45.25, 1),
+								positionList[${status.index}], 
+								true
+							</c:when>
+							<c:when test="${status.index eq 10}"> 
+								<%--new Vector(${artwork.width} / 30, ${artwork.height} / 30, 1),--%>
+								new Vector(40, 30, 1),
+								positionList[${status.index}], 
+								true
+							</c:when>
+							<c:otherwise>
+								<%--new Vector(${artwork.width} / 30, ${artwork.height} / 30, 1),--%>
+								new Vector(40, 30, 1),
+								positionList[${status.index}], 
+								false
+							</c:otherwise>
+						</c:choose>
+					);
+				</c:forEach>
+
+				/*
+				makeImgCube(${artworkList[0].artworkId}, "${artworkList[0].artworkAddress}", new Vector(40, 25, 1), new Vector(57, 30, 28), false);
+				makeImgCube(${artworkList[1].artworkId}, "${artworkList[1].artworkAddress}", new Vector(30, 20, 1), new Vector(-55, 30, 97), false);
+				makeImgCube(${artworkList[2].artworkId}, "${artworkList[2].artworkAddress}", new Vector(32, 23, 1), new Vector(0, 30, 97), false);
+				makeImgCube(${artworkList[3].artworkId}, "${artworkList[3].artworkAddress}", new Vector(58, 39, 1), new Vector(-97, 35, 40), true);
+				makeImgCube(${artworkList[4].artworkId}, "${artworkList[4].artworkAddress}", new Vector(34, 27, 1), new Vector(-59, 30, -22), false);
+				makeImgCube(${artworkList[5].artworkId}, "${artworkList[5].artworkAddress}", new Vector(36, 24, 1), new Vector(57, 30, 22), false);
+				makeImgCube(${artworkList[6].artworkId}, "${artworkList[6].artworkAddress}", new Vector(60, 50, 1), new Vector(97, 35, -40), true);
+				makeImgCube(${artworkList[7].artworkId}, "${artworkList[7].artworkAddress}", new Vector(30, 30, 1), new Vector(60, 30, -97), false);
+				makeImgCube(${artworkList[8].artworkId}, "${artworkList[8].artworkAddress}", new Vector(32, 23, 1), new Vector(0, 30, -97), false);
+				makeImgCube(${artworkList[9].artworkId}, "${artworkList[9].artworkAddress}", new Vector(30, 20, 1), new Vector(-55, 30, -97), false);
+				makeImgCube(${artworkList[10].artworkId}, "${artworkList[10].artworkAddress}", new Vector(30, 20, 1), new Vector(-97, 30, -62), false);
+				makeImgCube(${artworkList[11].artworkId}, "${artworkList[11].artworkAddress}", new Vector(40, 25, 1), new Vector(-57, 30, -28), false);
+
+				const light3 = new THREE.SpotLight(0xffffff, 10);
+				light3.target.position.set(-97, 35, 40);
+				light3.position.set(-50, 90, 40);
+				light3.distance = 200;
+				light3.angle = 0.5;
+				scene.add(light3);
+    			scene.add(light3.target);
+*/
+				//spotlight를 만들어 장면에 배치
+				function makeSpotLight(start, target) {
+					const light = new THREE.SpotLight(0xffffff, 1);
+					light.target.position.set(target.x, target.y, target.z);
+					light.position.set(start.x, start.y, start.z);
+					light.distance = 200;
+					light.angle = 0.3;
+					scene.add(light);
+    				scene.add(light.target);
+				}
+
+				//spotlight 12개를 만들어 배치
+				makeSpotLight(new Vector(57, 95, 58), positionList[0]); //0
+				makeSpotLight(new Vector(-55, 95, 87), positionList[1]); //1
+				makeSpotLight(new Vector(0, 95, 87), positionList[2]); //2
+				makeSpotLight(new Vector(-67, 95, 40), positionList[3]); //3
+				makeSpotLight(new Vector(-59, 95, 18), positionList[4]); //4
+				makeSpotLight(new Vector(57, 95, -18), positionList[5]); //5
+				makeSpotLight(new Vector(67, 95, -40), positionList[6]); //6
+				makeSpotLight(new Vector(60, 95, -67), positionList[7]); //7
+				makeSpotLight(new Vector(0, 95, -67), positionList[8]); //8
+				makeSpotLight(new Vector(-55, 95, -67), positionList[9]); //9
+				makeSpotLight(new Vector(-67, 95, -62), positionList[10]); //10
+				makeSpotLight(new Vector(-57, 95, -58), positionList[11]); //11
+	
 			}
 
 			function onWindowResize() {
-
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
-
 				renderer.setSize( window.innerWidth, window.innerHeight );
-
 			}
 
 			// function getCamera() {
@@ -411,7 +398,7 @@ body {
 				const height = canvas.clientHeight;
 				const needResize = canvas.width !== width || canvas.height !== height;
 				if (needResize) {
-				renderer.setSize(width, height, false);
+					renderer.setSize(width, height, false);
 				}
 				return needResize;
 			}
@@ -511,18 +498,17 @@ body {
 			}
 		</script>
 	<div id="blocker">
-		<tr width=100%>
+		<tr>
 			<td width=70%><audio autoplay controls>
 					<source src="../resources/audio/bensound-ukulele.mp3"
 						type="audio/mpeg" />
 					Your browser does not support the audio tag.
 				</audio></td>
-			<td width=30%><a
+			<td><a
 				href="<c:url value='/WebVR/exhb/guestbook'>
                             <c:param name='exhibitionId' value='${exhibitionId}' />
-                        </c:url>"
-				button type="button" class="btn btn-default">방명록
-					</button>
+                        </c:url>">
+					<button type="button" class="btn">방명록</button>
 			</a></td>
 		</tr>
 		<div id="instructions">

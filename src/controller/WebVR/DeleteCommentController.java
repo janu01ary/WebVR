@@ -2,6 +2,7 @@ package controller.WebVR;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import controller.WebVR.user.UserSessionUtils;
@@ -19,11 +20,17 @@ public class DeleteCommentController implements Controller {
 		}
 		
 		String artworkId = request.getParameter("artworkId");
-		System.out.println("artworkId: " + artworkId);
+		
+		HttpSession session = request.getSession();
+		int userId = Integer.parseInt(UserSessionUtils.getLoginUserId(session));
 		
 		int commentId = Integer.parseInt(request.getParameter("commentId"));
-//		int result = commentDAO.deleteComment(commentId);
-		commentDAO.delete(commentId);
+		
+		if(userId == commentId) {
+			commentDAO.delete(commentId);
+		} else {
+			return "redirect:/WebVR/login/form";
+		}
 		
 		return "redirect:/WebVR/artwork/comment?artworkId=" + artworkId;
 	}
