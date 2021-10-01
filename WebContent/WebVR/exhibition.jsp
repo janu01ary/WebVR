@@ -264,8 +264,8 @@ p {
 					this.z = z;
 				}
 
-				// 파라미터 id: artwork의 id / imgUrl: artwork의 이미지 url / size: artwork의 크기(Vector) / position: artwork의 위치 / rotation: artwork 회전 여부(T/F) 
-				function makeImgCube(id, imgUrl, size, position, rotation) {
+				// 파라미터 id: artwork의 id / imgUrl: artwork의 이미지 url / size: artwork의 크기(Vector) / position: artwork의 위치
+				function makeImgCube(id, imgUrl, size, position) {
 					const geometry = new THREE.BoxGeometry(size.x, size.y, size.z);
 					img_loader.load(s3_url + imgUrl, (texture) => {
 						const material = new THREE.MeshLambertMaterial({
@@ -276,9 +276,6 @@ p {
 						cube.position.y = position.y; // 세로로 이동(높이 조정)
 						cube.position.z = position.z; // 고정
 						cube.uuid = id;
-						if (rotation) {
-                    		cube.rotation.y = Math.PI / 2;
-						}
 						scene.add(cube);
 					});
 				}
@@ -304,25 +301,18 @@ p {
 					makeImgCube(
 						"${artwork.artworkId}", 
 						"${artwork.artworkAddress}", 
-						//new Vector(40, 25, 1), 
-						//positionList[${status.index}], 
 						<c:choose>
 							<c:when test="${status.index eq 3 || status.index eq 6}"> 
-								new Vector(${artwork.width} / 20, ${artwork.height} / 20, 1),
-								positionList[${status.index}], 
-								true
+								new Vector(1, ${artwork.height} / 20, ${artwork.width} / 20),
 							</c:when>
 							<c:when test="${status.index eq 10}"> 
-								new Vector(${artwork.width} / 30, ${artwork.height} / 30, 1),
-								positionList[${status.index}], 
-								true
+								new Vector(1, ${artwork.height} / 30, ${artwork.width} / 30),
 							</c:when>
 							<c:otherwise>
 								new Vector(${artwork.width} / 30, ${artwork.height} / 30, 1),
-								positionList[${status.index}], 
-								false
 							</c:otherwise>
 						</c:choose>
+						positionList[${status.index}], 
 					);
 				</c:forEach>
 
