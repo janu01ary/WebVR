@@ -127,8 +127,10 @@ button#edit_confirm:hover{
 /* 관람 내역 + 전시 목록 (카드) */
 div.watch_card, div.exhib_card{
 	width: 250px;
-	height: 300px;
+	height: 350px;
 	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
 	text-align: center;
 	border: #FFFFFF solid 1px;
 	border-radius: 6px;
@@ -189,6 +191,12 @@ td.reply_box{
 	height: 100px;
 	padding-top: 10px;
 	border-bottom: 1px solid white;
+}
+p.reply_content{
+	width: 700px;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+  	white-space: nowrap;
 }
 button.reply_delete, button.manage_delete{
 	cursor: pointer;

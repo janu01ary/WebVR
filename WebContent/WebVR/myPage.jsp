@@ -118,7 +118,7 @@
                             <div class="watch_card">
                                 <img src="<%=url %>" class="card_image" alt="exhibitionImage">
                                 <div class="card_body">
-                                    <h2 class="card_title"><%=visit.getExhibitionTitle() %></h2>
+                                    <h3 class="card_title"><%=visit.getExhibitionTitle() %></h3>
                                     <p class="card_text"><%=visit.getExhibitionDesc() %></p>
                                 </div>
                                 
@@ -238,7 +238,7 @@
                             <div class="exhib_card">
                                 <img src="<%=url %>" class="card_image" alt="exhibitionImage">
                                 <div class="card_body">
-                                    <h2 class="card_title"><%=exhibition.getTitle() %></h2>
+                                    <h3 class="card_title"><%=exhibition.getTitle() %></h3>
                                     <p class="card_text"><%=exhibition.getDescription() %></p>
                                 </div>
                                 
