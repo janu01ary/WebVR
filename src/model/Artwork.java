@@ -13,7 +13,9 @@ public class Artwork {
 	private Date date; // 작품을 제작한 날짜
 	private int viewCount; // 작품의 조회수
 	private int likesCount; // 작품의 좋아요 수
-	
+	private int width; //작품의 가로 길이
+	private int height; //작품의 세로 길이
+
 	public Artwork() {}
 
 	public Artwork(int artworkId, int exhibitionId, String title,  String artworkAddress, String description, String artistName, Date date,
@@ -28,6 +30,22 @@ public class Artwork {
 		this.date = date;
 		this.viewCount = viewCount;
 		this.likesCount = likesCount;
+	}
+	
+	public Artwork(int artworkId, int exhibitionId, String title,  String artworkAddress, String description, String artistName, Date date,
+			int viewCount, int likesCount, int width, int height) {
+		super();
+		this.artworkId = artworkId;
+		this.exhibitionId = exhibitionId;
+		this.title = title;
+		this.artworkAddress = artworkAddress;
+		this.description = description;
+		this.artistName = artistName;
+		this.date = date;
+		this.viewCount = viewCount;
+		this.likesCount = likesCount;
+		this.width = width;
+		this.height = height;
 	}
 
 	public int getArtworkId() {
@@ -100,6 +118,22 @@ public class Artwork {
 
 	public void setLikesCount(int likesCount) {
 		this.likesCount = likesCount;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
 }

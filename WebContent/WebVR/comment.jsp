@@ -104,35 +104,6 @@
                     <p class="mb-1">${comment.content}</p>
                	</div>
 	            </c:forEach>
-	            <!-- 
-                <a class="list-group-item" aria-current="true">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">UserName</h5>
-                        <small class="mb-2">3 days ago<button class="btn btn-outline-light custom-p-2 ml-2">삭제</button></small>
-                    </div>
-                    <p class="mb-1">Some placeholder content</p>
-                </a>
-                <a class="list-group-item" aria-current="true">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">UserName</h5>
-                        <small class="mb-2">3 days ago<button class="btn btn-outline-light custom-p-2 ml-2">삭제</button></small>
-                    </div>
-                    <p class="mb-1">Some placeholder content in a paragraph.</p>
-                </a>
-                <a class="list-group-item" aria-current="true">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">UserName</h5>
-                        <small>3 days ago<span class="material-icons icon ml-1">delete</span></small>
-                    </div>
-                    <p class="mb-1">Some placeholder content in a paragraph.</p>
-                </a>
-                <a class="list-group-item" aria-current="true">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">UserName</h5>
-                        <small class="mb-2">3 days ago</small>
-                    </div>
-                    <p class="mb-1">Some placeholder content in a paragraph.</p>
-                </a> -->
             </div>
         </div>
         <div class="card-footer text-white">
@@ -140,7 +111,7 @@
             				<c:param name='artworkId' value='${artwork.artworkId}'/>
             			  </c:url>" method="post">
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="InputComment" name="content">
+                    <input type="text" class="form-control" id="InputComment" name="content" max-length="99">
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 	<button type="submit" class="btn btn-outline-light me-md-2">Send</button>

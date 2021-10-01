@@ -8,7 +8,6 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-<!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
 <style>
 @font-face {
 	font-family: 'NEXON Lv1 Gothic OTF';
@@ -32,7 +31,7 @@ body {
 
 #instructions {
 	width: 100%;
-	height: 100%;
+	height: 90%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -63,6 +62,11 @@ body {
 .btn:hover {
 	box-shadow:200px 0 0 0 rgba(255,255,255,0.5) inset;
 }
+
+p {
+	color: white;
+}
+
 </style>
 </head>
 <body>
@@ -96,7 +100,7 @@ body {
 			let boxWireframe;
 			let tempObject;
 
-			const s3_url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/${exhibitionId}/";
+			const s3_url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/${exhibition.id}/";
 
 			init();
 			animate();
@@ -214,13 +218,12 @@ body {
 				mouse.x = mouse.y = -1;
 
 				let onMouseClick = function(e){
-					//ÃªÂ·Â¸Ã«Â¦Â¼ Ã¬ÂÂ Ã­ÂÂÃ­ÂÂÃ¬ÂÂ Ã«ÂÂ Ã¬ÂÂ´Ã«Â²Â¤Ã­ÂÂ¸
 					if (instructions.style.display == 'none') {
 						event.preventDefault();
 						if ( SELECTED ){
 							console.log("SELECTED : ", SELECTED);
 							console.log("event: ", e);
-							window.open("<c:url value='/WebVR/exhb/artwork?artworkId=' />" + SELECTED.uuid); //Ã«ÂÂÃ¬Â¤ÂÃ¬ÂÂ Ã¬ÂÂÃ­ÂÂÃ­ÂÂÃ«Â©Â´Ã¬ÂÂ¼Ã«Â¡Â Ã¬ÂÂ´Ã«ÂÂÃ­ÂÂÃªÂ²Â~
+							window.open("<c:url value='/WebVR/exhb/artwork?artworkId=' />" + SELECTED.uuid);
 							controls.unlock();
 						}
 					} 
@@ -241,7 +244,6 @@ body {
 				const loader2 = new GLTFLoader();
        		    loader2.load(
                 	'<c:url value='/resources/three_js/exhibition_test.gltf' />',
-
                 	function ( gltf ) {
                     	scene.add( gltf.scene );
                     	gltf.animations; 
@@ -306,49 +308,23 @@ body {
 						//positionList[${status.index}], 
 						<c:choose>
 							<c:when test="${status.index eq 3 || status.index eq 6}"> 
-								<%--new Vector(${artwork.width} / 20, ${artwork.height} / 20, 1),--%>
-								new Vector(60, 45.25, 1),
+								new Vector(${artwork.width} / 20, ${artwork.height} / 20, 1),
 								positionList[${status.index}], 
 								true
 							</c:when>
 							<c:when test="${status.index eq 10}"> 
-								<%--new Vector(${artwork.width} / 30, ${artwork.height} / 30, 1),--%>
-								new Vector(40, 30, 1),
+								new Vector(${artwork.width} / 30, ${artwork.height} / 30, 1),
 								positionList[${status.index}], 
 								true
 							</c:when>
 							<c:otherwise>
-								<%--new Vector(${artwork.width} / 30, ${artwork.height} / 30, 1),--%>
-								new Vector(40, 30, 1),
+								new Vector(${artwork.width} / 30, ${artwork.height} / 30, 1),
 								positionList[${status.index}], 
 								false
 							</c:otherwise>
 						</c:choose>
 					);
 				</c:forEach>
-
-				/*
-				makeImgCube(${artworkList[0].artworkId}, "${artworkList[0].artworkAddress}", new Vector(40, 25, 1), new Vector(57, 30, 28), false);
-				makeImgCube(${artworkList[1].artworkId}, "${artworkList[1].artworkAddress}", new Vector(30, 20, 1), new Vector(-55, 30, 97), false);
-				makeImgCube(${artworkList[2].artworkId}, "${artworkList[2].artworkAddress}", new Vector(32, 23, 1), new Vector(0, 30, 97), false);
-				makeImgCube(${artworkList[3].artworkId}, "${artworkList[3].artworkAddress}", new Vector(58, 39, 1), new Vector(-97, 35, 40), true);
-				makeImgCube(${artworkList[4].artworkId}, "${artworkList[4].artworkAddress}", new Vector(34, 27, 1), new Vector(-59, 30, -22), false);
-				makeImgCube(${artworkList[5].artworkId}, "${artworkList[5].artworkAddress}", new Vector(36, 24, 1), new Vector(57, 30, 22), false);
-				makeImgCube(${artworkList[6].artworkId}, "${artworkList[6].artworkAddress}", new Vector(60, 50, 1), new Vector(97, 35, -40), true);
-				makeImgCube(${artworkList[7].artworkId}, "${artworkList[7].artworkAddress}", new Vector(30, 30, 1), new Vector(60, 30, -97), false);
-				makeImgCube(${artworkList[8].artworkId}, "${artworkList[8].artworkAddress}", new Vector(32, 23, 1), new Vector(0, 30, -97), false);
-				makeImgCube(${artworkList[9].artworkId}, "${artworkList[9].artworkAddress}", new Vector(30, 20, 1), new Vector(-55, 30, -97), false);
-				makeImgCube(${artworkList[10].artworkId}, "${artworkList[10].artworkAddress}", new Vector(30, 20, 1), new Vector(-97, 30, -62), false);
-				makeImgCube(${artworkList[11].artworkId}, "${artworkList[11].artworkAddress}", new Vector(40, 25, 1), new Vector(-57, 30, -28), false);
-
-				const light3 = new THREE.SpotLight(0xffffff, 10);
-				light3.target.position.set(-97, 35, 40);
-				light3.position.set(-50, 90, 40);
-				light3.distance = 200;
-				light3.angle = 0.5;
-				scene.add(light3);
-    			scene.add(light3.target);
-				*/
 
 				// spotlight를 만들어 장면에 배치
 				function makeSpotLight(start, target) {
@@ -382,13 +358,6 @@ body {
 				camera.updateProjectionMatrix();
 				renderer.setSize( window.innerWidth, window.innerHeight );
 			}
-
-			// function getCamera() {
-			// 	var aspectRatio = window.innerWidth / window.innerHeight;
-			// 	var camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 100000);
-			// 	camera.position.set(0, 1, -6000);
-			// 	return camera;
-			// }
 			
 			function resizeRendererToDisplaySize(renderer) {
 				const canvas = renderer.domElement;
@@ -560,15 +529,16 @@ body {
 				</audio></td>
 			<td><a
 				href="<c:url value='/WebVR/exhb/guestbook'>
-                            <c:param name='exhibitionId' value='${exhibitionId}' />
+                            <c:param name='exhibitionId' value='${exhibition.id}' />
                         </c:url>">
 					<button type="button" class="btn">방명록</button>
 			</a></td>
 		</tr>
 		<div id="instructions">
-			<p style="font-size: 36px">Click to play</p>
+			<p style="font-size: 36px">${exhibition.title}</p>
+			<p style="font-size: 24px">${exhibition.description}</p>
 			<p>
-				Move: WASD<br /> Look: MOUSE
+				Move: WASD<br /> Look: MOUSE<br /><br /><br /><br />
 			</p>
 		</div>
 	</div>

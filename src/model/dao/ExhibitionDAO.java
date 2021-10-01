@@ -70,7 +70,7 @@ public class ExhibitionDAO {
 	
 	//exhibition id를 통해 전시에 속한 artwork list 조회
 	public List<Artwork> findArtworkListById(int exhibitionId) {
-		String sql = "select id, title, artwork_address, description, artist_name, date, views_count, likes_count " 
+		String sql = "select id, title, artwork_address, description, artist_name, date, views_count, likes_count, width, height " 
       		   + "from artwork "
       		   + "where exhibition_id=? "
       		   + "order by id"; //시간 순서대로 id가 만들어지니까 그냥 id로 정렬
@@ -89,7 +89,9 @@ public class ExhibitionDAO {
 					rs.getString("artist_name"),
 					new java.util.Date(rs.getDate("date").getTime()),
 					rs.getInt("views_count"),
-					rs.getInt("likes_count"));
+					rs.getInt("likes_count"),
+					rs.getInt("width"),
+					rs.getInt("height"));
 				artworkList.add(artwork); 
 			}		
 			return artworkList;					
