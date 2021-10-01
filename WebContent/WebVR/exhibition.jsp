@@ -32,7 +32,7 @@ body {
 
 #instructions {
 	width: 100%;
-	height: 100%;
+	height: 90%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -63,6 +63,11 @@ body {
 .btn:hover {
 	box-shadow:200px 0 0 0 rgba(255,255,255,0.5) inset;
 }
+
+p {
+	color: white;
+}
+
 </style>
 </head>
 <body>
@@ -95,7 +100,7 @@ body {
 			let boxWireframe;
 			let tempObject;
 
-			const s3_url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/${exhibitionId}/";
+			const s3_url = "https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/${exhibition.id}/";
 
 			init();
 			animate();
@@ -314,20 +319,17 @@ body {
 						//positionList[${status.index}], 
 						<c:choose>
 							<c:when test="${status.index eq 3 || status.index eq 6}"> 
-								<%--new Vector(${artwork.width} / 20, ${artwork.height} / 20, 1),--%>
-								new Vector(60, 45.25, 1),
+								new Vector(${artwork.width} / 20, ${artwork.height} / 20, 1),
 								positionList[${status.index}], 
 								true
 							</c:when>
 							<c:when test="${status.index eq 10}"> 
-								<%--new Vector(${artwork.width} / 30, ${artwork.height} / 30, 1),--%>
-								new Vector(40, 30, 1),
+								new Vector(${artwork.width} / 30, ${artwork.height} / 30, 1),
 								positionList[${status.index}], 
 								true
 							</c:when>
 							<c:otherwise>
-								<%--new Vector(${artwork.width} / 30, ${artwork.height} / 30, 1),--%>
-								new Vector(40, 30, 1),
+								new Vector(${artwork.width} / 30, ${artwork.height} / 30, 1),
 								positionList[${status.index}], 
 								false
 							</c:otherwise>
@@ -567,15 +569,16 @@ body {
 				</audio></td>
 			<td><a
 				href="<c:url value='/WebVR/exhb/guestbook'>
-                            <c:param name='exhibitionId' value='${exhibitionId}' />
+                            <c:param name='exhibitionId' value='${exhibition.id}' />
                         </c:url>">
 					<button type="button" class="btn">방명록</button>
 			</a></td>
 		</tr>
 		<div id="instructions">
-			<p style="font-size: 36px">Click to play</p>
+			<p style="font-size: 36px">${exhibition.title}</p>
+			<p style="font-size: 24px">${exhibition.description}</p>
 			<p>
-				Move: WASD<br /> Look: MOUSE
+				Move: WASD<br /> Look: MOUSE<br /><br /><br /><br />
 			</p>
 		</div>
 	</div>
