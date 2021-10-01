@@ -39,7 +39,7 @@
 	<div id="listPage" class="center-block" style="overflow:auto">
  		<br><br>
      	<table width="70%" style="margin-right:10px;" class="img-responsive">
-     		<c:set var="s3_bucket_link" value="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/" />
+     		<c:set var="s3_bucket_link" value="https://webvrbucket.s3.ap-northeast-2.amazonaws.com/exhibition/" />
 			<c:forEach var="artwork" items="${artworkList}" varStatus="status">
 				<c:choose>
 					<c:when test="${status.index % 3  eq 0}">
@@ -47,7 +47,7 @@
 							<td width="23%">
 								<a href="<c:url value='/WebVR/exhb/List/artwork'>
 								   <c:param name='artworkId' value='${artwork.artworkId}'/></c:url>">
-									<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.artworkAddress}"/>"  class="img-responsive">
+									<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.exhibitionId}"/>/<c:out value="${artwork.artworkAddress}"/>"  class="img-responsive">
 								</a>
 							 </td>
 					</c:when>
@@ -55,7 +55,7 @@
 							<td width="23%">
 								<a href="<c:url value='/WebVR/exhb/List/artwork'>
 								   <c:param name='artworkId' value='${artwork.artworkId}'/></c:url>">
-									<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.artworkAddress}"/>"  class="img-responsive">
+									<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.exhibitionId}"/>/<c:out value="${artwork.artworkAddress}"/>"  class="img-responsive">
 								</a>
 							 </td>
 						 </tr>
@@ -64,7 +64,7 @@
 							<td width="23%">
 								<a href="<c:url value='/WebVR/exhb/List/artwork'>
 								   <c:param name='artworkId' value='${artwork.artworkId}'/></c:url>">
-									<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.artworkAddress}"/>"  class="img-responsive">
+									<img src="<c:out value="${s3_bucket_link}"/><c:out value="${artwork.exhibitionId}"/>/<c:out value="${artwork.artworkAddress}"/>"  class="img-responsive">
 								</a>
 							 </td>
 					</c:otherwise>
