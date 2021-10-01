@@ -111,7 +111,7 @@
             				<c:param name='artworkId' value='${artwork.artworkId}'/>
             			  </c:url>" method="post">
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="InputComment" name="content" max-length="99">
+                    <input type="text" class="form-control" id="InputComment" name="content" maxlength="99">
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 	<button type="submit" class="btn btn-outline-light me-md-2">Send</button>
