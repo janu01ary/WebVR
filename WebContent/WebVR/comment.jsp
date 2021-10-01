@@ -104,7 +104,7 @@
                         	</c:if>
                         </small>
                     </div>
-                    <p class="mb-1">${comment.content}</p>
+                    <p class="mb-1"><c:out value="${comment.content}"></c:out></p>
                	</div>
 	            </c:forEach>
             </div>
