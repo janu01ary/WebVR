@@ -525,8 +525,8 @@ p {
 			<td><a
 				href="<c:url value='/WebVR/exhb/guestbook'>
                             <c:param name='exhibitionId' value='${exhibition.id}' />
-                        </c:url>">
-					<button type="button" class="btn">방명록</button>
+                        </c:url>" target="_blank">
+					<button type="button" class="btn" >방명록</button>
 			</a></td>
 			<td><a
 				href="<c:url value='/WebVR/exhb/List'>
