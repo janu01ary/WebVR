@@ -36,9 +36,11 @@ public class CreateGuestBookController implements Controller {
 		try {
 			guestBookDAO.create(gb);
 			List<GuestBookUser> GBUList = guestBookDAO.getGuestBookList(exhbId);
+			request.setAttribute("exhibitionId", exhbId);
 			request.setAttribute("GBUList", GBUList);	
 			return "/WebVR/guestbook.jsp";
 		} catch (Exception e) {
+			request.setAttribute("exhibitionId", exhbId);
 			return "/WebVR/guestbook.jsp";//수정 필요
 		}
 

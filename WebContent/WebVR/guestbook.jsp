@@ -69,10 +69,10 @@ body {
 						<a class="list-group-item list-group-item-dark"
 							aria-current="true">
 							<div class="d-flex w-100 justify-content-between">
-								<h5 class="mb-1">${gb.nickname}</h5>
-								<small>${gb.date}</small>
+								<h5 class="mb-1"><c:out value="${gb.nickname}"/></h5>
+								<small><c:out value="${gb.date}"/></small>
 							</div>
-							<p class="mb-1">${gb.content}</p>
+							<p class="mb-1"><c:out value="${gb.content}"></c:out></p>
 						</a>
 					</c:forEach>
 				</div> 
