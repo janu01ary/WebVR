@@ -36,7 +36,7 @@ public class LikeArtworkController implements Controller {
 		// 로그인이 되어있는 경우
 		int userId = Integer.parseInt(UserSessionUtils.getLoginUserId(session));
 		User user = userDAO.findUser(userId);
-		Likes like = likesDAO.findLikesByUserId(userId); // DB에서 user가 artwork에 좋아요를 누른 기록 확인
+		Likes like = likesDAO.findLikesByUserId(userId, artworkId); // DB에서 user가 artwork에 좋아요를 누른 기록 확인
 		
 		if (like == null) { // 좋아요를 누른 기록이 없다면 좋아요 + 1
 			artworkDAO.increaseLike(artwork); // artwork 좋아요 증가

@@ -70,7 +70,7 @@
 	    	var url = '';
 	    	var textarea = document.createElement("textarea");
 	    	document.body.appendChild(textarea);
-	    	url = window.document.location.href;
+	    	url = shareURL;
 	    	textarea.value = url;
 	    	textarea.select();
 	    	document.execCommand("copy");

@@ -56,12 +56,12 @@ public class LikesDAO {
 		return 0;
 	}
 	
-	// 주어진 userId에 해당하는 artwork를 데이터베이스에서 찾아 도메인 클래스에 저장하여 반환
-	public Likes findLikesByUserId(int userId) throws SQLException {
+	// 주어진 userId, artworkId에 해당하는 artwork를 데이터베이스에서 찾아 도메인 클래스에 저장하여 반환
+	public Likes findLikesByUserId(int userId, int artworkId) throws SQLException {
 		String sql = "SELECT id, user_id, artwork_id "
     			+ "FROM likes "
-    			+ "WHERE user_id=? ";         
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 query문과 매개 변수 설정
+    			+ "WHERE user_id=? and artwork_id=? ";         
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId, artworkId});	// JDBCUtil에 query문과 매개 변수 설정
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
 			Likes like = null;
