@@ -23,7 +23,7 @@ public class CreateGuestBookController implements Controller {
 		// 로그인 여부 
 				if (!UserSessionUtils.hasLogined(request.getSession())) { // 로그인 안되어있는 있는 경우
 					return "redirect:/WebVR/login/form";	
-				}
+				} 
 				
 		HttpSession session = request.getSession(); 
 		int exhbId = Integer.parseInt(request.getParameter("exhibitionId"));// 파라미터로 전시 아이디 가져오기

@@ -32,7 +32,7 @@
 	font-style: normal;
 }
 
-body {
+body { 
 	font-family: 'NEXON Lv1 Gothic OTF';
 }
 .card { $ 
