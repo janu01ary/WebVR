@@ -177,7 +177,7 @@
                     <tr>
                         <td class="reply_box">
                             <h3 class="reply_exhib" style="display: inline"><%= comment.getArtworkTitle() %></h3>
-                            <p class="reply_content"><%= comment.getContent() %></p>
+                            <p class="reply_content"><c:out escapeXml="true" value="<%= comment.getContent() %>" /></p>
                         </td>
                         <td>
                             <button onclick="location.href='<c:url value='/WebVR/myPage/commentDelete'/>?commentId=<%=comment.getCmtID() %>'" class="reply_delete">삭제</button>
@@ -205,7 +205,7 @@
                     <tr>
                         <td class="reply_box">
                             <h3 class="reply_exhib" style="display: inline"><%= guestBook.getExhbTitle() %></h3>
-                            <p class="reply_content"><%= guestBook.getContent() %></p>
+                            <p class="reply_content"><c:out escapeXml="true" value="<%= guestBook.getContent() %>" /></p>
                         </td>
                         <td>
                             <button onclick="location.href='<c:url value='/WebVR/myPage/guestBookDelete'/>?guestBookId=<%=guestBook.getGbID() %>'" class="reply_delete">삭제</button>
