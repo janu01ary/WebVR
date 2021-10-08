@@ -20,10 +20,10 @@ public class CreateGuestBookController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 로그인 여부
+		// 로그인 여부 
 				if (!UserSessionUtils.hasLogined(request.getSession())) { // 로그인 안되어있는 있는 경우
 					return "redirect:/WebVR/login/form";	
-				}
+				} 
 				
 		HttpSession session = request.getSession(); 
 		int exhbId = Integer.parseInt(request.getParameter("exhibitionId"));// 파라미터로 전시 아이디 가져오기
@@ -36,9 +36,11 @@ public class CreateGuestBookController implements Controller {
 		try {
 			guestBookDAO.create(gb);
 			List<GuestBookUser> GBUList = guestBookDAO.getGuestBookList(exhbId);
+			request.setAttribute("exhibitionId", exhbId);
 			request.setAttribute("GBUList", GBUList);	
 			return "/WebVR/guestbook.jsp";
 		} catch (Exception e) {
+			request.setAttribute("exhibitionId", exhbId);
 			return "/WebVR/guestbook.jsp";//수정 필요
 		}
 
