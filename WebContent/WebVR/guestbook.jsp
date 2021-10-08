@@ -42,7 +42,7 @@ body {
 
 .list-group {
 	min-height: 750px;
-	max-height: 750px;
+	max-height: 750px; 
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 }
