@@ -64,7 +64,7 @@ function isLogin(){
 			<tr>
 			    <th>
 			    	<a href="<c:url value='/WebVR/artwork/comment'> <c:param name='artworkId' value='${artwork.artworkId}'/></c:url>">
-	        		<img src="<c:url value='/resources/icon/comment.png' />" alt="commentIcon" width="50px" /> </a> 
+	        		<img src="<c:url value='/resources/icon/comment_white.png' />" alt="commentIcon" width="50px" /> </a> 
 			    </th>
 				<th>
 	        		<c:choose>
@@ -72,7 +72,7 @@ function isLogin(){
 							<img src="<c:url value='/resources/icon/redHeart.png' />" alt="likeIcon" width="32px" onClick="isLogin()" />
 						</c:when>
 						<c:otherwise>
-							<img src="<c:url value='/resources/icon/likes.png' />" alt="likeIcon" width="50px" onClick="isLogin()" />
+							<img src="<c:url value='/resources/icon/likes_white.png' />" alt="likeIcon" width="50px" onClick="isLogin()" />
 						</c:otherwise>
 					</c:choose>
 	        		
@@ -93,10 +93,10 @@ function isLogin(){
 				
 				<th>
 					<a href="<c:url value='/WebVR/artwork/share'> <c:param name='artworkId' value='${artwork.artworkId}'/></c:url>">
-	        		<img src="<c:url value='/resources/icon/share.png' />" alt="shareIcon" width="50px" /> </a>
+	        		<img src="<c:url value='/resources/icon/share_white.png' />" alt="shareIcon" width="50px" /> </a>
 				</th>
 				<th>
-					<img src="<c:url value='/resources/icon/view.png' />" alt="viewIcon" width="50px" />
+					<img src="<c:url value='/resources/icon/view_white.png' />" alt="viewIcon" width="50px" />
 				</th>
 				<th>
 					<c:choose>
@@ -119,7 +119,7 @@ function isLogin(){
 				</td>
 			</tr>
 			<tr>
-				<td colspan="7" ><h4><c:out value="${artwork.description}"/></h4></td>
+				<td colspan="7"><h4 style="line-height:30px; margin-bottom:50px;"><c:out value="${artwork.description}"/></h4></td>
 			</tr>
 	    </table>
 	</div>
